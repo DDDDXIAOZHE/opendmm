@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'opendmm'
+require 'pp'
+
+pp OpenDMM.search(ARGV.first)
