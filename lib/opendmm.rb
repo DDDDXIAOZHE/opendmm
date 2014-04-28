@@ -1,5 +1,5 @@
 require 'opendmm/version'
-require 'opendmm/prestige'
+require 'opendmm/prestige/parser'
 
 module OpenDMM
   def self.search(name)

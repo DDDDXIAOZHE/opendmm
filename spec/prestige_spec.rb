@@ -25,6 +25,11 @@ describe OpenDMM::Prestige do
       "http://image.prestige-av.com/images/prestige/abp/013/cap_e_7_abp-013.jpg",
       "http://image.prestige-av.com/images/prestige/abp/013/cap_e_8_abp-013.jpg"
     ])
-    details[:review].must_equal        "プレステージ専属女優 『水咲 ローラ』 が熱気を漂わせながら超濃厚なセックスを展開！男と相互奉仕の応酬をして、貪るような肉食っぷりを披露！焦らされたカラダは手マンされ、カメラが水没するほど何度も大量潮吹き！パイパンマ〇コにパワフルな腰使いでピストンされ、本気汁まみれで悶えっぱなし！！"
+    details[:review].must_equal(
+      "プレステージ専属女優 『水咲 ローラ』 が熱気を漂わせながら超濃厚なセックスを展開！"\
+      "男と相互奉仕の応酬をして、貪るような肉食っぷりを披露！"\
+      "焦らされたカラダは手マンされ、カメラが水没するほど何度も大量潮吹き！"\
+      "パイパンマ〇コにパワフルな腰使いでピストンされ、本気汁まみれで悶えっぱなし！！"
+    )
   end
 end
