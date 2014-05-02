@@ -1,9 +1,9 @@
-require 'minitest/autorun'
-require 'opendmm'
+require "minitest/autorun"
+require "opendmm"
 
 describe OpenDMM::Prestige do
-  it 'supports ABP series' do
-    details = OpenDMM::Prestige.search('ABP-013')
+  it "supports ABP series" do
+    details = OpenDMM::Prestige.search("ABP-013")
     details[:title].must_equal         "天然成分由来 水咲ローラ汁120%＋生写真7枚付き"
     details[:cover_image].must_equal   "http://image.prestige-av.com/images/prestige/abp/013/pb_e_abp-013.jpg"
     details[:actresses].must_equal     [ "水咲(滝澤)ローラ" ]
@@ -34,8 +34,8 @@ describe OpenDMM::Prestige do
     )
   end
 
-  it 'supports ABS series' do
-    details = OpenDMM::Prestige.search('ABS-014')
+  it "supports ABS series" do
+    details = OpenDMM::Prestige.search("ABS-014")
     details[:title].must_equal         "貸し切り、純潔サロン04"
     details[:cover_image].must_equal   "http://image.prestige-av.com/images/prestige/abs/014/pb_e_abs-014.jpg"
     details[:actresses].must_equal     [ "絵色 千佳" ]
@@ -68,4 +68,38 @@ describe OpenDMM::Prestige do
     ])
     details[:review].must_equal        nil
   end
+
+  it "supports ABY series" do
+    details = OpenDMM::Prestige.search("ABY-003")
+    details[:title].must_equal         "人妻不倫温泉 03＋未公開映像DVD付き(未公開のドライブシーンを収録したDVD付き！)"
+    details[:cover_image].must_equal   "http://image.prestige-av.com/images/prestige/aby/003/pb_e_aby-003.jpg"
+    details[:actresses].must_equal     [ "真咲 華" ]
+    details[:movie_length].must_equal  "120min"
+    details[:release_date].must_equal  "2011/05/11"
+    details[:maker].must_equal         "プレステージ"
+    details[:product_id].must_equal    "ABY-003"
+    details[:genres].must_equal        [ "玩具責め", "ハメ撮り", "人妻" ]
+    details[:series].must_equal        "人妻不倫温泉"
+    details[:label].must_equal         "油屋"
+    details[:information].must_equal(
+      "欲求不満な顔で男と湖畔をデートする若妻。"\
+      "熱いキスを交わしたら駐車場に停めた車内でフェラ抜き。"\
+      "旅館のプライベート露天風呂で相互愛撫して、湯船の縁や和室で様々な体位で合体！"\
+      "感じ過ぎて何度もイク！食事したら浴衣に着替え寝床へ。"\
+      "両手を帯紐で拘束されながら玩具責めにヨガル！"\
+      "美味しそうに肉棒をしゃぶったら、横になった男に跨り腰を上下して快楽を貪る！"
+    )
+    details[:sample_images].must_equal([
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_0_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_1_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_2_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_3_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_4_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_5_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_6_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_7_aby-003.jpg",
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_8_aby-003.jpg"
+    ])
+    details[:review].must_equal        nil
+end
 end
