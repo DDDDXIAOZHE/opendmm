@@ -21,12 +21,12 @@ module OpenDMM
             product_id:    spec["品番："].text.strip,
             genres:        spec["ジャンル："].css("a").map(&:text).map(&:strip),
             series:        spec["シリーズ："].text.strip,
-            # TODO:  parse complete label, for example
+            # TODO: Parse complete label, for example
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
             label:         spec["レーベル："].text.strip,
             information:   descriptions["作品情報"].text.strip,
             sample_images: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
-            review:        (descriptions["レビュー"].text.strip if descriptions["レビュー"])
+            review:        descriptions["レビュー"].text.strip
           }
         end
       end

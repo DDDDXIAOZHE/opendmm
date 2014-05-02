@@ -66,7 +66,7 @@ describe OpenDMM::Prestige do
       "http://image.prestige-av.com/images/prestige/abs/014/cap_e_6_abs-014.jpg",
       "http://image.prestige-av.com/images/prestige/abs/014/cap_e_7_abs-014.jpg"
     ])
-    details[:review].must_equal        nil
+    details[:review].must_equal        ""
   end
 
   it "supports ABY series" do
@@ -100,6 +100,6 @@ describe OpenDMM::Prestige do
       "http://image.prestige-av.com/images/prestige/aby/003/cap_e_7_aby-003.jpg",
       "http://image.prestige-av.com/images/prestige/aby/003/cap_e_8_aby-003.jpg"
     ])
-    details[:review].must_equal        nil
+    details[:review].must_equal        ""
 end
 end

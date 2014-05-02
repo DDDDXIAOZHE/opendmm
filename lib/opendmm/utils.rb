@@ -7,3 +7,9 @@ module OpenDMM
     end
   end
 end
+
+class NilClass
+  def text
+    ""
+  end
+end
