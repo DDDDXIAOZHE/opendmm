@@ -7,7 +7,7 @@ module OpenDMM
     class Parser
       def self.parse(name)
         case name
-        when /ABP-\d{3}/
+        when /ABP-\d{3}/, /ABS-\d{3}/
           html = Nokogiri::HTML(Site.new.item(name))
           spec = Utils.parse_dl(html.css('div.product_detail_layout_01 dl.spec_layout'))
           descriptions = self.parse_descriptions(html)
@@ -24,8 +24,9 @@ module OpenDMM
             # TODO:  parse complete label, for example
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
             label:         spec['レーベル：'].text.strip,
+            information:   descriptions['作品情報'].text.strip,
             sample_images: descriptions['サンプル画像'].css('a.sample_image').map { |a| a['href'] },
-            review:        descriptions['レビュー'].text.strip,
+            review:        (descriptions['レビュー'].text.strip if descriptions['レビュー'])
           }
         end
       end
