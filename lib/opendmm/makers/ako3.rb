@@ -1,6 +1,7 @@
 require "httparty"
 require "nokogiri"
 require "opendmm/utils"
+require "active_support/core_ext/string/filters"
 
 module OpenDMM
   module Maker
@@ -25,7 +26,7 @@ module OpenDMM
           return {
             page:         page_uri.to_s,
             product_id:   specs["商品番号"],
-            title:        html.css("div.maintitle").first.text.strip_unicode,
+            title:        html.css("div.maintitle").first.text.squish,
             maker:        specs["メーカー"],
             release_date: specs["配信日"],
             actresses: {
