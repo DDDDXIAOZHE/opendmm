@@ -39,7 +39,7 @@ class #{name.upcase}Test < Minitest::Test
   include FixtureTest
 
   def setup
-    @fixtures = #{name.upcase}
+    @fixtures = Fixture::#{name.upcase}
   end
 end
 
