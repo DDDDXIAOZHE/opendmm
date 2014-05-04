@@ -1,9 +1,9 @@
 require "minitest/autorun"
 require "opendmm"
 
-describe OpenDMM::Ako3 do
+describe OpenDMM::Maker::Ako3 do
   it "supports AKO series" do
-    details = OpenDMM::Ako3.search("AKO-011")
+    details = OpenDMM.search("AKO-011")
     details[:title].must_equal         "MARI 18歳"
     details[:cover_image].must_equal   "http://www.ako-3.com/img/jacket/AKO011.jpg"
     details[:actresses].must_equal({

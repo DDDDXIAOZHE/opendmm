@@ -1,9 +1,9 @@
 require "minitest/autorun"
 require "opendmm"
 
-describe OpenDMM::Prestige do
+describe OpenDMM::Maker::Prestige do
   it "supports ABP series" do
-    details = OpenDMM::Prestige.search("ABP-013")
+    details = OpenDMM.search("ABP-013")
     details[:title].must_equal         "天然成分由来 水咲ローラ汁120%＋生写真7枚付き"
     details[:cover_image].must_equal   "http://image.prestige-av.com/images/prestige/abp/013/pb_e_abp-013.jpg"
     details[:actresses].must_equal     [ "水咲(滝澤)ローラ" ]
@@ -35,7 +35,7 @@ describe OpenDMM::Prestige do
   end
 
   it "supports ABS series" do
-    details = OpenDMM::Prestige.search("ABS-014")
+    details = OpenDMM.search("ABS-014")
     details[:title].must_equal         "貸し切り、純潔サロン04"
     details[:cover_image].must_equal   "http://image.prestige-av.com/images/prestige/abs/014/pb_e_abs-014.jpg"
     details[:actresses].must_equal     [ "絵色 千佳" ]
@@ -70,7 +70,7 @@ describe OpenDMM::Prestige do
   end
 
   it "supports ABY series" do
-    details = OpenDMM::Prestige.search("ABY-003")
+    details = OpenDMM.search("ABY-003")
     details[:title].must_equal         "人妻不倫温泉 03＋未公開映像DVD付き(未公開のドライブシーンを収録したDVD付き！)"
     details[:cover_image].must_equal   "http://image.prestige-av.com/images/prestige/aby/003/pb_e_aby-003.jpg"
     details[:actresses].must_equal     [ "真咲 華" ]
