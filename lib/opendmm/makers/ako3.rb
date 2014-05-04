@@ -23,23 +23,26 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            title:         html.css("div.maintitle").first.text.strip_unicode,
-            cover_image:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
-            actresses:     {
+            page:         page_uri.to_s,
+            product_id:   specs["商品番号"],
+            title:        html.css("div.maintitle").first.text.strip_unicode,
+            maker:        specs["メーカー"],
+            release_date: specs["配信日"],
+            actresses: {
               specs["title"] => {
-                face_image: URI.join(page_uri, specs["face"]).to_s,
-                age:        specs["年齢"],
-                height:     specs["身長"],
-                size:       specs["サイズ"],
+                face:   URI.join(page_uri, specs["face"]).to_s,
+                age:    specs["年齢"],
+                height: specs["身長"],
+                size:   specs["サイズ"],
               }
             },
-            maker:         specs["メーカー"],
-            product_id:    specs["商品番号"],
-            release_date:  specs["配信日"],
-            information:   html.css("div#caption").first.text.strip,
-            sample_images: html.css("ul.sampleimg li a").map { |a|
-              URI.join(page_uri, a["href"]).to_s
+            images: {
+              cover:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
+              samples: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
             },
+            descriptions: [
+              html.css("div#caption").first.text.strip,
+            ],
           }
         end
 
