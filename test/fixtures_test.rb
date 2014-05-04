@@ -29,3 +29,19 @@ module FixtureTest
     true
   end
 end
+
+Dir[File.dirname(__FILE__) + '/fixtures/*.rb'].each do |file|
+  require file
+  name = File.basename(file, ".rb")
+  eval <<-META
+
+class #{name.upcase}Test < Minitest::Test
+  include FixtureTest
+
+  def setup
+    @fixtures = #{name.upcase}
+  end
+end
+
+META
+end
