@@ -34,7 +34,7 @@ module OpenDMM
           label:         spec["レーベル："].text.strip,
           information:   descriptions["作品情報"].text.strip,
           sample_images: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
-          review:        descriptions["レビュー"].text.strip
+          review:        descriptions["レビュー"].text.strip,
         }
       end
 

@@ -24,7 +24,7 @@ describe OpenDMM::Prestige do
       "http://image.prestige-av.com/images/prestige/abp/013/cap_e_5_abp-013.jpg",
       "http://image.prestige-av.com/images/prestige/abp/013/cap_e_6_abp-013.jpg",
       "http://image.prestige-av.com/images/prestige/abp/013/cap_e_7_abp-013.jpg",
-      "http://image.prestige-av.com/images/prestige/abp/013/cap_e_8_abp-013.jpg"
+      "http://image.prestige-av.com/images/prestige/abp/013/cap_e_8_abp-013.jpg",
     ])
     details[:review].must_equal(
       "プレステージ専属女優 『水咲 ローラ』 が熱気を漂わせながら超濃厚なセックスを展開！"\
@@ -64,7 +64,7 @@ describe OpenDMM::Prestige do
       "http://image.prestige-av.com/images/prestige/abs/014/cap_e_4_abs-014.jpg",
       "http://image.prestige-av.com/images/prestige/abs/014/cap_e_5_abs-014.jpg",
       "http://image.prestige-av.com/images/prestige/abs/014/cap_e_6_abs-014.jpg",
-      "http://image.prestige-av.com/images/prestige/abs/014/cap_e_7_abs-014.jpg"
+      "http://image.prestige-av.com/images/prestige/abs/014/cap_e_7_abs-014.jpg",
     ])
     details[:review].must_equal        ""
   end
@@ -98,8 +98,8 @@ describe OpenDMM::Prestige do
       "http://image.prestige-av.com/images/prestige/aby/003/cap_e_5_aby-003.jpg",
       "http://image.prestige-av.com/images/prestige/aby/003/cap_e_6_aby-003.jpg",
       "http://image.prestige-av.com/images/prestige/aby/003/cap_e_7_aby-003.jpg",
-      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_8_aby-003.jpg"
+      "http://image.prestige-av.com/images/prestige/aby/003/cap_e_8_aby-003.jpg",
     ])
     details[:review].must_equal        ""
-end
+  end
 end

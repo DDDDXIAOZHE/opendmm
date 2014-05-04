@@ -13,3 +13,9 @@ class NilClass
     ""
   end
 end
+
+class String
+  def strip_unicode
+    gsub(/^[[:space:]]*(.*)[[:space:]]*$/, '\1')
+  end
+end
