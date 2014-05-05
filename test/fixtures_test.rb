@@ -1,47 +1,35 @@
 require "minitest/autorun"
 require "opendmm"
 
-module FixtureTest
-  def test_fixtures
-    @fixtures.each do |name, details|
-      assert_equal_hash(details, OpenDMM.search(name))
-    end
-  end
-
-  def assert_equal_array(expected, actual)
-    assert actual.instance_of?(Array), "#{expected} expected but non-array value #{actual} given"
-    assert (expected - actual).empty?, "#{expected} not included in #{actual}"
-  end
-
-  def assert_equal_hash(expected, actual)
-    assert actual.instance_of?(Hash), "#{expected} expected but non-hash value #{actual} given"
-    expected.each do |k, v|
-      assert actual.include?(k), "#{actual} doesn't have key #{k}"
-      case v
-      when Hash
-        assert_equal_hash(v, actual[k])
-      when Array
-        assert_equal_array(v, actual[k])
-      else
+class FixtureTest
+  def assert_equal(expected, actual)
+    case expected
+    when Hash
+      assert actual.instance_of?(Hash), "#{expected} expected but non-hash value #{actual} given"
+      expected.each do |k, v|
         assert_equal v, actual[k]
       end
+    when Array
+      assert actual.instance_of?(Array), "#{expected} expected but non-array value #{actual} given"
+      assert (expected - actual).empty?, "#{expected} not included in #{actual}"
+    else
+      super(expected, actual)
     end
-    true
   end
 end
 
 Dir[File.dirname(__FILE__) + '/fixtures/*.rb'].each do |file|
-  require file
   name = File.basename(file, ".rb")
-  eval <<-META
+  require_relative "fixtures/#{name}"
+  eval <<-TESTCASE
 
-class #{name.upcase}Test < Minitest::Test
-  include FixtureTest
-
-  def setup
-    @fixtures = Fixture::#{name.upcase}
+class FixtureTest
+  def test_#{name.downcase}
+    Fixture::#{name.upcase}.each do |name, details|
+      assert_equal details, OpenDMM.search(name)
+    end
   end
 end
 
-META
+TESTCASE
 end
