@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "opendmm"
 
-class FixtureTest
+class FixtureTest < Minitest::Test
   def assert_equal(expected, actual)
     case expected
     when Hash
