@@ -1,5 +1,8 @@
 require "minitest/autorun"
+require "active_support/core_ext/numeric/time"
 require "opendmm"
+
+I18n.enforce_available_locales = false
 
 class FixtureTest < Minitest::Test
   def assert_equal(expected, actual)

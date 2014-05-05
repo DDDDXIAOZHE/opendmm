@@ -5,8 +5,8 @@ module Fixture
       product_id:   "ABS-014",
       title:        "貸し切り、純潔サロン04",
       maker:        "プレステージ",
-      release_date: "2011/02/08",
-      movie_length: "120min",
+      release_date: Date.new(2011, 2, 8),
+      movie_length: 120.minutes,
       series:       "貸し切り、純潔サロン",
       label:        "ABSOLUTE",
       actresses: {

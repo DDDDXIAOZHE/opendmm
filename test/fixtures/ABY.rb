@@ -5,8 +5,8 @@ module Fixture
       product_id:   "ABY-003",
       title:        "人妻不倫温泉 03＋未公開映像DVD付き(未公開のドライブシーンを収録したDVD付き！)",
       maker:        "プレステージ",
-      release_date: "2011/05/11",
-      movie_length: "120min",
+      release_date: Date.new(2011, 5, 11),
+      movie_length: 120.minutes,
       series:       "人妻不倫温泉",
       label:        "油屋",
       actresses: {

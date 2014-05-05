@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler"
   spec.add_dependency "activesupport"
+  spec.add_dependency "chronic_duration"
   spec.add_dependency "httparty"
   spec.add_dependency "nokogiri"
 end

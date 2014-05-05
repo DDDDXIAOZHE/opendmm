@@ -28,12 +28,12 @@ module OpenDMM
             product_id:   specs["商品番号"],
             title:        html.css("div.maintitle").first.text.squish,
             maker:        specs["メーカー"],
-            release_date: specs["配信日"],
+            release_date: Date.parse(specs["配信日"]),
             actresses: {
               specs["title"] => {
                 face:   URI.join(page_uri, specs["face"]).to_s,
-                age:    specs["年齢"],
-                height: specs["身長"],
+                age:    specs["年齢"].to_i,
+                height: specs["身長"].to_i,
                 size:   specs["サイズ"],
               }
             },

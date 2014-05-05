@@ -5,8 +5,8 @@ module Fixture
       product_id:   "ABP-013",
       title:        "天然成分由来 水咲ローラ汁120%＋生写真7枚付き",
       maker:        "プレステージ",
-      release_date: "2013/07/02",
-      movie_length: "120min",
+      release_date: Date.new(2013, 7, 2),
+      movie_length: 120.minutes,
       series:       "天然成分由来",
       label:        "ABSOLUTELY P…",
       actresses: {

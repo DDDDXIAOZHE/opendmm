@@ -1,3 +1,4 @@
+require "chronic_duration"
 require "httparty"
 require "nokogiri"
 require "opendmm/utils"
@@ -28,8 +29,8 @@ module OpenDMM
             product_id:   spec["品番："].text.strip,
             title:        html.css("div.product_title_layout_01").first.text.strip,
             maker:        spec["メーカー名："].text.strip,
-            release_date: spec["発売日："].text.strip,
-            movie_length: spec["収録時間："].text.strip,
+            release_date: Date.parse(spec["発売日："].text.strip),
+            movie_length: ChronicDuration.parse(spec["収録時間："].text.strip),
             series:       spec["シリーズ："].text.strip,
             # TODO: Parse complete label, for example
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
