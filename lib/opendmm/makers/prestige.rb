@@ -1,8 +1,3 @@
-require "chronic_duration"
-require "httparty"
-require "nokogiri"
-require "opendmm/utils"
-
 module OpenDMM
   module Maker
     module Prestige

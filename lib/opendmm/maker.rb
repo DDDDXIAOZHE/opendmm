@@ -1,3 +1,9 @@
+require "active_support/core_ext/string/filters"
+require "chronic_duration"
+require "httparty"
+require "nokogiri"
+require "opendmm/utils"
+
 module OpenDMM
   module Maker
     @@makers = []
@@ -11,6 +17,7 @@ module OpenDMM
         result = maker.search(name)
         return result if result
       end
+      nil
     end
   end
 end

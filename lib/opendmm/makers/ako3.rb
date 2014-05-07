@@ -1,8 +1,3 @@
-require "httparty"
-require "nokogiri"
-require "opendmm/utils"
-require "active_support/core_ext/string/filters"
-
 module OpenDMM
   module Maker
     module Ako3
