@@ -39,3 +39,13 @@ class NilClass
     ""
   end
 end
+
+class Hash
+  def self.new_with_keys(array)
+    self.new.tap do |hash|
+      array.each do |item|
+        hash[item] = nil
+      end
+    end
+  end
+end

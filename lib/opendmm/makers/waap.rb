@@ -28,7 +28,7 @@ module OpenDMM
             brand:        specs["ブランド"],
             series:       specs["シリーズ"],
             label:        specs["レーベル"],
-            actresses:    Hash.new.tap { |hash| specs["出演者"].split.each { |name| hash[name] =nil } },
+            actresses:    Hash.new_with_keys(specs["出演者"].split),
             directors:    parse_directors(specs["監督"]),
             images: {
               cover:   URI.join(page_uri, html.css("ul#title_img_all li.title_img a").first["href"]).to_s,

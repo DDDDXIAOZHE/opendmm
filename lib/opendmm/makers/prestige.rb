@@ -17,25 +17,25 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          spec = Utils.parse_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
+          specs = Utils.parse_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
           descriptions = parse_descriptions(html)
           return {
             page:         page_uri.to_s,
-            product_id:   spec["品番："].text.strip,
+            product_id:   specs["品番："].text.strip,
             title:        html.css("div.product_title_layout_01").first.text.strip,
-            maker:        spec["メーカー名："].text.strip,
-            release_date: Date.parse(spec["発売日："].text.strip),
-            movie_length: ChronicDuration.parse(spec["収録時間："].text.strip),
-            series:       spec["シリーズ："].text.strip,
+            maker:        specs["メーカー名："].text.strip,
+            release_date: Date.parse(specs["発売日："].text.strip),
+            movie_length: ChronicDuration.parse(specs["収録時間："].text.strip),
+            series:       specs["シリーズ："].text.strip,
             # TODO: Parse complete label, for example
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
-            label:        spec["レーベル："].text.strip,
-            actresses:    Hash.new.tap { |hash| spec["出演："].css("a").each { |link| hash[link.text.strip] =nil } },
+            label:        specs["レーベル："].text.strip,
+            actresses:    Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)),
             images: {
               cover:   html.css("div.product_detail_layout_01 p.package_layout a.sample_image").first["href"],
               samples: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
             },
-            genres:       spec["ジャンル："].css("a").map(&:text).map(&:strip),
+            genres:       specs["ジャンル："].css("a").map(&:text).map(&:strip),
             descriptions: [
               descriptions["作品情報"].text.strip,
               descriptions["レビュー"].text.strip,
