@@ -24,7 +24,7 @@ module OpenDMM
             title:        html.css("ul#pan_list li").last.text.strip,
             maker:        specs["メーカー"],
             release_date: Date.parse(specs["発売日"]),
-            movie_length: specs["収録時間"].to_i.minutes,
+            movie_length: ChronicDuration.parse(specs["収録時間"]),
             brand:        specs["ブランド"],
             series:       specs["シリーズ"],
             label:        specs["レーベル"],

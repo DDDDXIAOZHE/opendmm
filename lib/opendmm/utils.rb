@@ -22,6 +22,18 @@ class << Date
   alias_method_chain :parse, :chinese_support
 end
 
+class << ChronicDuration
+  def parse_with_chinese_support(str)
+    case str
+    when /(\d+)分/
+      return $1.to_i.minutes
+    else
+      return parse_without_chinese_support(str)
+    end
+  end
+  alias_method_chain :parse, :chinese_support
+end
+
 class NilClass
   def text
     ""
