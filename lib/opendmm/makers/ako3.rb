@@ -24,6 +24,10 @@ module OpenDMM
             title:        html.css("div.maintitle").first.text.squish,
             maker:        specs["メーカー"],
             release_date: Date.parse(specs["配信日"]),
+            movie_length: nil,
+            brand:        nil,
+            series:       nil,
+            label:        nil,
             actresses: {
               specs["title"] => {
                 face:   URI.join(page_uri, specs["face"]).to_s,
@@ -32,10 +36,12 @@ module OpenDMM
                 size:   specs["サイズ"],
               }
             },
+            directors:    nil,
             images: {
               cover:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
               samples: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
             },
+            genres:       nil,
             descriptions: [
               html.css("div#caption").first.text.strip,
             ],
