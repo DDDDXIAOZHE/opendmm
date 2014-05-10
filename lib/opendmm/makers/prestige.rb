@@ -9,7 +9,7 @@ module OpenDMM
         cookies(adc: 1)
 
         def self.item(name)
-          get("/item/prestige/#{name}")
+          get("/item/prestige/#{name.upcase}")
         end
       end
 

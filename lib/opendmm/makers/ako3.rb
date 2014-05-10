@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           name =~ /(\w+)-(\d+)/
-          get("/work/item.php?itemcode=#{$1}#{$2}")
+          get("/work/item.php?itemcode=#{$1.upcase}#{$2}")
         end
       end
 
