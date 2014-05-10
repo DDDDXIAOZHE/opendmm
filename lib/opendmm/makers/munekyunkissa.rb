@@ -5,7 +5,7 @@ module OpenDMM
 
       module Site
         include HTTParty
-        base_uri "http://www.munekyunkissa.com/"
+        base_uri "www.munekyunkissa.com"
 
         def self.item(name)
           name =~ /([A-Z]{3})-(\d{3})/

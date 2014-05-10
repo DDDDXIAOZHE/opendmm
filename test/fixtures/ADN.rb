@@ -7,6 +7,8 @@ module Fixture
       maker:        "Attackers",
       release_date: Date.new(2014, 5, 7),
       movie_length: 110.minutes,
+      brand:        nil,
+      series:       nil,
       label:        "大人のドラマ",
       actresses: {
         "かすみ果穂" => nil

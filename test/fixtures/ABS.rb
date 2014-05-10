@@ -7,11 +7,13 @@ module Fixture
       maker:        "プレステージ",
       release_date: Date.new(2011, 2, 8),
       movie_length: 120.minutes,
+      brand:        nil,
       series:       "貸し切り、純潔サロン",
       label:        "ABSOLUTE",
       actresses: {
         "絵色 千佳" => nil,
       },
+      directors:    nil,
       images: {
         cover:   "http://image.prestige-av.com/images/prestige/abs/014/pb_e_abs-014.jpg",
         samples: [

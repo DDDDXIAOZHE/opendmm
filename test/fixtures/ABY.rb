@@ -7,11 +7,13 @@ module Fixture
       maker:        "プレステージ",
       release_date: Date.new(2011, 5, 11),
       movie_length: 120.minutes,
+      brand:        nil,
       series:       "人妻不倫温泉",
       label:        "油屋",
       actresses: {
         "真咲 華" => nil,
       },
+      directors:    nil,
       images: {
         cover:   "http://image.prestige-av.com/images/prestige/aby/003/pb_e_aby-003.jpg",
         samples: [

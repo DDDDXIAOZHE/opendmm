@@ -13,6 +13,7 @@ module Fixture
       actresses: {
         "大槻ひびき" => nil
       },
+      directors:    nil,
       images: {
         cover:   "http://www.waap.co.jp/hskhsk/itsub/AIR017.jpg",
         samples: [
