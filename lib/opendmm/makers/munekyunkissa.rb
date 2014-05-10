@@ -8,7 +8,7 @@ module OpenDMM
         base_uri "www.munekyunkissa.com"
 
         def self.item(name)
-          name =~ /([A-Z]{3})-(\d{3})/
+          name =~ /(\w+)-(\d+)/
           get("/works/#{$1.downcase}/#{$1.downcase}#{$2}.html")
         end
       end

@@ -8,8 +8,8 @@ module OpenDMM
         base_uri "www.ako-3.com"
 
         def self.item(name)
-          name_in_url = name.sub(/([A-Z]{3})-(\d{3})/, '\1\2')
-          get("/work/item.php?itemcode=#{name_in_url}")
+          name =~ /(\w+)-(\d+)/
+          get("/work/item.php?itemcode=#{$1}#{$2}")
         end
       end
 

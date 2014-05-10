@@ -8,8 +8,8 @@ module OpenDMM
         base_uri "attackers.net"
 
         def self.item(name)
-          name_in_url = name.sub(/([A-Z]{3})-(\d{3})/, '\1\2').downcase
-          get("/works/-/detail/=/cid=#{name_in_url}/")
+          name =~ /(\w+)-(\d+)/
+          get("/works/-/detail/=/cid=#{$1.downcase}#{$2}/")
         end
       end
 

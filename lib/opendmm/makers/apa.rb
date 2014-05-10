@@ -8,7 +8,7 @@ module OpenDMM
         base_uri "www.apa-av.jp"
 
         def self.item(name)
-          name =~ /([A-Z]{2})-(\d{3})/
+          name =~ /(\w+)-(\d+)/
           get("/list_detail/detail_#{$2}.html")
         end
       end
