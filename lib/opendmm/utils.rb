@@ -8,6 +8,12 @@ module OpenDMM
       dds = dl.css("dd")
       Hash[dts.zip(dds)]
     end
+
+    def self.utf8_html(content)
+      encoding = Nokogiri::HTML(content).encoding
+      content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: '')
+      Nokogiri::HTML(content)
+    end
   end
 end
 
