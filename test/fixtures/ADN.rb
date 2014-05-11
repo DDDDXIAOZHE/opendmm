@@ -1,19 +1,18 @@
 module Fixture
   ADN = {
     "ADN-019" => {
-      page:         "http://attackers.net/works/-/detail/=/cid=adn019/",
-      product_id:   "ADN-019",
-      title:        "夫には言えない羞恥の性癖",
-      maker:        "Attackers",
-      release_date: Date.new(2014, 5, 7),
-      movie_length: 110.minutes,
-      label:        "大人のドラマ",
       actresses: {
         "かすみ果穂" => nil
       },
+      description: "予備校の集中講座を受けるために美里夫婦の家に一ヶ月身を寄せることになった夫の弟・研二。美里は、いけない事と思いつつ、研二の青葉を噛んだときのようなほろ苦い体臭に、切なくも心惹かれてしまうのだった。",
       directors: {
         "なぎら健造" => nil
       },
+      genres: [
+        "強制フェラ・イラマチオ",
+        "パイズリ",
+        "人妻・若妻",
+      ],
       images: {
         cover: "http://attackers.net/images/works/adn019/adn019pl.jpg",
         samples: [
@@ -31,14 +30,13 @@ module Fixture
           "http://attackers.net/images/works/adn019/adn019jp-12.jpg",
         ],
       },
-      genres: [
-        "強制フェラ・イラマチオ",
-        "パイズリ",
-        "人妻・若妻",
-      ],
-      descriptions: [
-        "予備校の集中講座を受けるために美里夫婦の家に一ヶ月身を寄せることになった夫の弟・研二。美里は、いけない事と思いつつ、研二の青葉を噛んだときのようなほろ苦い体臭に、切なくも心惹かれてしまうのだった。",
-      ],
+      label:        "大人のドラマ",
+      maker:        "Attackers",
+      movie_length: 110.minutes,
+      page:         "http://attackers.net/works/-/detail/=/cid=adn019/",
+      product_id:   "ADN-019",
+      release_date: Date.new(2014, 5, 7),
+      title:        "夫には言えない羞恥の性癖",
     },
   }
 end

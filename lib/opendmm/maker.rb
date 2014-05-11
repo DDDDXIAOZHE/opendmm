@@ -12,26 +12,28 @@ module OpenDMM
       @@makers << mod
     end
 
+    # Known fields:
+    #
     # {
-    #   page:          nil,
-    #   product_id:    nil,
-    #   title:         nil,
-    #   maker:         nil,
-    #   release_date:  nil,
-    #   movie_length:  nil,
-    #   brand:         nil,
-    #   series:        nil,
-    #   label:         nil,
     #   actresses:     {}
     #   actress_types: []
+    #   brand:         nil,
+    #   description:   nil
     #   directors:     []
+    #   genres:        []
     #   images: {
     #     cover:   nil,
     #     samples: [],
     #   },
-    #   genres:        []
+    #   label:         nil,
+    #   maker:         nil,
+    #   movie_length:  nil,
+    #   page:          nil,
+    #   product_id:    nil,
+    #   release_date:  nil,
     #   scenes:        []
-    #   descriptions:  []
+    #   series:        nil,
+    #   title:         nil,
     # }
 
     def self.search(name)
