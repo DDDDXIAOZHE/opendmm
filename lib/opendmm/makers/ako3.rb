@@ -27,7 +27,7 @@ module OpenDMM
                 size:   specs["サイズ"],
               }
             },
-            description:  html.css("div#caption").first.text.strip,
+            description:  html.css("div#caption").first.text.squish,
             images: {
               cover:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
               samples: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
@@ -46,11 +46,11 @@ module OpenDMM
           spec_area = html.css("div#spec-area").first
           specs = {
             "face"  => spec_area.css("div.face img").first["src"],
-            "title" => spec_area.css("div.title").first.text.strip,
+            "title" => spec_area.css("div.title").first.text.squish,
           }
           spec_area.css("div.release").each do |item|
             if item.text =~ /(.*)：(.*)/
-              specs[$1.strip] = $2.strip
+              specs[$1.squish] = $2.squish
             end
           end
           specs
