@@ -68,7 +68,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /ARM-\d{3}/
+        when /ARM-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end

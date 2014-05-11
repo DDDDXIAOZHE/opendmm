@@ -52,7 +52,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /ABP-\d{3}/, /ABS-\d{3}/, /ABY-\d{3}/
+        when /ABP-\d{3}/i, /ABS-\d{3}/i, /ABY-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end

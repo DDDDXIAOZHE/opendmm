@@ -59,7 +59,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /AKO-\d{3}/
+        when /AKO-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end

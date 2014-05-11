@@ -58,7 +58,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /AIR-\d{3}/
+        when /AIR-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
