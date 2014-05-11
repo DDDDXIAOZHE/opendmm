@@ -6,10 +6,6 @@ module Fixture
       title:        "MARI 18歳",
       maker:        "A子さん",
       release_date: Date.new(2011, 11, 12),
-      movie_length: nil,
-      brand:        nil,
-      series:       nil,
-      label:        nil,
       actresses: {
         "MARI［まり］" => {
           face:   "http://www.ako-3.com/img/jacket_s/AKO011.jpg",
@@ -28,7 +24,6 @@ module Fixture
           "http://www.ako-3.com/SampleImg_b/AKO011_05.jpg",
         ],
       },
-      genres:       nil,
       descriptions: [
         "コスプレしてみたりソフトSMをしてみたいというMARIちゃんは、爽やかイケメンがタイプで男に関しては色々うるさそう。そんな彼女のお餅みたく白くて柔らかい上物パイオツをぺろぺろナメナメしたり、アソコをぐっちょぐっちょ掻き回すと、カワイイ声で喘ぐスケベちゃんに豹変。で、ズッポリ挿入、フィニッシュは舌上、で、ごっくんしてくれたよ。で、おまけに、セックス後のシャワー室に侵入し、俺の乳首をイジらせ、フェラに持ち込み「ぐえっ」っと咽る彼女を尻目に精子を舐めさせちゃったぜ！",
       ],

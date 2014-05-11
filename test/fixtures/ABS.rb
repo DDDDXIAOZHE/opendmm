@@ -13,7 +13,6 @@ module Fixture
       actresses: {
         "絵色 千佳" => nil,
       },
-      directors:    nil,
       images: {
         cover:   "http://image.prestige-av.com/images/prestige/abs/014/pb_e_abs-014.jpg",
         samples: [

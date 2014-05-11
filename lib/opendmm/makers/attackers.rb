@@ -25,7 +25,6 @@ module OpenDMM
             maker:        "Attackers",
             release_date: Date.parse(specs["発売日"]),
             movie_length: ChronicDuration.parse(specs["収録時間"]),
-            brand:        nil,
             series:       parse_series(specs["シリーズ"]),
             label:        specs["レーベル"],
             actresses:    Hash.new_with_keys(specs["出演女優"].split),

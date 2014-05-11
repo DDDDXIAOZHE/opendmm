@@ -26,17 +26,12 @@ module OpenDMM
             maker:        "胸キュン喫茶",
             release_date: Date.parse(data_left["発売日"].text.remove("：").squish),
             movie_length: ChronicDuration.parse(data_left["収録時間"].text.remove("：").squish),
-            brand:        nil,
             # TODO: parse series, label, genres from pics
-            series:       nil,
-            label:        nil,
             actresses:    Hash.new_with_keys(data_right["出演者"].text.remove("：").split),
-            directors:    nil,
             images: {
               cover:   URI.join(page_uri, html.css("div.ttl-pac a.ttl-package").first["href"]).to_s,
               samples: html.css("div.ttl-sample img").map { |img| URI.join(page_uri, img["src"]).to_s },
             },
-            genres:       nil,
             descriptions: [
               html.css("div.ttl-comment div.comment").first.text.squish,
             ],

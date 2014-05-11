@@ -7,13 +7,11 @@ module Fixture
       maker:        "プレステージ",
       release_date: Date.new(2013, 7, 2),
       movie_length: 120.minutes,
-      brand:        nil,
       series:       "天然成分由来",
       label:        "ABSOLUTELY P…",
       actresses: {
         "水咲(滝澤)ローラ" => nil,
       },
-      directors:    nil,
       images: {
         cover:   "http://image.prestige-av.com/images/prestige/abp/013/pb_e_abp-013.jpg",
         samples: [

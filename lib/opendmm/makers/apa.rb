@@ -8,8 +8,8 @@ module OpenDMM
         base_uri "www.apa-av.jp"
 
         def self.item(name)
-          name =~ /(\w+)-(\d+)/
-          get("/list_detail/detail_#{$2}.html")
+          name =~ /AP-(\d+)/
+          get("/list_detail/detail_#{$1}.html")
         end
       end
 
@@ -23,18 +23,13 @@ module OpenDMM
             product_id:   specs["品番"],
             title:        html.css("div.detail_title_1").first.text.squish,
             maker:        "Apache",
-            release_date: nil,
             movie_length: ChronicDuration.parse(specs["収録時間"]),
-            brand:        nil,
-            series:       nil,
-            label:        nil,
             actresses:    Hash.new_with_keys(specs["出演女優"].split(",")),
             directors:    Hash.new_with_keys(specs["監督"].split),
             images: {
               cover:   URI.join(page_uri, html.css("div.detail_img a").first["href"]).to_s,
               samples: html.css("ul.detail-main-thum li a").map { |a| URI.join(page_uri, a["href"]).to_s },
             },
-            genres:       nil,
             descriptions: [
               html.css("div.detail_description").first.inner_text.squish,
             ],

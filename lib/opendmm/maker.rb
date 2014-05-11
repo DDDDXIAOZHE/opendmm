@@ -12,6 +12,28 @@ module OpenDMM
       @@makers << mod
     end
 
+    # {
+    #   page:          nil,
+    #   product_id:    nil,
+    #   title:         nil,
+    #   maker:         nil,
+    #   release_date:  nil,
+    #   movie_length:  nil,
+    #   brand:         nil,
+    #   series:        nil,
+    #   label:         nil,
+    #   actresses:     {}
+    #   actress_types: []
+    #   directors:     []
+    #   images: {
+    #     cover:   nil,
+    #     samples: [],
+    #   },
+    #   genres:        []
+    #   scenes:        []
+    #   descriptions:  []
+    # }
+
     def self.search(name)
       @@makers.each do |maker|
         result = maker.search(name)

@@ -26,13 +26,11 @@ module OpenDMM
             maker:        specs["メーカー名："].text.strip,
             release_date: Date.parse(specs["発売日："].text.strip),
             movie_length: ChronicDuration.parse(specs["収録時間："].text.strip),
-            brand:        nil,
             series:       specs["シリーズ："].text.strip,
             # TODO: Parse complete label, for example
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
             label:        specs["レーベル："].text.strip,
             actresses:    Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)),
-            directors:    nil,
             images: {
               cover:   html.css("div.product_detail_layout_01 p.package_layout a.sample_image").first["href"],
               samples: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
