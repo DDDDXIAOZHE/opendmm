@@ -35,7 +35,14 @@ module OpenDMM
             release_date: Date.parse(specs["発売日"]["DVD"]),
             series:       specs["シリーズ"],
             title:        html.css("div#content-box h2.list-ttl").text.squish,
-          }
+          }.reject do |k, v|
+            case v
+            when Array, Hash, String
+              v.empty?
+            when nil
+              true
+            end
+          end
         end
 
         private

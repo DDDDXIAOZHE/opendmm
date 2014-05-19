@@ -1,6 +1,55 @@
 #!/usr/bin/env ruby
 
 require "opendmm"
-require "pp"
 
-pp OpenDMM.search(ARGV.first)
+def key_width(hash)
+  hash.keys.map do |key|
+    case key
+    when Symbol
+      key.length + 1
+    else
+      key.to_s.length + 5
+    end
+  end.max
+end
+
+def pp(obj, indent = 0)
+  case obj
+  when Hash
+    width = key_width(obj)
+    puts "{"
+    obj.each do |key, value|
+      print " " * indent
+      case key
+      when Symbol
+        printf "  %-#{width}s ", "#{key}:"
+      else
+        printf "  %-#{width}s ", "\"#{key}\" =>"
+      end
+      pp(value, indent + 2)
+      puts ","
+    end
+    print " " * indent + "}"
+  when Array
+    puts "["
+    obj.each do |value|
+      print " " * (indent + 2)
+      pp(value, indent + 2)
+      puts ","
+    end
+    print " " * indent + "]"
+  when Date
+    print "Date.new(#{obj.year}, #{obj.month}, #{obj.day})"
+  when ActiveSupport::Duration
+    print "#{obj/60}.minutes"
+  when nil
+    print "nil"
+  else
+    print "\"#{obj.to_s}\""
+  end
+end
+
+query = ARGV.first
+product = OpenDMM.search(query)
+print "\"#{query}\" => "
+pp product
