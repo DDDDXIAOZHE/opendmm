@@ -72,7 +72,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /IPZ-\d{3}/i, /IDBD-\d{3}/i
+        when /IPZ-\d{3}/i, /IDBD-\d{3}/i, /IPSD-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
