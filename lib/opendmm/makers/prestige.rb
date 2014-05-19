@@ -36,7 +36,7 @@ module OpenDMM
             product_id:   specs["品番："].text.squish,
             release_date: Date.parse(specs["発売日："].text.squish),
             series:       specs["シリーズ："].text.squish,
-            title:        html.css("div.product_title_layout_01").first.text.squish,
+            title:        html.css("div.product_title_layout_01").text.squish,
           }
         end
 

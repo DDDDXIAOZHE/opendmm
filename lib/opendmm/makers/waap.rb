@@ -21,7 +21,7 @@ module OpenDMM
           return {
             actresses:    Hash.new_with_keys(specs["出演者"].split),
             brand:        specs["ブランド"],
-            description:  html.css("div#title_cmt_all").first.text.squish,
+            description:  html.css("div#title_cmt_all").text.squish,
             directors:    parse_directors(specs["監督"]),
             genres:       specs["ジャンル"].split,
             images: {

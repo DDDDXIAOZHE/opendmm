@@ -27,7 +27,7 @@ module OpenDMM
                 size:   specs["サイズ"],
               }
             },
-            description:  html.css("div#caption").first.text.squish,
+            description:  html.css("div#caption").text.squish,
             images: {
               cover:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
               samples: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
@@ -36,7 +36,7 @@ module OpenDMM
             page:         page_uri.to_s,
             product_id:   specs["商品番号"],
             release_date: Date.parse(specs["配信日"]),
-            title:        html.css("div.maintitle").first.text.squish,
+            title:        html.css("div.maintitle").text.squish,
           }
         end
 
@@ -46,7 +46,7 @@ module OpenDMM
           spec_area = html.css("div#spec-area").first
           specs = {
             "face"  => spec_area.css("div.face img").first["src"],
-            "title" => spec_area.css("div.title").first.text.squish,
+            "title" => spec_area.css("div.title").text.squish,
           }
           spec_area.css("div.release").each do |item|
             if item.text =~ /(.*)：(.*)/

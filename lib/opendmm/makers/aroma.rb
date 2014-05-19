@@ -23,7 +23,7 @@ module OpenDMM
           return {
             actresses:    Hash.new_with_keys(specs["出演者"].split("・")),
             directors:    Hash.new_with_keys(specs["監督"].split("・")),
-            description:  html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[9]/td[2]").first.text.squish,
+            description:  html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[9]/td[2]").text.squish,
             genres:       specs["ジャンル"].split,
             images: {
               cover:   parse_cover_image(html, page_uri),
@@ -42,7 +42,7 @@ module OpenDMM
 
         def self.parse_specs(html)
           specs = {}
-          html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[3]").first.text.split.each do |item|
+          html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[3]").text.split.each do |item|
             if item =~ /(.*)：(.*)/
               specs[$1.squish] = $2.squish
             end

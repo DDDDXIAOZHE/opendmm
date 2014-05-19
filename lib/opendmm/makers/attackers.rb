@@ -21,7 +21,7 @@ module OpenDMM
           return {
             actresses:    Hash.new_with_keys(specs["出演女優"].split),
             directors:    Hash.new_with_keys(specs["監督"].split),
-            description:  html.css("p.works_txt").first.text.squish,
+            description:  html.css("p.works_txt").text.squish,
             genres:       specs["ジャンル"].split,
             images: {
               cover:   URI.join(page_uri, html.css("div#works_pake_box a#pake").first["href"]).to_s,
@@ -34,7 +34,7 @@ module OpenDMM
             product_id:   specs["品番"],
             release_date: Date.parse(specs["発売日"]),
             series:       parse_series(specs["シリーズ"]),
-            title:        html.css("div.hl_box_btm").first.text.squish,
+            title:        html.css("div.hl_box_btm").text.squish,
           }
         end
 

@@ -30,7 +30,7 @@ module OpenDMM
             movie_length: ChronicDuration.parse(specs["収録時間"]),
             page:         page_uri.to_s,
             product_id:   specs["品番"],
-            title:        html.css("div.detail_title_1").first.text.squish,
+            title:        html.css("div.detail_title_1").text.squish,
           }
         end
 
