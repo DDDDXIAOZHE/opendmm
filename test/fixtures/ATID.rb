@@ -36,7 +36,7 @@ module Fixture
       label:        "in mad",
       maker:        "Attackers",
       movie_length: 7200,
-      page:         "http://attackers.net/works/-/detail/=/cid=atid183/",
+      page:         "http://attackers.net/works/-/detail/=/cid=atid183",
       product_id:   "ATID-183",
       release_date: Date.new(2011, 9, 7),
       series:       "堕ちるまで…",

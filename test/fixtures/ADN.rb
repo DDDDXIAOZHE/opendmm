@@ -4,7 +4,7 @@ module Fixture
       actresses: {
         "かすみ果穂" => nil
       },
-      description: "予備校の集中講座を受けるために美里夫婦の家に一ヶ月身を寄せることになった夫の弟・研二。美里は、いけない事と思いつつ、研二の青葉を噛んだときのようなほろ苦い体臭に、切なくも心惹かれてしまうのだった。",
+      description:  "予備校の集中講座を受けるために美里夫婦の家に一ヶ月身を寄せることになった夫の弟・研二。美里は、いけない事と思いつつ、研二の青葉を噛んだときのようなほろ苦い体臭に、切なくも心惹かれてしまうのだった。",
       directors: {
         "なぎら健造" => nil
       },
@@ -33,7 +33,7 @@ module Fixture
       label:        "大人のドラマ",
       maker:        "Attackers",
       movie_length: 110.minutes,
-      page:         "http://attackers.net/works/-/detail/=/cid=adn019/",
+      page:         "http://attackers.net/works/-/detail/=/cid=adn019",
       product_id:   "ADN-019",
       release_date: Date.new(2014, 5, 7),
       title:        "夫には言えない羞恥の性癖",

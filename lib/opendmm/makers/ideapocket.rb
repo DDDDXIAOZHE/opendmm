@@ -1,11 +1,11 @@
 module OpenDMM
   module Maker
-    module Attackers
+    module Ideapocket
       include Maker
 
       module Site
         include HTTParty
-        base_uri "attackers.net"
+        base_uri "ideapocket.com"
 
         def self.item(name)
           name =~ /(\w+)-(\d+)/
@@ -19,22 +19,22 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            actresses:    Hash.new_with_keys(specs["出演女優"].split),
+            actresses:    Hash.new_with_keys(html.xpath('//*[@id="content-box"]/p[1]/a').map(&:text)),
             directors:    Hash.new_with_keys(specs["監督"].split),
-            description:  html.css("p.works_txt").first.text.squish,
+            description:  html.xpath('//*[@id="content-box"]/p[2]').text.squish,
             genres:       specs["ジャンル"].split,
             images: {
-              cover:   URI.join(page_uri, html.css("div#works_pake_box a#pake").first["href"]).to_s,
-              samples: html.css("ul#sample_photo li a").map { |a| URI.join(page_uri, a["href"]).to_s },
+              cover:   URI.join(page_uri, html.css("div#content-box div.pake a").first["href"]).to_s,
+              samples: html.css("div#sample-pic a").map { |a| URI.join(page_uri, a["href"]).to_s },
             },
             label:        specs["レーベル"],
-            maker:        "Attackers",
+            maker:        "Ideapocket",
             movie_length: ChronicDuration.parse(specs["収録時間"]),
             page:         page_uri.to_s,
             product_id:   specs["品番"],
             release_date: Date.parse(specs["発売日"]),
-            series:       parse_series(specs["シリーズ"]),
-            title:        html.css("div.hl_box_btm").first.text.squish,
+            series:       specs["シリーズ"],
+            title:        html.css("div#content-box h2.list-ttl").text.squish,
           }
         end
 
@@ -42,27 +42,18 @@ module OpenDMM
 
         def self.parse_specs(html)
           specs = {}
-          html.css("div#works-content ul li").each do |li|
-            if li.text =~ /(.*)：(.*)/
+          html.xpath('//*[@id="navi-right"]/div[1]/p').text.remove(/\s*DVD/).lines do |line|
+            if line =~ /(.*)：(.*)/
               specs[$1.squish] = $2.squish
             end
           end
           specs
         end
-
-        def self.parse_series(str)
-          case str
-          when /-+/
-            return nil
-          else
-            return str
-          end
-        end
       end
 
       def self.search(name)
         case name
-        when /ADN-\d{3}/i, /ATID-\d{3}/i
+        when /IPZ-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
