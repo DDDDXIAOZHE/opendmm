@@ -41,7 +41,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /APAA-\d{3}/i, /APAK-\d{3}/i
+        when /(APAA|APAK)-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
