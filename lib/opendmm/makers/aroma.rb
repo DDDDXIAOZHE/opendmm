@@ -9,8 +9,10 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /ARM-(\d+)/
+          when /\bARM-(\d+)/i
             return get("/member/contents/title.php?conid=101#{$1}")
+          when /\bPARM-(\d+)/i
+            return get("/member/contents/title.php?conid=205#{$1}")
           end
         end
       end
@@ -21,8 +23,8 @@ module OpenDMM
           html = Utils.utf8_html(content)
           specs = parse_specs(html)
           return {
-            actresses:    Hash.new_with_keys(specs["出演者"].split("・")),
-            directors:    Hash.new_with_keys(specs["監督"].split("・")),
+            actresses:    (Hash.new_with_keys(specs["出演者"].split("・")) if specs["出演者"]),
+            directors:    (Hash.new_with_keys(specs["監督"].split("・")) if specs["監督"]),
             description:  html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[9]/td[2]").text.squish,
             genres:       specs["ジャンル"].split,
             images: {
@@ -68,7 +70,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /ARM-\d{3}/i
+        when /\bARM-\d{3}/i, /\bPARM-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
