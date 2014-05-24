@@ -1,6 +1,6 @@
 module Fixture
   AIR = {
-    "AIR-017" => {
+    "AIR017" => {
       actresses: {
         "大槻ひびき" => nil
       },
