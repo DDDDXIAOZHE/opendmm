@@ -1,55 +1,100 @@
 #!/usr/bin/env ruby
 
+require "optparse"
 require "opendmm"
 
-def key_width(hash)
-  hash.keys.map do |key|
-    case key
-    when Symbol
-      key.length + 1
-    else
-      key.to_s.length + 5
-    end
-  end.max
-end
+class PrettyProduct
+  def initialize(product)
+    @product = product
+  end
 
-def pp(obj, indent = 0)
-  case obj
-  when Hash
-    width = key_width(obj)
-    puts "{"
-    obj.each do |key, value|
-      print " " * indent
+  def print_raw
+    unless @product
+      puts "Unknown product" + ARGV.first
+      return
+    end
+    print_obj(@product)
+    puts ""
+  end
+
+  def print_fixture
+    id = @product[:product_id]
+    fixture_name = id.match(/\w+/)[0]
+    $stdout.reopen("test/fixtures/#{fixture_name}.rb", "w")
+    puts "module Fixture"
+    puts "  #{fixture_name} = {"
+    print "    \"#{id}\" => "
+    print_obj(@product, 4)
+    puts ","
+    puts "  }"
+    puts "end"
+  end
+
+  private
+
+  def print_obj(obj, indent = 0)
+    case obj
+    when Hash
+      width = key_width(obj)
+      puts "{"
+      obj.each do |key, value|
+        print " " * indent
+        case key
+        when Symbol
+          printf "  %-#{width}s ", "#{key}:"
+        else
+          printf "  %-#{width}s ", "\"#{key}\" =>"
+        end
+        print_obj(value, indent + 2)
+        puts ","
+      end
+      print " " * indent + "}"
+    when Array
+      puts "["
+      obj.each do |value|
+        print " " * (indent + 2)
+        print_obj(value, indent + 2)
+        puts ","
+      end
+      print " " * indent + "]"
+    when Date
+      print "Date.new(#{obj.year}, #{obj.month}, #{obj.day})"
+    when ActiveSupport::Duration, Numeric
+      print "#{obj/60}.minutes"
+    when nil
+      print "nil"
+    else
+      print "\"#{obj.to_s}\""
+    end
+  end
+
+  def key_width(hash)
+    hash.keys.map do |key|
       case key
       when Symbol
-        printf "  %-#{width}s ", "#{key}:"
+        key.length + 1
       else
-        printf "  %-#{width}s ", "\"#{key}\" =>"
+        key.to_s.length + 5
       end
-      pp(value, indent + 2)
-      puts ","
-    end
-    print " " * indent + "}"
-  when Array
-    puts "["
-    obj.each do |value|
-      print " " * (indent + 2)
-      pp(value, indent + 2)
-      puts ","
-    end
-    print " " * indent + "]"
-  when Date
-    print "Date.new(#{obj.year}, #{obj.month}, #{obj.day})"
-  when ActiveSupport::Duration
-    print "#{obj/60}.minutes"
-  when nil
-    print "nil"
-  else
-    print "\"#{obj.to_s}\""
+    end.max
   end
 end
 
-query = ARGV.first
-product = OpenDMM.search(query)
-print "\"#{query}\" => "
-pp product
+options = { fixture: false }
+OptionParser.new do |opts|
+  opts.on("-p", "--[no-]fixture", "Fixture mode") do |p|
+    options[:fixture] = p
+  end
+end.parse!
+
+details = OpenDMM.search(ARGV.first)
+if details
+  product = PrettyProduct.new(details)
+  if options[:fixture]
+    product.print_fixture
+  else
+    product.print_raw
+  end
+else
+  puts "Unknown product: " + ARGV.first
+end

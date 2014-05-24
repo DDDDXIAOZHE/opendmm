@@ -20,7 +20,7 @@ module OpenDMM
           specs = Utils.parse_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
           descriptions = parse_descriptions(html)
           return {
-            actresses:    Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)),
+            actresses:    (Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)) if specs["出演："]),
             description:  [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join.squish,
             genres:       specs["ジャンル："].css("a").map(&:text).map(&:squish),
             images: {
@@ -52,7 +52,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /ABP-\d{3}/i, /ABS-\d{3}/i, /ABY-\d{3}/i
+        when /(ABP|ABS|ABY|CHN|CHS|DOM|EDD|ESK|EZD|HAZ|HON|INU|JOB|LLR|MAS|MBD|MDC|MEK|MMY|NDR|NOF|OSR|PPB|PPT|RAW|SAD|SGA|SPC|SRS|TAP|TDT|TRD|WAT|WPC|XND|YRH|YRZ)-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
