@@ -1,0 +1,47 @@
+module Fixture
+  JBD = {
+    "JBD-153" => {
+      actresses:    {
+        "朝桐光" => nil,
+      },
+      directors:    {
+        "TAIZO" => nil,
+      },
+      description:  "買い物帰りに拉致・監禁された美しき人妻。…執拗な二穴凌辱…自我が崩壊してしまうほどの絶頂！人妻の腫れ上がった淫穴から噴出する恥ずかしい濁り汁…「やめてえええ！ お尻が…壊れちゃううう！！誰か！助けてええ！！」",
+      genres:       [
+        "強制フェラ・イラマチオ",
+        "アナル責め",
+        "放尿・失禁・潮吹き",
+        "浣腸",
+        "緊縛",
+        "電マ",
+        "人妻・若妻",
+      ],
+      images:       {
+        cover:   "http://attackers.net/images/works/jbd153/jbd153pl.jpg",
+        samples: [
+          "http://attackers.net/images/works/jbd153/jbd153jp-01.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-02.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-03.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-04.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-05.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-06.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-07.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-08.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-09.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-10.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-11.jpg",
+          "http://attackers.net/images/works/jbd153/jbd153jp-12.jpg",
+        ],
+      },
+      label:        "蛇縛",
+      maker:        "Attackers",
+      movie_length: 100.minutes,
+      page:         "http://attackers.net/works/-/detail/=/cid=jbd153",
+      product_id:   "JBD-153",
+      release_date: Date.new(2012, 3, 7),
+      series:       "絶望に耐えながら…。",
+      title:        "人妻監禁アナル拷問 絶望に耐えながら…。4",
+    },
+  }
+end

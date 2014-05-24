@@ -62,7 +62,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /ADN-\d{3}/i, /ATID-\d{3}/i
+        when /ADN-\d{3}/i, /ATID-\d{3}/i, /JBD-\d{3}/i, /RBD-\d{3}/i, /SHKD-\d{3}/i, /SSPD-\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
