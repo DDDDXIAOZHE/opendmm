@@ -16,7 +16,7 @@ class FixtureTest < Minitest::Test
       assert actual.instance_of?(Array), "#{expected} expected but non-array value #{actual} given"
       assert (expected - actual).empty?, "#{expected} not included in #{actual}"
     else
-      super(expected, actual)
+      super(expected, actual, "#{expected} expected while #{actual} given")
     end
   end
 end

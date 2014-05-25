@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "小川あさ美" => nil,
       },
+      code:         "SHKD-415",
       directors:    {
         "なぎら健造" => nil,
       },
@@ -34,7 +35,6 @@ module Fixture
       maker:        "Attackers",
       movie_length: 110.minutes,
       page:         "http://attackers.net/works/-/detail/=/cid=shkd415",
-      code:         nil,
       release_date: Date.new(2010, 8, 7),
       series:       "夫の目の前で犯されて―",
       title:        "夫の目の前で犯されて― ターゲット",

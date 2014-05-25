@@ -4,8 +4,8 @@ module Fixture
       actresses:    {
         "MARI［まり］" => {
           face:   "http://www.ako-3.com/img/jacket_s/AKO011.jpg",
-          age:    0.minutes,
-          height: 2.minutes,
+          age:    18,
+          height: 160,
           size:   "B80（B-65）/W58/H83",
         },
       },

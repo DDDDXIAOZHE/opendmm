@@ -20,7 +20,7 @@ module OpenDMM
           specs = parse_specs(html)
           return {
             actresses:    Hash.new_with_keys(specs["出演女優"].split),
-            code:         specs["品番"],
+            code:         parse_code(specs["品番"]),
             directors:    Hash.new_with_keys(specs["監督"].split),
             description:  html.css("p.works_txt").text.squish,
             genres:       specs["ジャンル"].split,
@@ -43,19 +43,28 @@ module OpenDMM
         def self.parse_specs(html)
           specs = {}
           html.css("div#works-content ul li").each do |li|
-            if li.text =~ /(.*)：(.*)/
+            if li.text =~ /(.*?)：(.*)/
               specs[$1.squish] = $2.squish
             end
           end
           specs
         end
 
+        def self.parse_code(str)
+          case str
+          when /Blu-ray：(\w+-\d+).*DVD：(\w+-\d+)/
+            $2.upcase
+          when /\w+-\d+/
+            $&
+          end
+        end
+
         def self.parse_series(str)
           case str
           when /-+/
-            return nil
+            nil
           else
-            return str
+            str
           end
         end
       end

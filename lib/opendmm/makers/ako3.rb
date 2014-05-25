@@ -8,7 +8,7 @@ module OpenDMM
         base_uri "www.ako-3.com"
 
         def self.item(name)
-          name =~ /(\w+)-(\d+)/
+          name =~ /(\w+)-?(\d+)/
           get("/work/item.php?itemcode=#{$1.upcase}#{$2}")
         end
       end
@@ -59,7 +59,7 @@ module OpenDMM
 
       def self.search(name)
         case name
-        when /AKO-\d{3}/i
+        when /AKO-?\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
