@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "小西 悠" => nil,
       },
+      code:         "SAD-031",
       description:  "大人気プレステージ専属女優『小西悠』のセルショップ限定ＤＶＤ。車に乗り助手席でオナニーしながらシティホテルでＨ。立ったままイチャツキ、敏感過ぎる身体は痙攣しながらイク！玩具で性感チェックされ淫らな身体を曝け出し、ガラス張りのバスルームで張り型をしゃぶりながらブッカケストリップショー！椅子に足をオッひろげながら手マンされ何度も潮吹き！角度を変えながら打ち込まれアクメイキ！",
       genres:       [
         "巨乳",
@@ -31,7 +32,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 120.minutes,
       page:         "http://www.prestige-av.com/item/prestige/SAD-031",
-      product_id:   "SAD-031",
       release_date: Date.new(2011, 5, 2),
       series:       "カラダをウリにする絶対的…",
       title:        "カラダをウリにする絶対的美少女 VOLUME02",

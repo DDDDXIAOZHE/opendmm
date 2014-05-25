@@ -3,6 +3,7 @@ module Fixture
     "SGA-001" => {
       actresses:    {
       },
+      code:         "SGA-001",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！美人すぎる人妻がAVデビュー。裸になると38才には見えないスレンダー体型と色白のFカップ美乳が露に！目を閉じ戸惑いながらするフェラは見逃せません！本番になり頬を赤らめながら快感に酔いしれる！！体位を変えながらタップリと打ち込まれ、マ〇コは汁が滴るほど濡れまくり！初々しいセックスは新鮮でエロい！！",
       genres:       [
         "通販限定",
@@ -27,7 +28,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 130.minutes,
       page:         "http://www.prestige-av.com/item/prestige/SGA-001",
-      product_id:   "SGA-001",
       release_date: Date.new(2013, 12, 3),
       series:       "",
       title:        "パーフェクト過ぎるFカップ人妻 林ゆな38歳 AVデビュー＋生写真7枚付き",

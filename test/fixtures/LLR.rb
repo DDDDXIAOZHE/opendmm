@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "泉 もえ" => nil,
       },
+      code:         "LLR-005",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！プレステージ専属女優 『泉 もえ』 登場。魅力的な桃尻を突き出して、パイパンマ〇コに打ち込まれ快感にウットリ！マン汁で染みが付いたブルマ姿で、拘束されながら玩具責めされ悶える姿は必見です！拒む事なく、されるがまま受け身でヨガル健気なシーンが満載です！若くて張りのある肌はエロい！！",
       genres:       [
         "通販限定",
@@ -31,7 +32,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 120.minutes,
       page:         "http://www.prestige-av.com/item/prestige/LLR-005",
-      product_id:   "LLR-005",
       release_date: Date.new(2013, 12, 20),
       series:       "私の放課後、さしあげます…",
       title:        "私の放課後、さしあげます。改 5＋生写真7枚付き",

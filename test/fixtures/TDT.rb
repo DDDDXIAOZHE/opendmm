@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "JULIA" => nil,
       },
+      code:         "TDT-018",
       description:  "大きな美巨乳を曝け出しながら手マンで潮吹きさせら、れウットリヨガル姿が艶めかしいい美人妻。濡れマ○コにハメられ、美巨乳を揺らし悶える！大きな尻を突き出して抜き挿しされるシーンも必見！シャワールームで奉仕させられれば、竿や玉を丁寧にしゃぶり口内抜き。透けランジェリー姿で男を責めるシーンはオイルでテカった身体がエロい！玄関先で目隠しのままパンツをずらされて突然ハメられ、激しいピストンにヨガル！結合したまま歩かされたり、台所で疲れたりと見所満載。",
       genres:       [
         "巨乳",
@@ -27,7 +28,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 120.minutes,
       page:         "http://www.prestige-av.com/item/prestige/TDT-018",
-      product_id:   "TDT-018",
       release_date: Date.new(2011, 2, 23),
       series:       "続・エロ一発妻",
       title:        "続・エロ一発妻 06",

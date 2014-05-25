@@ -9,6 +9,7 @@ module Fixture
         "ロリ",
         "美乳",
       ],
+      code:          "APAA-182",
       description:   "最近は育ちの良いお嬢様のAV出演が続きます！整えられた髪に、制服が似合いすぎの女の子、ゆうりちゃん[T：156・B：90（E）・W：57・H：87]です。しかしそのSEXは、まさに愛人のごとく妖艶で濃厚。清楚の象徴の制服と淫猥の対局性が、男の性欲を刺激して止みません。見事なEカップバストを揺らし、見せつけながらの騎乗位！奮い付きたくなるようなヒップを突きだしながら、奥まで突かれまくる激しいバック！自ら腰を浮かせ挿入感を高めようと夢中の正常位！そして顔に放たれた精を舐め、すすり、呑み込む姿は卑猥そのもの。寝起きのベッドでは、タップリと手コキとフェラを施して、硬くしたモノを奥まで迎え入れ、昨夜にも負けないエッチを披露です！！",
       directors:     {
         "葵刀樹" => nil,
@@ -30,7 +31,6 @@ module Fixture
       maker:         "Apache Project",
       movie_length:  109.minutes,
       page:          "http://www.aurora-pro.com/shop/-/product/p/goods_id=APAA-182",
-      product_id:    "APAA-182",
       release_date:  Date.new(2012, 11, 13),
       scenes:        [
         "顔射",
@@ -39,6 +39,6 @@ module Fixture
         "イラマチオ",
       ],
       title:         "制服の愛人 ゆうり",
-    }
+    },
   }
 end

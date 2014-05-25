@@ -24,6 +24,7 @@ module OpenDMM
           specs = parse_specs(html)
           return {
             actresses:    (Hash.new_with_keys(specs["出演者"].split("・")) if specs["出演者"]),
+            code:         specs["品番"],
             directors:    (Hash.new_with_keys(specs["監督"].split("・")) if specs["監督"]),
             description:  html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[9]/td[2]").text.squish,
             genres:       specs["ジャンル"].split,
@@ -35,7 +36,6 @@ module OpenDMM
             maker:        "Aroma",
             movie_length: ChronicDuration.parse(specs["時間"]),
             page:         page_uri.to_s,
-            product_id:   specs["品番"],
             title:        html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[1]/td").text.squish,
           }
         end

@@ -27,6 +27,7 @@ module OpenDMM
                 size:   specs["サイズ"],
               }
             },
+            code:         specs["商品番号"],
             description:  html.css("div#caption").text.squish,
             images: {
               cover:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
@@ -34,7 +35,6 @@ module OpenDMM
             },
             maker:        specs["メーカー"],
             page:         page_uri.to_s,
-            product_id:   specs["商品番号"],
             release_date: Date.parse(specs["配信日"]),
             title:        html.css("div.maintitle").text.squish,
           }

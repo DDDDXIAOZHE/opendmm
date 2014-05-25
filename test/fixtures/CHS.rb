@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "藤澤 美羽" => nil,
       },
+      code:         "CHS-015",
       description:  "通販限定商品！未公開映像収録DVDの特典付き商品です。本数限定となりますのでお早めにお求め下さい！！アイドル級の美女が登場。男に撮影されながら笑顔でオナニーしたりフェラは堪りません！背面騎乗位で腰を振り、正常位で小刻みに突かれ感じる！ラブラブでラブホに入るなりベロチューして立ったままクンニされ、フェラして手コキ抜きも必見！後日、別の男のマンションに行き、卑猥な格好で責められ悦ぶ。チ○コ２本を交互にしゃぶり、体勢を変えながら絶倫男に打ち込まれ悶えまくり！臨場感抜群！",
       genres:       [
         "通販限定",
@@ -28,7 +29,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 120.minutes,
       page:         "http://www.prestige-av.com/item/prestige/CHS-015",
-      product_id:   "CHS-015",
       release_date: Date.new(2012, 1, 11),
       series:       "シロウトハンター",
       title:        "シロウトハンター 17＋未公開映像DVD付き",

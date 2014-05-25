@@ -1,17 +1,18 @@
 module Fixture
   IPZ = {
     "IPZ-005" => {
-      actresses: {
+      actresses:    {
         "希美まゆ" => nil,
-        "星美りか" => nil
+        "星美りか" => nil,
       },
+      code:         "IPZ-005",
       description:  "祝☆初共演！星美りか、希美まゆのキュートな2人の豪華共演！男責めFUCKにキュート過ぎるWフェラ、JKコスに4P乱交FUCKと息の合ったコンビネーションでイキまくりハメまくりの200分重宝作品！",
-      genres: [
+      genres:       [
         "共演",
         "ロリ",
-        "女子校生"
+        "女子校生",
       ],
-      images: {
+      images:       {
         cover:   "http://ideapocket.com/images/works/ipz005/ipz005pl.jpg",
         samples: [
           "http://ideapocket.com/images/works/ipz005/ipz005jp-01.jpg",
@@ -32,7 +33,6 @@ module Fixture
       maker:        "Ideapocket",
       movie_length: 200.minutes,
       page:         "http://ideapocket.com/works/-/detail/=/cid=ipz005",
-      product_id:   "IPZ-005",
       release_date: Date.new(2012, 12, 19),
       title:        "CUTIE VENUS",
     },

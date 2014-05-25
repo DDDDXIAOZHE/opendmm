@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "あやみ 旬果" => nil,
       },
+      code:         "DOM-045",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！プレステージ専属女優『あやみ 旬果』が待望の人気シリーズに登場。男に言われるがまま悩ましいカラダを差し出し、猥らなポーズで感じっぱなし！足の指を舐めあう相互奉仕シーンも見逃せません！執拗な玩具攻めにビクッと痙攣しながら何度も絶頂！激しいピストンに美巨乳を揺らし、歓喜の声で悶え狂う！！",
       genres:       [
         "通販限定",
@@ -32,7 +33,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 115.minutes,
       page:         "http://www.prestige-av.com/item/prestige/DOM-045",
-      product_id:   "DOM-045",
       release_date: Date.new(2013, 2, 1),
       series:       "やりたい放題",
       title:        "やりたい放題 31＋生写真7枚付き",

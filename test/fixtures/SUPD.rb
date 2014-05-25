@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "松島かえで" => nil,
       },
+      code:         "SUPD-065",
       directors:    {
         "黒澤あらら" =>   nil,
         "つぶやきジロー" => nil,
@@ -37,7 +38,6 @@ module Fixture
       maker:        "Ideapocket",
       movie_length: 220.minutes,
       page:         "http://ideapocket.com/works/-/detail/=/cid=supd065",
-      product_id:   "SUPD-065",
       release_date: Date.new(2009, 12, 1),
       series:       "DIGITAL CHANNEL",
       title:        "DIGITAL CHANNEL DC65",

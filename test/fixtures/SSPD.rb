@@ -6,6 +6,7 @@ module Fixture
         "国見奈々" =>  nil,
         "石原あすか" => nil,
       },
+      code:         "SSPD-077",
       directors:    {
         "本田教仁" => nil,
       },
@@ -41,10 +42,9 @@ module Fixture
       maker:        "Attackers",
       movie_length: 160.minutes,
       page:         "http://attackers.net/works/-/detail/=/cid=sspd077",
-      product_id:   "SSPD-077",
       release_date: Date.new(2010, 4, 7),
       series:       nil,
       title:        "対魔忍アサギ",
-    }
+    },
   }
 end

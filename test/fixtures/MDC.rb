@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "真田 春香" => nil,
       },
+      code:         "MDC-002",
       description:  "淡白な夫との性の営みでは満足できずに応募してきた人妻。角度を変えながら打ち込まれ、髪を乱しながらヨガル！大の字で拘束されながら性感チェックされ、細身の身体をクネラセながら感じる。バスルームで男を奉仕になると、焦らすようなテクニックで責めあげ、音を出しながらの濃厚なアナル舐めを披露！色っぽ過ぎるプロポーションで尻ズリしたりパイずりもエロい！寝込み中を男に犯され、ウットリとした顔でヨガリ続ける！",
       genres:       [
         "アナル舐め",
@@ -29,7 +30,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 125.minutes,
       page:         "http://www.prestige-av.com/item/prestige/MDC-002",
-      product_id:   "MDC-002",
       release_date: Date.new(2011, 6, 21),
       series:       "欲張り主婦の性衝動",
       title:        "欲張り主婦の性衝動 02",

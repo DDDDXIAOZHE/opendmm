@@ -21,6 +21,7 @@ module OpenDMM
           descriptions = parse_descriptions(html)
           return {
             actresses:    (Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)) if specs["出演："]),
+            code:         specs["品番："].text.squish,
             description:  [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join.squish,
             genres:       specs["ジャンル："].css("a").map(&:text).map(&:squish),
             images: {
@@ -33,7 +34,6 @@ module OpenDMM
             maker:        specs["メーカー名："].text.squish,
             movie_length: ChronicDuration.parse(specs["収録時間："].text.squish),
             page:         page_uri.to_s,
-            product_id:   specs["品番："].text.squish,
             release_date: Date.parse(specs["発売日："].text.squish),
             series:       specs["シリーズ："].text.squish,
             title:        html.css("div.product_title_layout_01").text.squish,

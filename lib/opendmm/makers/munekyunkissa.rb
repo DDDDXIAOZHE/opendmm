@@ -21,6 +21,7 @@ module OpenDMM
           data_right = Utils.parse_dl(html.css("dl.data-right").first)
           return {
             actresses:    Hash.new_with_keys(data_right["出演者"].text.remove("：").split),
+            code:         data_left["品番"].text.remove("：").squish,
             description:  html.css("div.ttl-comment div.comment").text.squish,
             images: {
               cover:   URI.join(page_uri, html.css("div.ttl-pac a.ttl-package").first["href"]).to_s,
@@ -29,7 +30,6 @@ module OpenDMM
             maker:        "胸キュン喫茶",
             movie_length: ChronicDuration.parse(data_left["収録時間"].text.remove("：").squish),
             page:         page_uri.to_s,
-            product_id:   data_left["品番"].text.remove("：").squish,
             release_date: Date.parse(data_left["発売日"].text.remove("：").squish),
             title:        html.css("div.capt01").text.squish,
             # TODO: parse series, label, genres from pics

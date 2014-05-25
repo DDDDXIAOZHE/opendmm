@@ -20,6 +20,7 @@ module OpenDMM
           specs = parse_specs(html)
           return {
             actresses:    Hash.new_with_keys(html.xpath('//*[@id="content-box"]/p[1]/a').map(&:text)),
+            code:         specs["品番"]["DVD"],
             directors:    Hash.new_with_keys(specs["監督"].split),
             description:  html.xpath('//*[@id="content-box"]/p[2]').text.squish,
             genres:       specs["ジャンル"].split,
@@ -31,7 +32,6 @@ module OpenDMM
             maker:        "Ideapocket",
             movie_length: ChronicDuration.parse(specs["収録時間"]["DVD"]),
             page:         page_uri.to_s,
-            product_id:   specs["品番"]["DVD"],
             release_date: Date.parse(specs["発売日"]["DVD"]),
             series:       specs["シリーズ"],
             title:        html.css("div#content-box h2.list-ttl").text.squish,

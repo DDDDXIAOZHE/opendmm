@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "小倉 ゆず" => nil,
       },
+      code:         "EDD-189",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！ショートカットの巨乳娘ゆずちゃん。緊張しながら男に体を預け、挿入されプルンプルンとオッパイが揺れながら感じる姿はエロい！一緒に湯船に浸かったらここでも盛り上がり、部屋で電マを渡されればパイパンマ○コに押し付けてオナニーで潮吹き！本番になり息荒く悶えまくり！",
       genres:       [
         "通販限定",
@@ -29,7 +30,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 120.minutes,
       page:         "http://www.prestige-av.com/item/prestige/EDD-189",
-      product_id:   "EDD-189",
       release_date: Date.new(2011, 11, 1),
       series:       "エスカレートするドしろー…",
       title:        "エスカレートするドしろーと娘 189＋生写真7枚付き",

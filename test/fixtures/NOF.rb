@@ -3,6 +3,7 @@ module Fixture
     "NOF-003" => {
       actresses:    {
       },
+      code:         "NOF-003",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！Hが好きでAVに応募してきた巨乳娘。服を脱ぐとダイナミックな巨乳が露に！セックスになれば、打ち込まれるたびに喘ぎ、快感に酔いしれる！ブルセラショップに連れられ、パイズリするシーンも必見！スクール水着に着替え、連続奉仕プレイもエロい！上下の口に挿し込まれ・・・。淫らなカラダに釘付け必至です！！",
       genres:       [
         "通販限定",
@@ -31,7 +32,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 130.minutes,
       page:         "http://www.prestige-av.com/item/prestige/NOF-003",
-      product_id:   "NOF-003",
       release_date: Date.new(2013, 12, 3),
       series:       "乳撮 ニュウサツ",
       title:        "乳撮 ニュウサツ＋生写真7枚付き",

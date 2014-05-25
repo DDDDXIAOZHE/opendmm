@@ -20,6 +20,7 @@ module OpenDMM
           specs = parse_specs(html)
           return {
             actresses:    Hash.new_with_keys(specs["出演女優"].split(",")),
+            code:         specs["品番"],
             description:  html.css("div.detail_description").first.inner_text.squish,
             directors:    Hash.new_with_keys(specs["監督"].split),
             images: {
@@ -29,7 +30,6 @@ module OpenDMM
             maker:        "Apache",
             movie_length: ChronicDuration.parse(specs["収録時間"]),
             page:         page_uri.to_s,
-            product_id:   specs["品番"],
             title:        html.css("div.detail_title_1").text.squish,
           }
         end

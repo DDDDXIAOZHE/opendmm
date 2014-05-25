@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "Rio" => nil,
       },
+      code:         "IPTD-464",
       description:  "みんなのアイドルりおっちが先生になって、いろ〜んなことを教えちゃう！！カワイイ淫語で生徒たちを誘惑、もう学校中が総勃ち！超アイドル女教師の愛らしすぎる笑顔…数々の誘惑にアナタはどこまで耐えられますか？",
       genres:       [
         "先生",
@@ -31,7 +32,6 @@ module Fixture
       maker:        "Ideapocket",
       movie_length: 120.minutes,
       page:         "http://ideapocket.com/works/-/detail/=/cid=iptd464",
-      product_id:   "IPTD-464",
       release_date: Date.new(2009, 7, 1),
       series:       "誘惑授業シリーズ",
       title:        "Rio先生の誘惑授業",

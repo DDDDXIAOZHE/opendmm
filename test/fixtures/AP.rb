@@ -3,6 +3,7 @@ module Fixture
     "AP-001" => {
       actresses:    {
       },
+      code:         "AP-001",
       description:  "目指せ！賞金１００万円！素人娘が生脱ぎしたホカホカのパンティーを路上に放置！制限時間内に誰にも拾われなかったら、最高賞金100万円ゲット！しかし！もし、拾われてしまうと…パンティーを拾った変態男にノーパン姿を見られ、さらに全身を舐めまわされ、オモチャでいじられ最後はファックまでされてしまう！ サンプル画像",
       directors:    {
         "川尻" => nil,
@@ -24,7 +25,6 @@ module Fixture
       maker:        "Apache",
       movie_length: 240.minutes,
       page:         "http://www.apa-av.jp/list_detail/detail_001.html",
-      product_id:   "AP-001",
       title:        "路上でパンティー生脱ぎ放置!!1分間誰にも拾われなかったら賞金100万円! 拾われたらその相手とHな罰ゲーム!!",
     },
   }

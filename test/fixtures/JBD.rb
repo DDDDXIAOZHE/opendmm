@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "朝桐光" => nil,
       },
+      code:         "JBD-153",
       directors:    {
         "TAIZO" => nil,
       },
@@ -38,7 +39,6 @@ module Fixture
       maker:        "Attackers",
       movie_length: 100.minutes,
       page:         "http://attackers.net/works/-/detail/=/cid=jbd153",
-      product_id:   "JBD-153",
       release_date: Date.new(2012, 3, 7),
       series:       "絶望に耐えながら…。",
       title:        "人妻監禁アナル拷問 絶望に耐えながら…。4",

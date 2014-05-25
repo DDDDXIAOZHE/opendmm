@@ -5,6 +5,7 @@ module Fixture
         "雨宮琴音" => nil,
         "小桜沙樹" => nil,
       },
+      code:         "RBD-183",
       directors:    {
         "なぎら健造" => nil,
       },
@@ -36,7 +37,6 @@ module Fixture
       maker:        "Attackers",
       movie_length: 100.minutes,
       page:         "http://attackers.net/works/-/detail/=/cid=rbd183",
-      product_id:   "RBD-183",
       release_date: Date.new(2010, 2, 7),
       series:       "新奴隷島",
       title:        "新奴隷島 第九章 友情の証明",

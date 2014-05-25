@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "小西 悠" => nil,
       },
+      code:         "WPC-002",
       description:  "通販限定商品！悠ちゃんのエロさがわかる興奮オナニー映像！未公開映像収録DVDの特典付き商品です。本数限定となりますのでお早めにお求め下さい！！大人気プレステージ専属女優『小西悠』が「ＷＡＴＥＲＰＯＬE」に登場。まずは慣れた手つきで手コキしながら絶品のアナル舐めを披露。大股開きで打ち込まれたら、感度良くイキまくる！精子を垂らしながら連続フェラ抜きや、ブリーフ男達に連続でブッカケられるシーンも見逃せません！オイル３Ｐシーンで目隠しのまま感じさせられてから、敏感なマ○コに打ち込まれアクメ絶頂！",
       genres:       [
         "通販限定",
@@ -31,7 +32,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 125.minutes,
       page:         "http://www.prestige-av.com/item/prestige/WPC-002",
-      product_id:   "WPC-002",
       release_date: Date.new(2011, 6, 10),
       series:       "WATER POLE",
       title:        "WATER POLE 02＋未公開映像DVD付き(悠ちゃんのエロさがわかる興奮オナニー映像！)",

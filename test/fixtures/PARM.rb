@@ -1,7 +1,8 @@
 module Fixture
   PARM = {
-   "PARM-028" => {
+    "PARM-028" => {
       actresses:    nil,
+      code:         "PARM-028",
       directors:    nil,
       description:  "すらりとした脚にまとわりついた薄い膜。圧迫され変形する秘密の花園。全編カメラ目線さまざまなストッキングによる透明感のバリエーション。恥らいつつ大胆に股を開いて誘惑するお姉さん 8名 110分そんな目でこっちを見ないで…太股のこすれる音が耳からはなれません。そんな大股開きで挑発されるとあ〜先生、僕どうにかなりそうです！！二人っきりの空間だからこそのノーパンｘパンティーストッキング見せっぱなし挑発「お願いします、パンティー返してください」「もっと近くでみたいんでしょ」「ねえ、こうしてほしかったの？」「ほら、こんな形になってる」「私のここいやらしい音立ててるわ」",
       genres:       [
@@ -21,7 +22,6 @@ module Fixture
       maker:        "Aroma",
       movie_length: 110.minutes,
       page:         "http://www.aroma-p.com/member/contents/title.php?conid=205028",
-      product_id:   "PARM-028",
       title:        "妄想 ノーパン × パンティーストッキング",
     },
   }

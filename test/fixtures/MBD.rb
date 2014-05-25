@@ -3,6 +3,7 @@ module Fixture
     "MBD-148" => {
       actresses:    {
       },
+      code:         "MBD-148",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！復活した人気若妻シリーズ。自宅マンションにスタッフを迎え入れ、渡された電マでオナニーして潮吹きするカレンさん。訪ねてきた若手男優をゆっくりとフェラして挿入され見つめながらか細い声で喘ぐ！２人目の男優にマニアックに舐められたら攻守交替してフェラして顔射を浴びる。男優２人が待つシティホテルでタップリとハメ回され、気持ち良さそうな声で悶え続ける！",
       genres:       [
         "通販限定",
@@ -27,7 +28,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 115.minutes,
       page:         "http://www.prestige-av.com/item/prestige/MBD-148",
-      product_id:   "MBD-148",
       release_date: Date.new(2011, 12, 13),
       series:       "萌えあがる募集若妻",
       title:        "萌えあがる募集若妻 148＋生写真7枚付き",

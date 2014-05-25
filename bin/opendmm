@@ -18,12 +18,12 @@ class PrettyProduct
   end
 
   def print_fixture
-    id = @product[:product_id]
-    fixture_name = id.match(/[a-z]+/i)[0].upcase
+    code = @product[:code]
+    fixture_name = code.match(/[a-z]+/i)[0].upcase
     $stdout.reopen("test/fixtures/#{fixture_name}.rb", "w")
     puts "module Fixture"
     puts "  #{fixture_name} = {"
-    print "    \"#{id}\" => "
+    print "    \"#{code}\" => "
     print_obj(@product, 4)
     puts ","
     puts "  }"

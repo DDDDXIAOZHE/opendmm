@@ -20,6 +20,7 @@ module OpenDMM
           specs = parse_specs(html)
           return {
             actresses:    Hash.new_with_keys(specs["出演女優"].split),
+            code:         specs["品番"],
             directors:    Hash.new_with_keys(specs["監督"].split),
             description:  html.css("p.works_txt").text.squish,
             genres:       specs["ジャンル"].split,
@@ -31,7 +32,6 @@ module OpenDMM
             maker:        "Attackers",
             movie_length: ChronicDuration.parse(specs["収録時間"]),
             page:         page_uri.to_s,
-            product_id:   specs["品番"],
             release_date: Date.parse(specs["発売日"]),
             series:       parse_series(specs["シリーズ"]),
             title:        html.css("div.hl_box_btm").text.squish,

@@ -6,6 +6,7 @@ module Fixture
         "希志あいの" =>  nil,
         "横山美雪" =>   nil,
       },
+      code:         "IPSD-041",
       directors:    {
         "宇佐美忠則" => nil,
       },
@@ -36,7 +37,6 @@ module Fixture
       maker:        "Ideapocket",
       movie_length: 460.minutes,
       page:         "http://ideapocket.com/works/-/detail/=/cid=ipsd041",
-      product_id:   "IPSD-041",
       release_date: Date.new(2010, 11, 1),
       series:       "BEAUTY VENUS",
       title:        "BEAUTY VENUS 3",

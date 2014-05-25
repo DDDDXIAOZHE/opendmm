@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "美波 小夜" => nil,
       },
+      code:         "ESK-232",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！アイドル級ルックスの素人娘、さよちゃん。手入れのしていない卑猥なマ〇コを弄られ、耐えるように横を向いて感じちゃってる様子♪パンパンと音を立て体位を変えながら打ち込まれたら、快感を堪能するように受け身で悶える！睡眠中に電マで責められれば、電子音みたく喘いじゃいます（汗）フェラしてギンギンになったチ〇コで本番になり・・・。",
       genres:       [
         "通販限定",
@@ -27,7 +28,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 120.minutes,
       page:         "http://www.prestige-av.com/item/prestige/ESK-232",
-      product_id:   "ESK-232",
       release_date: Date.new(2013, 10, 22),
       series:       "エスカレートするドしろー…",
       title:        "エスカレートするドしろーと娘 232＋生写真7枚付き",

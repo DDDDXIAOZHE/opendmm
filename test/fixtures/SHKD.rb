@@ -34,7 +34,7 @@ module Fixture
       maker:        "Attackers",
       movie_length: 110.minutes,
       page:         "http://attackers.net/works/-/detail/=/cid=shkd415",
-      product_id:   nil,
+      code:         nil,
       release_date: Date.new(2010, 8, 7),
       series:       "夫の目の前で犯されて―",
       title:        "夫の目の前で犯されて― ターゲット",

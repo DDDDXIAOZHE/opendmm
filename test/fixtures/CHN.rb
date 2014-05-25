@@ -4,6 +4,7 @@ module Fixture
       actresses:    {
         "川村 まや" => nil,
       },
+      code:         "CHN-008",
       description:  "通販限定商品！生写真7枚付きの特典商品です。本数限定となりますのでお早めにお求め下さい！！好奇心旺盛な素人娘が登場。素人男性宅でパンツを脱がされ、恥ずかしさで局部を隠しながらも責められたら歓喜の声で喘ぎっぱなし！戸惑いながらするセックスは初々しくて緊張感が伝わってきます♪男優に優しく責められ、テクニックに打ちのめされた様子で脱力イキ！！",
       genres:       [
         "通販限定",
@@ -27,7 +28,6 @@ module Fixture
       maker:        "プレステージ",
       movie_length: 130.minutes,
       page:         "http://www.prestige-av.com/item/prestige/CHN-008",
-      product_id:   "CHN-008",
       release_date: Date.new(2013, 7, 19),
       series:       "新・素人娘、お貸しします。",
       title:        "新・素人娘、お貸しします。4＋生写真7枚付き",
