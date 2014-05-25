@@ -29,7 +29,7 @@ Dir[File.dirname(__FILE__) + '/fixtures/*.rb'].each do |file|
 class FixtureTest
   def test_#{name.downcase}
     Fixture::#{name.upcase}.each do |name, details|
-      puts name
+      assert_equal details, OpenDMM.search(name)
     end
   end
 end
