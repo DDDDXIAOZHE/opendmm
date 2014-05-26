@@ -1,6 +1,6 @@
 # Welcome to OpenDMM
 
-OpenDMM provides an free alternative of [DMM](http://www.dmm.co.jp) to search Japanese AV.
+OpenDMM provides a free alternative of [DMM](http://www.dmm.co.jp) to search Japanese AV.
 
 # License
 
