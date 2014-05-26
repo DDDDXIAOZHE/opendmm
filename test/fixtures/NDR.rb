@@ -2,6 +2,7 @@ module Fixture
   NDR = {
     "NDR-001" => {
       actresses:     {
+        "えれな" => nil,
       },
       code:          "NDR-001",
       cover_image:   "http://image.prestige-av.com/images/prestige/ndr/001/pb_e_ndr-001.jpg",

@@ -2,6 +2,7 @@ module Fixture
   NOF = {
     "NOF-003" => {
       actresses:     {
+        "さとみ Gカップ" => nil,
       },
       code:          "NOF-003",
       cover_image:   "http://image.prestige-av.com/images/prestige/nof/003/pb_e_nof-003.jpg",

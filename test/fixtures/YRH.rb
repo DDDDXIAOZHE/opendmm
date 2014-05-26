@@ -2,6 +2,7 @@ module Fixture
   YRH = {
     "YRH-008" => {
       actresses:     {
+        "西新宿美脚OL編" => nil,
       },
       code:          "YRH-008",
       cover_image:   "http://image.prestige-av.com/images/prestige/yrh/008/pb_e_yrh-008.jpg",

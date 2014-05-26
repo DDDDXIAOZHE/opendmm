@@ -2,6 +2,7 @@ module Fixture
   HON = {
     "HON-001" => {
       actresses:     {
+        "松本さん" => nil,
       },
       code:          "HON-001",
       cover_image:   "http://image.prestige-av.com/images/prestige/hon/001/pb_e_hon-001.jpg",

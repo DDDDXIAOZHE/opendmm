@@ -2,6 +2,7 @@ module Fixture
   MMY = {
     "MMY-010" => {
       actresses:     {
+        "まみちゃん" => nil,
       },
       code:          "MMY-010",
       cover_image:   "http://image.prestige-av.com/images/prestige/mmy/010/pb_e_mmy-010.jpg",

@@ -2,6 +2,7 @@ module Fixture
   INU = {
     "INU-013" => {
       actresses:     {
+        "あずさ" => nil,
       },
       code:          "INU-013",
       cover_image:   "http://image.prestige-av.com/images/prestige/inu/013/pb_e_inu-013.jpg",

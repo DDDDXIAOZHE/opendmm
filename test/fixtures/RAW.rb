@@ -2,6 +2,7 @@ module Fixture
   RAW = {
     "RAW-005" => {
       actresses:     {
+        "松本 ほのか" => nil,
       },
       code:          "RAW-005",
       cover_image:   "http://image.prestige-av.com/images/prestige/raw/005/pb_e_raw-005.jpg",

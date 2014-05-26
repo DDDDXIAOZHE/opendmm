@@ -2,6 +2,7 @@ module Fixture
   SRS = {
     "SRS-015" => {
       actresses:     {
+        "早乙女 ○美" => nil,
       },
       code:          "SRS-015",
       cover_image:   "http://image.prestige-av.com/images/prestige/srs/015/pb_e_srs-015.jpg",

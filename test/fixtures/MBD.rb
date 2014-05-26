@@ -2,6 +2,7 @@ module Fixture
   MBD = {
     "MBD-148" => {
       actresses:     {
+        "かれんさん" => nil,
       },
       code:          "MBD-148",
       cover_image:   "http://image.prestige-av.com/images/prestige/mbd/148/pb_e_mbd-148.jpg",

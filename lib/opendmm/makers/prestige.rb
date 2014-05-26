@@ -20,7 +20,7 @@ module OpenDMM
           specs = Utils.parse_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
           descriptions = parse_descriptions(html)
           return {
-            actresses:     (Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)) if specs["出演："]),
+            actresses:     parse_actresses(specs["出演："]),
             code:          specs["品番："].text.squish,
             cover_image:   html.css("div.product_detail_layout_01 p.package_layout a.sample_image").first["href"],
             description:   [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join.squish,
@@ -45,6 +45,16 @@ module OpenDMM
           titles = layouts.css("h2.title").map(&:text)
           contents = layouts.css(".contents")
           Hash[titles.zip(contents)]
+        end
+
+        def self.parse_actresses(node)
+          if node.nil?
+            nil
+          elsif !node.css("a").empty?
+            Hash.new_with_keys(node.css("a").map(&:text).map(&:squish))
+          else
+            { node.text.squish => nil }
+          end
         end
       end
 

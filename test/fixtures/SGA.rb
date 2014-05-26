@@ -2,6 +2,7 @@ module Fixture
   SGA = {
     "SGA-001" => {
       actresses:     {
+        "林 ゆな" => nil,
       },
       code:          "SGA-001",
       cover_image:   "http://image.prestige-av.com/images/prestige/sga/001/pb_e_sga-001.jpg",

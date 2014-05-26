@@ -2,6 +2,7 @@ module Fixture
   JOB = {
     "JOB-010" => {
       actresses:     {
+        "Seno" => nil,
       },
       code:          "JOB-010",
       cover_image:   "http://image.prestige-av.com/images/prestige/job/010/pb_e_job-010.jpg",
