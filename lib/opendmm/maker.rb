@@ -19,18 +19,16 @@ module OpenDMM
     #   actress_types: Array
     #   brand:         String
     #   code:          String
+    #   cover_image:   String
     #   description:   String
     #   directors:     Array
     #   genres:        Array
-    #   images: {
-    #     cover:   String
-    #     samples: Array,
-    #   },
     #   label:         String
     #   maker:         String
     #   movie_length:  String
     #   page:          String
     #   release_date:  String
+    #   sample_images: Array,
     #   scenes:        Array
     #   series:        String
     #   title:         String
