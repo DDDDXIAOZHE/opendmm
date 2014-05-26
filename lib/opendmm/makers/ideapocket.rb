@@ -19,22 +19,20 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            actresses:    Hash.new_with_keys(html.xpath('//*[@id="content-box"]/p[1]/a').map(&:text)),
-            code:         specs["品番"]["DVD"],
-            directors:    Hash.new_with_keys(specs["監督"].split),
-            description:  html.xpath('//*[@id="content-box"]/p[2]').text.squish,
-            genres:       specs["ジャンル"].split,
-            images: {
-              cover:   URI.join(page_uri, html.css("div#content-box div.pake a").first["href"]).to_s,
-              samples: html.css("div#sample-pic a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            },
-            label:        specs["レーベル"],
-            maker:        "Ideapocket",
-            movie_length: ChronicDuration.parse(specs["収録時間"]["DVD"]),
-            page:         page_uri.to_s,
-            release_date: Date.parse(specs["発売日"]["DVD"]),
-            series:       specs["シリーズ"],
-            title:        html.css("div#content-box h2.list-ttl").text.squish,
+            actresses:     Hash.new_with_keys(html.xpath('//*[@id="content-box"]/p[1]/a').map(&:text)),
+            code:          specs["品番"]["DVD"],
+            cover_image:   URI.join(page_uri, html.css("div#content-box div.pake a").first["href"]).to_s,
+            directors:     Hash.new_with_keys(specs["監督"].split),
+            description:   html.xpath('//*[@id="content-box"]/p[2]').text.squish,
+            genres:        specs["ジャンル"].split,
+            label:         specs["レーベル"],
+            maker:         "Ideapocket",
+            movie_length:  ChronicDuration.parse(specs["収録時間"]["DVD"]),
+            page:          page_uri.to_s,
+            release_date:  Date.parse(specs["発売日"]["DVD"]),
+            sample_images: html.css("div#sample-pic a").map { |a| URI.join(page_uri, a["href"]).to_s },
+            series:        specs["シリーズ"],
+            title:         html.css("div#content-box h2.list-ttl").text.squish,
           }.reject do |k, v|
             case v
             when Array, Hash, String

@@ -20,23 +20,21 @@ module OpenDMM
           specs = Utils.parse_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
           descriptions = parse_descriptions(html)
           return {
-            actresses:    (Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)) if specs["出演："]),
-            code:         specs["品番："].text.squish,
-            description:  [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join.squish,
-            genres:       specs["ジャンル："].css("a").map(&:text).map(&:squish),
-            images: {
-              cover:   html.css("div.product_detail_layout_01 p.package_layout a.sample_image").first["href"],
-              samples: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
-            },
+            actresses:     (Hash.new_with_keys(specs["出演："].css("a").map(&:text).map(&:squish)) if specs["出演："]),
+            code:          specs["品番："].text.squish,
+            cover_image:   html.css("div.product_detail_layout_01 p.package_layout a.sample_image").first["href"],
+            description:   [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join.squish,
+            genres:        specs["ジャンル："].css("a").map(&:text).map(&:squish),
             # TODO: Parse complete label, for example
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
-            label:        specs["レーベル："].text.squish,
-            maker:        specs["メーカー名："].text.squish,
-            movie_length: ChronicDuration.parse(specs["収録時間："].text.squish),
-            page:         page_uri.to_s,
-            release_date: Date.parse(specs["発売日："].text.squish),
-            series:       specs["シリーズ："].text.squish,
-            title:        html.css("div.product_title_layout_01").text.squish,
+            label:         specs["レーベル："].text.squish,
+            maker:         specs["メーカー名："].text.squish,
+            movie_length:  ChronicDuration.parse(specs["収録時間："].text.squish),
+            page:          page_uri.to_s,
+            release_date:  Date.parse(specs["発売日："].text.squish),
+            sample_images: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
+            series:        specs["シリーズ："].text.squish,
+            title:         html.css("div.product_title_layout_01").text.squish,
           }
         end
 

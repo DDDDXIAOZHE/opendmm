@@ -23,20 +23,18 @@ module OpenDMM
           html = Utils.utf8_html(content)
           specs = parse_specs(html)
           return {
-            actresses:    (Hash.new_with_keys(specs["出演者"].split("・")) if specs["出演者"]),
-            code:         specs["品番"],
-            directors:    (Hash.new_with_keys(specs["監督"].split("・")) if specs["監督"]),
-            description:  html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[9]/td[2]").text.squish,
-            genres:       specs["ジャンル"].split,
-            images: {
-              cover:   parse_cover_image(html, page_uri),
-              samples: parse_sample_images(html, page_uri),
-            },
-            label:        specs["レーベル"],
-            maker:        "Aroma",
-            movie_length: ChronicDuration.parse(specs["時間"]),
-            page:         page_uri.to_s,
-            title:        html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[1]/td").text.squish,
+            actresses:     (Hash.new_with_keys(specs["出演者"].split("・")) if specs["出演者"]),
+            code:          specs["品番"],
+            cover_image:   parse_cover_image(html, page_uri),
+            directors:     (Hash.new_with_keys(specs["監督"].split("・")) if specs["監督"]),
+            description:   html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[9]/td[2]").text.squish,
+            genres:        specs["ジャンル"].split,
+            label:         specs["レーベル"],
+            maker:         "Aroma",
+            movie_length:  ChronicDuration.parse(specs["時間"]),
+            page:          page_uri.to_s,
+            sample_images: parse_sample_images(html, page_uri),
+            title:         html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[1]/td").text.squish,
           }
         end
 

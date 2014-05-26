@@ -19,18 +19,16 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            actresses:    Hash.new_with_keys(specs["出演女優"].split(",")),
-            code:         specs["品番"],
-            description:  html.css("div.detail_description").first.inner_text.squish,
-            directors:    Hash.new_with_keys(specs["監督"].split),
-            images: {
-              cover:   URI.join(page_uri, html.css("div.detail_img a").first["href"]).to_s,
-              samples: html.css("ul.detail-main-thum li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            },
-            maker:        "Apache",
-            movie_length: ChronicDuration.parse(specs["収録時間"]),
-            page:         page_uri.to_s,
-            title:        html.css("div.detail_title_1").text.squish,
+            actresses:     Hash.new_with_keys(specs["出演女優"].split(",")),
+            code:          specs["品番"],
+            cover_image:   URI.join(page_uri, html.css("div.detail_img a").first["href"]).to_s,
+            description:   html.css("div.detail_description").first.inner_text.squish,
+            directors:     Hash.new_with_keys(specs["監督"].split),
+            maker:         "Apache",
+            movie_length:  ChronicDuration.parse(specs["収録時間"]),
+            page:          page_uri.to_s,
+            sample_images: html.css("ul.detail-main-thum li a").map { |a| URI.join(page_uri, a["href"]).to_s },
+            title:         html.css("div.detail_title_1").text.squish,
           }
         end
 

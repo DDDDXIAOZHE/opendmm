@@ -27,16 +27,14 @@ module OpenDMM
                 size:   specs["サイズ"],
               }
             },
-            code:         specs["商品番号"],
-            description:  html.css("div#caption").text.squish,
-            images: {
-              cover:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
-              samples: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            },
-            maker:        specs["メーカー"],
-            page:         page_uri.to_s,
-            release_date: Date.parse(specs["配信日"]),
-            title:        html.css("div.maintitle").text.squish,
+            code:          specs["商品番号"],
+            cover_image:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
+            description:   html.css("div#caption").text.squish,
+            maker:         specs["メーカー"],
+            page:          page_uri.to_s,
+            release_date:  Date.parse(specs["配信日"]),
+            sample_images: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
+            title:         html.css("div.maintitle").text.squish,
           }
         end
 
