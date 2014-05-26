@@ -59,8 +59,12 @@ class PrettyProduct
       print " " * indent + "]"
     when Date
       print "Date.new(#{obj.year}, #{obj.month}, #{obj.day})"
-    when ActiveSupport::Duration, Numeric
-      print "#{obj/60}.minutes"
+    when Fixnum
+      if obj > 600 && obj % 60 == 0
+        print "#{obj/60}.minutes"
+      else
+        print obj
+      end
     when nil
       print "nil"
     else
