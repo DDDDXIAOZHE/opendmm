@@ -32,7 +32,7 @@ module OpenDMM
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"]),
             sample_images: html.css("ul.samplepicture_list li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            series:        specs["シリーズ"],
+            series:        parse_series(specs["シリーズ"]),
             title:         html.css("ul#pan_list li").last.text.squish,
           }
         end
@@ -52,11 +52,20 @@ module OpenDMM
         def self.parse_directors(str)
           return nil if str == "---"
         end
+
+        def self.parse_series(str)
+          case str
+          when /-+/
+            nil
+          else
+            str
+          end
+        end
       end
 
       def self.search(name)
         case name
-        when /(AIR|CWM|WSS)-?\d{3}/i
+        when /(AIR|CWM|ECB|WSS)-?\d{3}/i
           Parser.parse(Site.item(name))
         end
       end
