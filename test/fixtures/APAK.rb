@@ -22,7 +22,7 @@ module Fixture
       ],
       label:         nil,
       maker:         "Apache Project",
-      movie_length:  "8340",
+      movie_length:  8340.seconds,
       page:          "http://www.aurora-pro.com/shop/-/product/p/goods_id=APAK-051",
       release_date:  Date.new(2012, 12, 25),
       sample_images: [

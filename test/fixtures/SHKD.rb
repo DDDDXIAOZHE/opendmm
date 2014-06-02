@@ -17,7 +17,7 @@ module Fixture
       ],
       label:         "死夜悪",
       maker:         "Attackers",
-      movie_length:  "6600",
+      movie_length:  6600.seconds,
       page:          "http://attackers.net/works/-/detail/=/cid=shkd415",
       release_date:  Date.new(2010, 8, 7),
       sample_images: [

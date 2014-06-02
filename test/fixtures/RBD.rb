@@ -19,7 +19,7 @@ module Fixture
       ],
       label:         "龍縛",
       maker:         "Attackers",
-      movie_length:  "6000",
+      movie_length:  6000.seconds,
       page:          "http://attackers.net/works/-/detail/=/cid=rbd183",
       release_date:  Date.new(2010, 2, 7),
       sample_images: [

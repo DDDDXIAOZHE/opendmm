@@ -24,7 +24,7 @@ module Fixture
       ],
       label:         "スーパースペシャル",
       maker:         "Attackers",
-      movie_length:  "9600",
+      movie_length:  9600.seconds,
       page:          "http://attackers.net/works/-/detail/=/cid=sspd077",
       release_date:  Date.new(2010, 4, 7),
       sample_images: [

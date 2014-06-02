@@ -17,7 +17,7 @@ module Fixture
       ],
       label:         "Washing Machine",
       maker:         "ワープエンタテインメント",
-      movie_length:  "7800",
+      movie_length:  7800.seconds,
       page:          "http://www.waap.co.jp/work/item.php?itemcode=CWM156",
       release_date:  Date.new(2013, 1, 4),
       sample_images: [

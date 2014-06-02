@@ -15,7 +15,7 @@ module Fixture
       ],
       label:         "TISSUE",
       maker:         "Ideapocket",
-      movie_length:  "12000",
+      movie_length:  12000.seconds,
       page:          "http://ideapocket.com/works/-/detail/=/cid=ipz005",
       release_date:  Date.new(2012, 12, 19),
       sample_images: [

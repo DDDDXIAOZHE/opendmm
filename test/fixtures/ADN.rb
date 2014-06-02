@@ -17,7 +17,7 @@ module Fixture
       ],
       label:         "大人のドラマ",
       maker:         "Attackers",
-      movie_length:  "6600",
+      movie_length:  6600.seconds,
       page:          "http://attackers.net/works/-/detail/=/cid=adn019",
       release_date:  Date.new(2014, 5, 7),
       sample_images: [

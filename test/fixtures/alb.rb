@@ -8,7 +8,7 @@ module Fixture
       cover_image:   "http://www.munekyunkissa.com/images/works/alb182/alb182pl.jpg",
       description:   "人見知りで恥ずかしがりや。そんな亜希さんがAVに出演した理由とは・・・メーカーに送られてきた一通のメール。『妻が他の男に抱かれているところを見たい』20も歳の離れた夫婦。自分では満足させられていないのではないかという旦那の悩み、歪んだ愛情。旦那しかオトコを知らない、性的に未熟な亜希さんを覚醒させ、ハメ潮まで吹かせる。最後は結婚指輪を投げ捨てさせ、旦那にダマで生ハメ中出し！",
       maker:         "胸キュン喫茶",
-      movie_length:  "7200",
+      movie_length:  7200.seconds,
       page:          "http://www.munekyunkissa.com/works/alb/alb182.html",
       release_date:  Date.new(2012, 10, 1),
       sample_images: [

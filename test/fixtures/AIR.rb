@@ -17,7 +17,7 @@ module Fixture
       ],
       label:         "AIR*WAAP",
       maker:         "ワープエンタテインメント",
-      movie_length:  "2880",
+      movie_length:  2880.seconds,
       page:          "http://www.waap.co.jp/work/item.php?itemcode=AIR017",
       release_date:  Date.new(2013, 1, 15),
       sample_images: [

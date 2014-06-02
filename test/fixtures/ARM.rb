@@ -16,7 +16,7 @@ module Fixture
       ],
       label:         "アロマ",
       maker:         "Aroma",
-      movie_length:  "7200",
+      movie_length:  7200.seconds,
       page:          "http://www.aroma-p.com/member/contents/title.php?conid=101191",
       sample_images: [
         "http://www.aroma-p.com/images/contents/101191_01.jpg','view','width=740,height=590",

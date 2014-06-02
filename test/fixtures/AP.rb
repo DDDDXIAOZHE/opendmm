@@ -10,7 +10,7 @@ module Fixture
         "川尻" => nil,
       },
       maker:         "Apache",
-      movie_length:  "14400",
+      movie_length:  14400.seconds,
       page:          "http://www.apa-av.jp/list_detail/detail_001.html",
       sample_images: [
         "http://www.apa-av.jp/list_detail/image/001/01.jpg",

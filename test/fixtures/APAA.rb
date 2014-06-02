@@ -21,7 +21,7 @@ module Fixture
       ],
       label:         nil,
       maker:         "Apache Project",
-      movie_length:  "6540",
+      movie_length:  6540.seconds,
       page:          "http://www.aurora-pro.com/shop/-/product/p/goods_id=APAA-182",
       release_date:  Date.new(2012, 11, 13),
       sample_images: [

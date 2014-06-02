@@ -11,7 +11,7 @@ module Fixture
       ],
       label:         "妄想チラリズム",
       maker:         "Aroma",
-      movie_length:  "6600",
+      movie_length:  6600.seconds,
       page:          "http://www.aroma-p.com/member/contents/title.php?conid=205028",
       sample_images: [
         "http://www.aroma-p.com/images/contents/205028_01.jpg','view','width=740,height=590",

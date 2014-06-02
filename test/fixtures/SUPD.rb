@@ -20,7 +20,7 @@ module Fixture
       ],
       label:         "SUPREME",
       maker:         "Ideapocket",
-      movie_length:  "13200",
+      movie_length:  13200.seconds,
       page:          "http://ideapocket.com/works/-/detail/=/cid=supd065",
       release_date:  Date.new(2009, 12, 1),
       sample_images: [

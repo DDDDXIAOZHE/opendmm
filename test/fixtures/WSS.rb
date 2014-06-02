@@ -16,7 +16,7 @@ module Fixture
       ],
       label:         "So",
       maker:         "ワープエンタテインメント",
-      movie_length:  "7800",
+      movie_length:  7800.seconds,
       page:          "http://www.waap.co.jp/work/item.php?itemcode=WSS231",
       release_date:  Date.new(2013, 4, 19),
       sample_images: [

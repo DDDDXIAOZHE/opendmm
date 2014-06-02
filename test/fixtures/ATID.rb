@@ -20,7 +20,7 @@ module Fixture
       ],
       label:         "in mad",
       maker:         "Attackers",
-      movie_length:  "7200",
+      movie_length:  7200.seconds,
       page:          "http://attackers.net/works/-/detail/=/cid=atid183",
       release_date:  Date.new(2011, 9, 7),
       sample_images: [

@@ -12,7 +12,7 @@ module Fixture
       ],
       label:         "IDEAPOCKET BEST",
       maker:         "Ideapocket",
-      movie_length:  "28800",
+      movie_length:  28800.seconds,
       page:          "http://ideapocket.com/works/-/detail/=/cid=idbd447",
       release_date:  Date.new(2013, 6, 1),
       sample_images: [

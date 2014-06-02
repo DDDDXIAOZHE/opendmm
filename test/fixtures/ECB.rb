@@ -17,7 +17,7 @@ module Fixture
       ],
       label:         "cobra",
       maker:         "ワープエンタテインメント",
-      movie_length:  "7800",
+      movie_length:  7800.seconds,
       page:          "http://www.waap.co.jp/work/item.php?itemcode=ECB078",
       release_date:  Date.new(2013, 7, 5),
       sample_images: [

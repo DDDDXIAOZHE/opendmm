@@ -21,7 +21,7 @@ module Fixture
       ],
       label:         "蛇縛",
       maker:         "Attackers",
-      movie_length:  "6000",
+      movie_length:  6000.seconds,
       page:          "http://attackers.net/works/-/detail/=/cid=jbd153",
       release_date:  Date.new(2012, 3, 7),
       sample_images: [
