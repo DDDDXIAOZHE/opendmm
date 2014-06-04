@@ -1,103 +1,23 @@
 #!/usr/bin/env ruby
 
+require "json"
 require "optparse"
+require "pp"
 require "opendmm"
 
-class PrettyProduct
-  def initialize(product)
-    @product = product
-  end
-
-  def print_raw
-    unless @product
-      puts "Unknown product" + ARGV.first
-      return
-    end
-    print_obj(@product)
-    puts ""
-  end
-
-  def print_fixture
-    code = @product[:code]
-    fixture_name = code.match(/[a-z]+/i)[0].upcase
-    $stdout.reopen("test/fixtures/#{fixture_name}.rb", "w")
-    puts "module Fixture"
-    puts "  #{fixture_name} = {"
-    print "    \"#{code}\" => "
-    print_obj(@product, 4)
-    puts ","
-    puts "  }"
-    puts "end"
-  end
-
-  private
-
-  def print_obj(obj, indent = 0)
-    case obj
-    when Hash
-      width = key_width(obj)
-      puts "{"
-      obj.each do |key, value|
-        print " " * indent
-        case key
-        when Symbol
-          printf "  %-#{width}s ", "#{key}:"
-        else
-          printf "  %-#{width}s ", "\"#{key}\" =>"
-        end
-        print_obj(value, indent + 2)
-        puts ","
-      end
-      print " " * indent + "}"
-    when Array
-      puts "["
-      obj.each do |value|
-        print " " * (indent + 2)
-        print_obj(value, indent + 2)
-        puts ","
-      end
-      print " " * indent + "]"
-    when Date
-      print "Date.new(#{obj.year}, #{obj.month}, #{obj.day})"
-    when Fixnum
-      if obj > 600 && obj % 60 == 0
-        print "#{obj/60}.minutes"
-      else
-        print obj
-      end
-    when nil
-      print "nil"
-    else
-      print "\"#{obj.to_s}\""
-    end
-  end
-
-  def key_width(hash)
-    hash.keys.map do |key|
-      case key
-      when Symbol
-        key.length + 1
-      else
-        key.to_s.length + 5
-      end
-    end.max
-  end
-end
-
-options = { fixture: false }
+options = { json: false }
 OptionParser.new do |opts|
-  opts.on("-p", "--[no-]fixture", "Fixture mode") do |p|
-    options[:fixture] = p
+  opts.on("-j", "--[no-]json", "JSON mode") do |j|
+    options[:json] = j
   end
 end.parse!
 
 details = OpenDMM.search(ARGV.first)
 if details
-  product = PrettyProduct.new(details)
-  if options[:fixture]
-    product.print_fixture
+  if options[:json]
+    puts JSON.pretty_generate(details)
   else
-    product.print_raw
+    pp details
   end
 else
   puts "Unknown product: " + ARGV.first
