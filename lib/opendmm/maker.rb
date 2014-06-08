@@ -15,7 +15,7 @@ module OpenDMM
     # Known fields:
     #
     # {
-    #   actresses:     Hash
+    #   actresses:     Array
     #   actress_types: Array
     #   brand:         String
     #   code:          String

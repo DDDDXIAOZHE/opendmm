@@ -1,6 +1,5 @@
 require "minitest/autorun"
 require "active_support/core_ext/hash/keys"
-require "active_support/core_ext/numeric/time"
 require "active_support/core_ext/string/inflections"
 require "active_support/json"
 require "opendmm"
