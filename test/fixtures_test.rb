@@ -2,6 +2,7 @@ require "minitest/autorun"
 require "active_support/core_ext/hash/keys"
 require "active_support/core_ext/string/inflections"
 require "active_support/json"
+require "hashdiff"
 require "opendmm"
 
 I18n.enforce_available_locales = false
@@ -28,7 +29,7 @@ class FixtureTest
   def test_#{name.underscore}
     expected = load_product("#{path}")
     actual = OpenDMM.search("#{name}")
-    assert_equal expected, actual
+    assert_equal expected, actual, HashDiff.diff(expected, actual)
   end
 end
 

@@ -8,8 +8,10 @@ module OpenDMM
         base_uri "www.aknr.com"
 
         def self.item(name)
-          name =~ /(\w+)-?(\d+)/
-          get("/works/#{$1}-#{$2}/")
+          case name
+          when /FSET-?(\d{3})/i
+            get("/works/fset-#{$1}/")
+          end
         end
       end
 
@@ -34,10 +36,8 @@ module OpenDMM
       end
 
       def self.search(name)
-        case name
-        when /FSET-?\d{3}/i
-          Parser.parse(Site.item(name))
-        end
+        item = Site.item(name)
+        item ? Parser.parse(item) : nil
       end
     end
   end
