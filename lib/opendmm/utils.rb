@@ -9,7 +9,7 @@ module OpenDMM
       Hash[dts.zip(dds)]
     end
 
-    def self.hash_by_split(array, delimiter = '：')
+    def self.hash_by_split(array, delimiter = /[：:]/)
       array.map do |str|
         slices = str.split(delimiter, 2).map(&:squish)
       end.select do |pair|
@@ -74,6 +74,6 @@ end
 
 class String
   def discard_if_empty
-    self.match(/-+/) ? nil : self
+    self.squish.match(/-+/) ? nil : self.squish
   end
 end

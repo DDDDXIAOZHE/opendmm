@@ -42,8 +42,8 @@ module OpenDMM
 
   	def self.search(name)
   	  @@makers.each do |maker|
-  		result = maker.search(name)
-  		return result if result
+    		result = maker.search(name)
+    		return result if result
   	  end
   	  nil
   	end
