@@ -8,7 +8,10 @@ module OpenDMM
         base_uri "www.aurora-pro.com"
 
         def self.item(name)
-          get("/shop/-/product/p/goods_id=#{name.upcase}")
+          case name
+          when /(APAA|APAK)-?(\d{3})/i
+            get("/shop/-/product/p/goods_id=#{$1.upcase}-#{$2}")
+          end
         end
       end
 
@@ -34,13 +37,6 @@ module OpenDMM
             scenes:        specs["シーン"].css("ul li").map(&:text),
             title:         html.css("h1.pro_title").text.squish,
           }
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /(APAA|APAK)-\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end

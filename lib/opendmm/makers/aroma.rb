@@ -9,9 +9,9 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /\bARM-(\d+)/i
+          when /\bARM-?(\d{3})/i
             return get("/member/contents/title.php?conid=101#{$1}")
-          when /\bPARM-(\d+)/i
+          when /\bPARM-?(\d{3})/i
             return get("/member/contents/title.php?conid=205#{$1}")
           end
         end

@@ -8,8 +8,10 @@ module OpenDMM
         base_uri "ideapocket.com"
 
         def self.item(name)
-          name =~ /(\w+)-(\d+)/
-          get("/works/-/detail/=/cid=#{$1.downcase}#{$2}")
+          case name
+          when /(IDBD|IPSD|IPTD|IPZ|SUPD)-?(\d{3})/i
+            get("/works/-/detail/=/cid=#{$1.downcase}#{$2}")
+          end
         end
       end
 
@@ -65,13 +67,6 @@ module OpenDMM
             end
           end
           specs
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /(IDBD|IPSD|IPTD|IPZ|SUPD)-\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end

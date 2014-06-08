@@ -9,7 +9,10 @@ module OpenDMM
 
         def self.item(name)
           name =~ /(\w+)-?(\d+)/
-          get("/work/item.php?itemcode=#{$1.upcase}#{$2}")
+          case name
+          when /(AIR|CWM|ECB|WSS)-?(\d{3})/i
+            get("/work/item.php?itemcode=#{$1.upcase}#{$2}")
+          end
         end
       end
 
@@ -60,13 +63,6 @@ module OpenDMM
           else
             str
           end
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /(AIR|CWM|ECB|WSS)-?\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end

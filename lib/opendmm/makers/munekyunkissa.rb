@@ -8,8 +8,10 @@ module OpenDMM
         base_uri "www.munekyunkissa.com"
 
         def self.item(name)
-          name =~ /(\w+)-(\d+)/
-          get("/works/#{$1.downcase}/#{$1.downcase}#{$2}.html")
+          case name
+          when /(ALB)-?(\d{3})/i
+            get("/works/#{$1.downcase}/#{$1.downcase}#{$2}.html")
+          end
         end
       end
 
@@ -32,13 +34,6 @@ module OpenDMM
             title:         html.css("div.capt01").text.squish,
             # TODO: parse series, label, genres from pics
           }
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /ALB-\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end

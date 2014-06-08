@@ -9,7 +9,10 @@ module OpenDMM
         cookies(adc: 1)
 
         def self.item(name)
-          get("/item/prestige/#{name.upcase}")
+          case name
+          when /(ABP|ABS|ABY|CHN|CHS|DOM|EDD|ESK|EZD|HAZ|HON|INU|JOB|LLR|MAS|MBD|MDC|MEK|MMY|NDR|NOF|OSR|PPB|PPT|RAW|SAD|SGA|SPC|SRS|TAP|TDT|TRD|WAT|WPC|XND|YRH|YRZ)-?(\d{3})/i
+            get("/item/prestige/#{$1.upcase}-#{$2}")
+          end
         end
       end
 
@@ -55,13 +58,6 @@ module OpenDMM
           else
             [ node.text.squish ]
           end
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /(ABP|ABS|ABY|CHN|CHS|DOM|EDD|ESK|EZD|HAZ|HON|INU|JOB|LLR|MAS|MBD|MDC|MEK|MMY|NDR|NOF|OSR|PPB|PPT|RAW|SAD|SGA|SPC|SRS|TAP|TDT|TRD|WAT|WPC|XND|YRH|YRZ)-\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end
