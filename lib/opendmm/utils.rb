@@ -49,6 +49,10 @@ class NilClass
   def text
     ""
   end
+
+  def split(pattern)
+    nil
+  end
 end
 
 class Hash
@@ -58,5 +62,11 @@ class Hash
         hash[item] = nil
       end
     end
+  end
+end
+
+class String
+  def discard_if_empty
+    self.match(/-+/) ? nil : self
   end
 end

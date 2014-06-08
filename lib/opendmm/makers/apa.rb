@@ -8,8 +8,10 @@ module OpenDMM
         base_uri "www.apa-av.jp"
 
         def self.item(name)
-          name =~ /AP-(\d+)/
-          get("/list_detail/detail_#{$1}.html")
+          case name
+          when /AP-(\d+)/
+            get("/list_detail/detail_#{$1}.html")
+          end
         end
       end
 
@@ -42,13 +44,6 @@ module OpenDMM
             end
           end
           specs
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /AP-\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end

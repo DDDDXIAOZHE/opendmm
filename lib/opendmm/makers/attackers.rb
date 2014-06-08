@@ -8,8 +8,10 @@ module OpenDMM
         base_uri "attackers.net"
 
         def self.item(name)
-          name =~ /(\w+)-(\d+)/
-          get("/works/-/detail/=/cid=#{$1.downcase}#{$2}")
+          case name
+          when /(ADN|ATID|JBD|RBD|SHKD|SSPD)-(\d{3})/i
+            get("/works/-/detail/=/cid=#{$1.downcase}#{$2}")
+          end
         end
       end
 
@@ -31,7 +33,7 @@ module OpenDMM
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"]),
             sample_images: html.css("ul#sample_photo li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            series:        parse_series(specs["シリーズ"]),
+            series:        specs["シリーズ"].discard_if_empty,
             title:         html.css("div.hl_box_btm").text.squish,
           }
         end
@@ -55,22 +57,6 @@ module OpenDMM
           when /\w+-\d+/
             $&
           end
-        end
-
-        def self.parse_series(str)
-          case str
-          when /-+/
-            nil
-          else
-            str
-          end
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /(ADN|ATID|JBD|RBD|SHKD|SSPD)-\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end
