@@ -34,7 +34,7 @@ module OpenDMM
   	#   movie_length:  String
   	#   page:          String
   	#   release_date:  String
-  	#   sample_images: Array,
+  	#   sample_images: Array
   	#   scenes:        Array
   	#   series:        String
   	#   title:         String

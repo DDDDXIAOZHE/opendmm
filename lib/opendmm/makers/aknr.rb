@@ -31,8 +31,6 @@ module OpenDMM
             title:         html.css("#mainContent2 > h1").text.squish,
           }
         end
-
-        private
       end
     end
   end

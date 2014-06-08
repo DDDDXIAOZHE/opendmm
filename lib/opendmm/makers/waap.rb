@@ -20,14 +20,14 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = parse_specs(html)
+          specs = Utils.hash_by_split(html.css("ul.title_shosai li.wkact_ser_maker02").map(&:text))
           return {
             actresses:     specs["出演者"].split,
             brand:         specs["ブランド"],
             code:          specs["品番"],
             cover_image:   URI.join(page_uri, html.css("ul#title_img_all li.title_img a").first["href"]).to_s,
             description:   html.css("div#title_cmt_all").text.squish,
-            directors:     parse_directors(specs["監督"]),
+            directors:     specs["監督"].discard_if_empty,
             genres:        specs["ジャンル"].split,
             label:         specs["レーベル"],
             maker:         specs["メーカー"],
@@ -35,34 +35,9 @@ module OpenDMM
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"]),
             sample_images: html.css("ul.samplepicture_list li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            series:        parse_series(specs["シリーズ"]),
+            series:        specs["シリーズ"].discard_if_empty,
             title:         html.css("ul#pan_list li").last.text.squish,
           }
-        end
-
-        private
-
-        def self.parse_specs(html)
-          specs = {}
-          html.css("ul.title_shosai li.wkact_ser_maker02").each do |li|
-            if li.text =~ /(.*)：(.*)/
-              specs[$1.squish] = $2.squish
-            end
-          end
-          specs
-        end
-
-        def self.parse_directors(str)
-          return nil if str == "---"
-        end
-
-        def self.parse_series(str)
-          case str
-          when /-+/
-            nil
-          else
-            str
-          end
         end
       end
     end

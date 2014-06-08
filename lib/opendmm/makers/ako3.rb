@@ -19,10 +19,10 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = parse_specs(html)
+          specs = Utils.hash_by_split(html.css("div#spec-area > div.release").map(&:text))
           return {
             actresses: [
-              specs["title"]
+              html.css('//*[@id="spec-area"]/div[2]').text.squish
             ],
             code:          specs["商品番号"],
             cover_image:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
@@ -33,21 +33,6 @@ module OpenDMM
             sample_images: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
             title:         html.css("div.maintitle").text.squish,
           }
-        end
-
-        private
-
-        def self.parse_specs(html)
-          spec_area = html.css("div#spec-area").first
-          specs = {
-            "title" => spec_area.css("div.title").text.squish,
-          }
-          spec_area.css("div.release").each do |item|
-            if item.text =~ /(.*)：(.*)/
-              specs[$1.squish] = $2.squish
-            end
-          end
-          specs
         end
       end
     end

@@ -19,7 +19,7 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = parse_specs(html)
+          specs = Utils.hash_by_split(html.css("div#works-content ul li").map(&:text))
           return {
             actresses:     specs["出演女優"].split,
             code:          parse_code(specs["品番"]),
@@ -39,16 +39,6 @@ module OpenDMM
         end
 
         private
-
-        def self.parse_specs(html)
-          specs = {}
-          html.css("div#works-content ul li").each do |li|
-            if li.text =~ /(.*?)：(.*)/
-              specs[$1.squish] = $2.squish
-            end
-          end
-          specs
-        end
 
         def self.parse_code(str)
           case str

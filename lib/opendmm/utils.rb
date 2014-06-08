@@ -3,20 +3,27 @@ require "active_support/core_ext/numeric/time"
 
 module OpenDMM
   module Utils
-    def self.parse_dl(dl)
+    def self.hash_from_dl(dl)
       dts = dl.css("dt").map(&:text)
       dds = dl.css("dd")
       Hash[dts.zip(dds)]
     end
 
-    def self.utf8_html(content)
+    def self.hash_by_split(array, delimiter = '：')
+      array.map do |str|
+        slices = str.split(delimiter, 2).map(&:squish)
+      end.select do |pair|
+        pair.size == 2
+      end.to_h
+    end
+
+    def self.force_utf8(content)
       # This is to get rid of the annoying error message:
       #   "encoding error : input conversion failed due to input error"
       $stderr.reopen("/dev/null", "w")
       encoding = Nokogiri::HTML(content).encoding
       $stderr = STDERR
       content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: "")
-      Nokogiri::HTML(content)
     end
   end
 end
@@ -50,7 +57,7 @@ class NilClass
     ""
   end
 
-  def split(pattern)
+  def split(pattern = $;, limit = 0)
     nil
   end
 end

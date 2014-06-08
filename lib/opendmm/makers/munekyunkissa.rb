@@ -19,8 +19,8 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          data_left = Utils.parse_dl(html.css("dl.data-left").first)
-          data_right = Utils.parse_dl(html.css("dl.data-right").first)
+          data_left = Utils.hash_from_dl(html.css("dl.data-left").first)
+          data_right = Utils.hash_from_dl(html.css("dl.data-right").first)
           return {
             actresses:     data_right["出演者"].text.remove("：").split,
             code:          data_left["品番"].text.remove("：").squish,

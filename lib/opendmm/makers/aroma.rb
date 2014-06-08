@@ -20,8 +20,8 @@ module OpenDMM
       module Parser
         def self.parse(content)
           page_uri = content.request.last_uri
-          html = Utils.utf8_html(content)
-          specs = parse_specs(html)
+          html = Nokogiri::HTML(Utils.force_utf8(content))
+          specs = Utils.hash_by_split(html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[3]").text.split)
           return {
             actresses:     specs["出演者"].split("・"),
             code:          specs["品番"],
@@ -39,16 +39,6 @@ module OpenDMM
         end
 
         private
-
-        def self.parse_specs(html)
-          specs = {}
-          html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[3]").text.split.each do |item|
-            if item =~ /(.*)：(.*)/
-              specs[$1.squish] = $2.squish
-            end
-          end
-          specs
-        end
 
         def self.parse_cover_image(html, page_uri)
           href = html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[1]/a").first["href"]

@@ -20,7 +20,7 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = Utils.parse_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
+          specs = Utils.hash_from_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
           descriptions = parse_descriptions(html)
           return {
             actresses:     parse_actresses(specs["出演："]),
