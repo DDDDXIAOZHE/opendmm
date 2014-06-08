@@ -19,10 +19,10 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            actresses:     Hash.new_with_keys(html.xpath('//*[@id="content-box"]/p[1]/a').map(&:text)),
+            actresses:     html.xpath('//*[@id="content-box"]/p[1]/a').map(&:text),
             code:          specs["品番"]["DVD"],
             cover_image:   URI.join(page_uri, html.css("div#content-box div.pake a").first["href"]).to_s,
-            directors:     Hash.new_with_keys(specs["監督"].split),
+            directors:     specs["監督"].split,
             description:   html.xpath('//*[@id="content-box"]/p[2]').text.squish,
             genres:        specs["ジャンル"].split,
             label:         specs["レーベル"],

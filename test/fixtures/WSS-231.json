@@ -1,7 +1,7 @@
 {
-  "actresses": {
-    "平原みなみ": null
-  },
+  "actresses": [
+    "平原みなみ"
+  ],
   "brand": "WAAP",
   "code": "WSS231",
   "cover_image": "http://www.waap.co.jp/hskhsk/itsub/WSS231.jpg",

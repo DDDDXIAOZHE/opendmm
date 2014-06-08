@@ -1,14 +1,14 @@
 {
-  "actresses": {
-    "青山菜々": null,
-    "国見奈々": null,
-    "石原あすか": null
-  },
+  "actresses": [
+    "青山菜々",
+    "国見奈々",
+    "石原あすか"
+  ],
   "code": "SSPD-077",
   "cover_image": "http://attackers.net/images/works/sspd077/sspd077pl.jpg",
-  "directors": {
-    "本田教仁": null
-  },
+  "directors": [
+    "本田教仁"
+  ],
   "description": "ATTACKERS×Lilithコラボレーション作品あの大ヒットゲームを遂に実写化！！！Lilith（原作）全面協力の元、映像や台詞・演出を出来る限り忠実に再現！ゲーム・アニメファン以外も楽しめる内容は必見！対魔忍アサギ 特設ページへ",
   "genres": [
     "異物挿入",

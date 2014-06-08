@@ -51,9 +51,9 @@ module OpenDMM
           if node.nil?
             nil
           elsif !node.css("a").empty?
-            Hash.new_with_keys(node.css("a").map(&:text).map(&:squish))
+            node.css("a").map(&:text).map(&:squish)
           else
-            { node.text.squish => nil }
+            [ node.text.squish ]
           end
         end
       end

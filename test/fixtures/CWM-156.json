@@ -1,7 +1,7 @@
 {
-  "actresses": {
-    "愛沢有紗": null
-  },
+  "actresses": [
+    "愛沢有紗"
+  ],
   "brand": "CLUB WAAP",
   "code": "CWM156",
   "cover_image": "http://www.waap.co.jp/hskhsk/itsub/CWM156.jpg",

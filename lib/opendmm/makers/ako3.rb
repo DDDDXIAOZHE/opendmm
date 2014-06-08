@@ -19,14 +19,9 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            actresses: {
-              specs["title"] => {
-                face:   URI.join(page_uri, specs["face"]).to_s,
-                age:    specs["年齢"].to_i,
-                height: specs["身長"].to_i,
-                size:   specs["サイズ"],
-              }
-            },
+            actresses: [
+              specs["title"]
+            ],
             code:          specs["商品番号"],
             cover_image:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
             description:   html.css("div#caption").text.squish,

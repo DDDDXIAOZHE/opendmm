@@ -19,11 +19,11 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            actresses:     Hash.new_with_keys(specs["出演女優"].split(",")),
+            actresses:     specs["出演女優"].split(","),
             code:          specs["品番"],
             cover_image:   URI.join(page_uri, html.css("div.detail_img a").first["href"]).to_s,
             description:   html.css("div.detail_description").first.inner_text.squish,
-            directors:     Hash.new_with_keys(specs["監督"].split),
+            directors:     specs["監督"].split,
             maker:         "Apache",
             movie_length:  ChronicDuration.parse(specs["収録時間"]),
             page:          page_uri.to_s,

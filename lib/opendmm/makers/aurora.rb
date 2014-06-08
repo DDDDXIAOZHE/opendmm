@@ -18,12 +18,12 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = Utils.parse_dl(html.css("div#product_info dl"))
           return {
-            actresses:     Hash.new_with_keys(specs["出演女優"].css("ul li").map(&:text)),
+            actresses:     specs["出演女優"].css("ul li").map(&:text),
             actress_types: specs["女優タイプ"].css("ul li").map(&:text),
             code:          specs["作品番号"].text.squish,
             cover_image:   URI.join(page_uri, html.css("div.main_pkg a img").first["src"]).to_s,
             description:   html.css("div#product_exp p").text.squish,
-            directors:     Hash.new_with_keys(specs["監督"].css("ul li").map(&:text)),
+            directors:     specs["監督"].css("ul li").map(&:text),
             genres:        specs["ジャンル"].css("ul li").map(&:text),
             label:         specs["レーベル"],
             maker:         "Apache Project",

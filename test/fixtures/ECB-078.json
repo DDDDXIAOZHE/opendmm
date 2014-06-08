@@ -1,7 +1,7 @@
 {
-  "actresses": {
-    "向井恋": null
-  },
+  "actresses": [
+    "向井恋"
+  ],
   "brand": "est WAAP",
   "code": "ECB078",
   "cover_image": "http://www.waap.co.jp/hskhsk/itsub/ECB078.jpg",

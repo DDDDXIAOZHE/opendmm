@@ -1,7 +1,7 @@
 {
-  "actresses": {
-    "大槻ひびき": null
-  },
+  "actresses": [
+    "大槻ひびき"
+  ],
   "brand": "AIR*WAAP",
   "code": "AIR017",
   "cover_image": "http://www.waap.co.jp/hskhsk/itsub/AIR017.jpg",

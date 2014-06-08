@@ -19,7 +19,7 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = parse_specs(html)
           return {
-            actresses:     Hash.new_with_keys(specs["出演者"].split),
+            actresses:     specs["出演者"].split,
             brand:         specs["ブランド"],
             code:          specs["品番"],
             cover_image:   URI.join(page_uri, html.css("ul#title_img_all li.title_img a").first["href"]).to_s,

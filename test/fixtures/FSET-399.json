@@ -1,10 +1,10 @@
 {
-  "actresses": {
-    "大槻ひびき": null,
-    "かすみりさ": null,
-    "水澤まお": null,
-    "相葉レイカ": null
-  },
+  "actresses": [
+    "大槻ひびき",
+    "かすみりさ",
+    "水澤まお",
+    "相葉レイカ"
+  ],
   "code": "FSET-399",
   "cover_image": "http://www.aknr.com/wp/wp-content/images/works/fset399/fset399_l.jpg",
   "directors": [

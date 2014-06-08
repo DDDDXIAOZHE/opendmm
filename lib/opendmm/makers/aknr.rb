@@ -18,7 +18,7 @@ module OpenDMM
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
           return {
-            actresses:     Hash.new_with_keys(html.xpath('//*[@id="data"]/div[2]/span').map(&:text).map(&:squish)),
+            actresses:     html.xpath('//*[@id="data"]/div[2]/span').map(&:text).map(&:squish),
             code:          html.xpath('//*[@id="info2"][2]/div[2]').text.squish,
             cover_image:   html.xpath('//*[@id="jktimg_l2"]/a').first["href"],
             directors:     html.xpath('//*[@id="info2"][1]/div[2]').text.split,

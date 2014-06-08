@@ -20,7 +20,7 @@ module OpenDMM
           data_left = Utils.parse_dl(html.css("dl.data-left").first)
           data_right = Utils.parse_dl(html.css("dl.data-right").first)
           return {
-            actresses:     Hash.new_with_keys(data_right["出演者"].text.remove("：").split),
+            actresses:     data_right["出演者"].text.remove("：").split,
             code:          data_left["品番"].text.remove("：").squish,
             cover_image:   URI.join(page_uri, html.css("div.ttl-pac a.ttl-package").first["href"]).to_s,
             description:   html.css("div.ttl-comment div.comment").text.squish,
