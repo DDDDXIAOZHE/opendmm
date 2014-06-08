@@ -8,8 +8,10 @@ module OpenDMM
         base_uri "www.ako-3.com"
 
         def self.item(name)
-          name =~ /(\w+)-?(\d+)/
-          get("/work/item.php?itemcode=#{$1.upcase}#{$2}")
+          case name
+          when /AKO-?(\d{3})/i
+            get("/work/item.php?itemcode=AKO#{$1}")
+          end
         end
       end
 
@@ -38,7 +40,6 @@ module OpenDMM
         def self.parse_specs(html)
           spec_area = html.css("div#spec-area").first
           specs = {
-            "face"  => spec_area.css("div.face img").first["src"],
             "title" => spec_area.css("div.title").text.squish,
           }
           spec_area.css("div.release").each do |item|
@@ -47,13 +48,6 @@ module OpenDMM
             end
           end
           specs
-        end
-      end
-
-      def self.search(name)
-        case name
-        when /AKO-?\d{3}/i
-          Parser.parse(Site.item(name))
         end
       end
     end

@@ -34,11 +34,6 @@ module OpenDMM
 
         private
       end
-
-      def self.search(name)
-        item = Site.item(name)
-        item ? Parser.parse(item) : nil
-      end
     end
   end
 end
