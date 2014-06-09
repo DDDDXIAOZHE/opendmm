@@ -28,4 +28,44 @@ namespace :fixture do
   end
 end
 
+namespace :maker do
+  desc "Generate a maker"
+  task :generate, [:name] do |t, args|
+    File.open(File.join(File.dirname(__FILE__) + "/lib/opendmm/makers/#{args[:name].underscore}.rb"), "w") do |file|
+      puts "Generating #{args[:name].underscore}.rb"
+      file.puts <<-CODE
+module OpenDMM
+  module Maker
+    module #{args[:name].camelize}
+      include Maker
+
+      module Site
+        include HTTParty
+        base_uri "example.com"
+
+        def self.item(name)
+          case name
+          when /(EXAM)-?(\\d{3})/i
+            get("/#\{$1.downcase\}#\{$2\}")
+          end
+        end
+      end
+
+      module Parser
+        def self.parse(content)
+          page_uri = content.request.last_uri
+          html = Nokogiri::HTML(content)
+          return {
+            page:          page_uri.to_s,
+          }
+        end
+      end
+    end
+  end
+end
+CODE
+    end
+  end
+end
+
 task :test => :install

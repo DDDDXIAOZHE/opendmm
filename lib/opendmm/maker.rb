@@ -37,6 +37,7 @@ module OpenDMM
   	#   sample_images: Array
   	#   scenes:        Array
   	#   series:        String
+    #   subtitle:      String
     #   theme:         String
   	#   title:         String
     #   __extra:       Hash
