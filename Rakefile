@@ -9,7 +9,7 @@ end
 
 namespace :fixture do
   desc "Generate a fixture"
-  task :generate, [:id] do |t, args|
+  task :generate, [:id] => :install do |t, args|
     File.open(File.join(File.dirname(__FILE__) + "/test/fixtures/#{args[:id]}.json"), "w") do |file|
       puts "Generating #{args[:id]}.json"
       file.puts JSON.pretty_generate(OpenDMM.search(args[:id]))
@@ -17,7 +17,7 @@ namespace :fixture do
   end
 
   desc "Regenerate all fixtures"
-  task :regenerate do
+  task :regenerate => :install do
     Dir[File.dirname(__FILE__) + '/test/fixtures/*.json'].each do |path|
       File.open(path, "w") do |file|
         id = File.basename(path, ".json")

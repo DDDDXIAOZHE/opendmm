@@ -37,7 +37,9 @@ module OpenDMM
   	#   sample_images: Array
   	#   scenes:        Array
   	#   series:        String
+    #   theme:         String
   	#   title:         String
+    #   __extra:       Hash
   	# }
 
   	def self.search(name)
