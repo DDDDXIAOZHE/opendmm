@@ -9,8 +9,8 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /AKO-?(\d{3})/i
-            get("/work/item.php?itemcode=AKO#{$1}")
+          when /(AKO)-?(\d{3})/i
+            get("/work/item.php?itemcode=#{$1.upcase}#{$2}")
           end
         end
       end
