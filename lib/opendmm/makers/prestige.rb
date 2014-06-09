@@ -24,20 +24,20 @@ module OpenDMM
           descriptions = parse_descriptions(html)
           return {
             actresses:     parse_actresses(specs["出演："]),
-            code:          specs["品番："].text.squish,
+            code:          specs["品番："].text,
             cover_image:   html.css("div.product_detail_layout_01 p.package_layout a.sample_image").first["href"],
-            description:   [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join.squish,
-            genres:        specs["ジャンル："].css("a").map(&:text).map(&:squish),
+            description:   [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join,
+            genres:        specs["ジャンル："].css("a").map(&:text),
             # TODO: Parse complete label, for example
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
-            label:         specs["レーベル："].text.squish,
-            maker:         specs["メーカー名："].text.squish,
-            movie_length:  ChronicDuration.parse(specs["収録時間："].text.squish),
+            label:         specs["レーベル："].text,
+            maker:         specs["メーカー名："].text,
+            movie_length:  ChronicDuration.parse(specs["収録時間："].text),
             page:          page_uri.to_s,
-            release_date:  Date.parse(specs["発売日："].text.squish),
+            release_date:  Date.parse(specs["発売日："].text),
             sample_images: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
-            series:        specs["シリーズ："].text.squish,
-            title:         html.css("div.product_title_layout_01").text.squish,
+            series:        specs["シリーズ："].text,
+            title:         html.css("div.product_title_layout_01").text,
           }
         end
 
@@ -54,9 +54,9 @@ module OpenDMM
           if node.nil?
             nil
           elsif !node.css("a").empty?
-            node.css("a").map(&:text).map(&:squish)
+            node.css("a").map(&:text)
           else
-            [ node.text.squish ]
+            [ node.text ]
           end
         end
       end

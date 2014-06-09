@@ -25,7 +25,7 @@ module OpenDMM
             code:          specs["品番"]["DVD"],
             cover_image:   URI.join(page_uri, html.css("div#content-box div.pake a").first["href"]).to_s,
             directors:     specs["監督"].split,
-            description:   html.xpath('//*[@id="content-box"]/p[2]').text.squish,
+            description:   html.xpath('//*[@id="content-box"]/p[2]').text,
             genres:        specs["ジャンル"].split,
             label:         specs["レーベル"],
             maker:         "Ideapocket",
@@ -34,7 +34,7 @@ module OpenDMM
             release_date:  Date.parse(specs["発売日"]["DVD"]),
             sample_images: html.css("div#sample-pic a").map { |a| URI.join(page_uri, a["href"]).to_s },
             series:        specs["シリーズ"],
-            title:         html.css("div#content-box h2.list-ttl").text.squish,
+            title:         html.css("div#content-box h2.list-ttl").text,
           }.reject do |k, v|
             case v
             when Array, Hash, String

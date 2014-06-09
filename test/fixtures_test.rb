@@ -12,11 +12,7 @@ class FixtureTest < Minitest::Test
     json = File.read(path)
     product = ActiveSupport::JSON.decode(json).symbolize_keys
     product[:release_date] = Date.parse(product[:release_date]) if product[:release_date]
-    if product[:actresses]
-      product[:actresses].each do |name, actress|
-        actress.symbolize_keys! if actress
-      end
-    end
+    product[:extra_info].try(:symbolize_keys!)
     product
   end
 end

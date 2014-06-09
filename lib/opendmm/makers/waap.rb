@@ -26,8 +26,8 @@ module OpenDMM
             brand:         specs["ブランド"],
             code:          specs["品番"],
             cover_image:   URI.join(page_uri, html.css("ul#title_img_all li.title_img a").first["href"]).to_s,
-            description:   html.css("div#title_cmt_all").text.squish,
-            directors:     specs["監督"].discard_if_empty,
+            description:   html.css("div#title_cmt_all").text,
+            directors:     specs["監督"],
             genres:        specs["ジャンル"].split,
             label:         specs["レーベル"],
             maker:         specs["メーカー"],
@@ -35,8 +35,8 @@ module OpenDMM
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"]),
             sample_images: html.css("ul.samplepicture_list li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            series:        specs["シリーズ"].discard_if_empty,
-            title:         html.css("ul#pan_list li").last.text.squish,
+            series:        specs["シリーズ"],
+            title:         html.css("ul#pan_list li").last.text,
           }
         end
       end

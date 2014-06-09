@@ -25,7 +25,7 @@ module OpenDMM
             code:          parse_code(specs["品番"]),
             cover_image:   URI.join(page_uri, html.css("div#works_pake_box a#pake").first["href"]).to_s,
             directors:     specs["監督"].split,
-            description:   html.css("p.works_txt").text.squish,
+            description:   html.css("p.works_txt").text,
             genres:        specs["ジャンル"].split,
             label:         specs["レーベル"],
             maker:         "Attackers",
@@ -33,8 +33,8 @@ module OpenDMM
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"]),
             sample_images: html.css("ul#sample_photo li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            series:        specs["シリーズ"].discard_if_empty,
-            title:         html.css("div.hl_box_btm").text.squish,
+            series:        specs["シリーズ"],
+            title:         html.css("div.hl_box_btm").text,
           }
         end
 

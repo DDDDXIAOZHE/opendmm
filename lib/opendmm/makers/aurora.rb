@@ -23,9 +23,9 @@ module OpenDMM
           return {
             actresses:     specs["出演女優"].css("ul li").map(&:text),
             actress_types: specs["女優タイプ"].css("ul li").map(&:text),
-            code:          specs["作品番号"].text.squish,
+            code:          specs["作品番号"].text,
             cover_image:   URI.join(page_uri, html.css("div.main_pkg a img").first["src"]).to_s,
-            description:   html.css("div#product_exp p").text.squish,
+            description:   html.css("div#product_exp p").text,
             directors:     specs["監督"].css("ul li").map(&:text),
             genres:        specs["ジャンル"].css("ul li").map(&:text),
             label:         specs["レーベル"],
@@ -35,7 +35,7 @@ module OpenDMM
             release_date:  Date.parse(specs["発売日"]),
             sample_images: html.css("div.product_scene ul li img").map { |img| URI.join(page_uri, img["src"]).to_s },
             scenes:        specs["シーン"].css("ul li").map(&:text),
-            title:         html.css("h1.pro_title").text.squish,
+            title:         html.css("h1.pro_title").text,
           }
         end
       end

@@ -4,7 +4,7 @@ require "active_support/core_ext/numeric/time"
 module OpenDMM
   module Utils
     def self.hash_from_dl(dl)
-      dts = dl.css("dt").map(&:text)
+      dts = dl.css("dt").map(&:text).map(&:squish)
       dds = dl.css("dd")
       Hash[dts.zip(dds)]
     end
@@ -43,7 +43,7 @@ end
 class << ChronicDuration
   def parse_with_chinese_support(str)
     case str
-    when /(\d+)分/
+    when /(\d+)(\s*)分/
       return $1.to_i.minutes
     else
       return parse_without_chinese_support(str)
@@ -56,24 +56,38 @@ class NilClass
   def text
     ""
   end
+end
 
-  def split(pattern = $;, limit = 0)
-    nil
+class Array
+  def squish
+    array = []
+    self.each do |v|
+      v = v.squish_hard if v.instance_of? String
+      array << v if v.present?
+    end
+    return array
   end
 end
 
 class Hash
-  def self.new_with_keys(array)
-    self.new.tap do |hash|
-      array.each do |item|
-        hash[item] = nil
+  def squish
+    hash = {}
+    self.each do |k, v|
+      case v
+      when String
+        v = v.squish
+        v = nil if v =~ /^[\s-]*$/
+      when Hash, Array
+        v = v.squish
       end
+      hash[k] = v if v.present?
     end
+    hash
   end
 end
 
 class String
-  def discard_if_empty
-    self.squish.match(/-+/) ? nil : self.squish
+  def squish_hard
+    self.squish =~ /^[\s-]*$/ ? nil : self.squish
   end
 end

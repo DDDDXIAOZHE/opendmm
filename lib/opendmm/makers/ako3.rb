@@ -22,16 +22,16 @@ module OpenDMM
           specs = Utils.hash_by_split(html.css("div#spec-area > div.release").map(&:text))
           return {
             actresses: [
-              html.css('//*[@id="spec-area"]/div[2]').text.squish
+              html.css('//*[@id="spec-area"]/div[2]').text,
             ],
             code:          specs["商品番号"],
             cover_image:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
-            description:   html.css("div#caption").text.squish,
+            description:   html.css("div#caption").text,
             maker:         specs["メーカー"],
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["配信日"]),
             sample_images: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
-            title:         html.css("div.maintitle").text.squish,
+            title:         html.css("div.maintitle").text,
           }
         end
       end

@@ -23,15 +23,15 @@ module OpenDMM
           data_right = Utils.hash_from_dl(html.css("dl.data-right").first)
           return {
             actresses:     data_right["出演者"].text.remove("：").split,
-            code:          data_left["品番"].text.remove("：").squish,
+            code:          data_left["品番"].text.remove("："),
             cover_image:   URI.join(page_uri, html.css("div.ttl-pac a.ttl-package").first["href"]).to_s,
-            description:   html.css("div.ttl-comment div.comment").text.squish,
+            description:   html.css("div.ttl-comment div.comment").text,
             maker:         "胸キュン喫茶",
-            movie_length:  ChronicDuration.parse(data_left["収録時間"].text.remove("：").squish),
+            movie_length:  ChronicDuration.parse(data_left["収録時間"].text.remove("：")),
             page:          page_uri.to_s,
-            release_date:  Date.parse(data_left["発売日"].text.remove("：").squish),
+            release_date:  Date.parse(data_left["発売日"].text.remove("：")),
             sample_images: html.css("div.ttl-sample img").map { |img| URI.join(page_uri, img["src"]).to_s },
-            title:         html.css("div.capt01").text.squish,
+            title:         html.css("div.capt01").text,
             # TODO: parse series, label, genres from pics
           }
         end

@@ -20,15 +20,15 @@ module OpenDMM
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
           return {
-            actresses:     html.xpath('//*[@id="data"]/div[2]/span').map(&:text).map(&:squish),
-            code:          html.xpath('//*[@id="info2"][2]/div[2]').text.squish,
+            actresses:     html.xpath('//*[@id="data"]/div[2]/span').map(&:text),
+            code:          html.xpath('//*[@id="info2"][2]/div[2]').text,
             cover_image:   html.xpath('//*[@id="jktimg_l2"]/a').first["href"],
             directors:     html.xpath('//*[@id="info2"][1]/div[2]').text.split,
-            movie_length:  ChronicDuration.parse(html.xpath('//*[@id="info2"][3]/div[2]').text.squish),
+            movie_length:  ChronicDuration.parse(html.xpath('//*[@id="info2"][3]/div[2]').text),
             page:          page_uri.to_s,
             release_date:  Date.parse(html.xpath('//*[@id="data"]/div[2]').text),
             sample_images: html.xpath('//*[@id="photo"]/p/a').map { |a| a["href"] },
-            title:         html.css("#mainContent2 > h1").text.squish,
+            title:         html.css("#mainContent2 > h1").text,
           }
         end
       end
