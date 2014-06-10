@@ -31,7 +31,7 @@ module OpenDMM
             movie_length:  ChronicDuration.parse(specs['収録時間']),
             page:          page_uri.to_s,
             release_date:  Date.parse(specs['発売日：'].text),
-            sample_images: html.css('#content > div.main > section > ul > li > a').map { |a| URI.join(page_uri, a['href']).to_s },
+            sample_images: html.css('#content > div.main > section > ul > li > a').map { |a| a['href'] },
             title:         html.xpath('//*[@id="content"]/div[2]/section/h2[1]').text,
           }
         end

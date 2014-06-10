@@ -23,13 +23,13 @@ module OpenDMM
           return {
             actresses:     specs["出演者"].split("/"),
             code:          specs["品番"],
-            cover_image:   URI.join(page_uri, html.xpath('//*[@id="pake-bottom-box"]/dl/a').first["href"]).to_s,
+            cover_image:   html.xpath('//*[@id="pake-bottom-box"]/dl/a').first["href"],
             description:   html.xpath('//*[@id="txt-bottom-box"]').text,
             directors:     specs["監督"].split("/"),
             movie_length:  ChronicDuration.parse(specs["収録時間"]),
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"]),
-            sample_images: html.xpath('//*[@id="mein-sanpuru-sam"]/a').map { |a| URI.join(page_uri, a["href"]).to_s },
+            sample_images: html.xpath('//*[@id="mein-sanpuru-sam"]/a').map { |a| a["href"] },
             title:         html.xpath('//*[@id="mein-left-new-release-box"]/div/div/h5').text,
           }
         end

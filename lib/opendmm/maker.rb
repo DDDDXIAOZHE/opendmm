@@ -12,7 +12,7 @@ module OpenDMM
       klass.module_eval <<-CODE
         def self.search(name)
           item = Site.item(name)
-          item ? Parser.parse(item).try(:squish) : nil
+          item ? Utils.cleanup(Parser.parse(item)) : nil
         end
       CODE
   	  @@makers << klass

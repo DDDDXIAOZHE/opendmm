@@ -23,7 +23,7 @@ module OpenDMM
           return {
             actresses:     specs["出演女優"].split,
             code:          parse_code(specs["品番"]),
-            cover_image:   URI.join(page_uri, html.css("div#works_pake_box a#pake").first["href"]).to_s,
+            cover_image:   html.css("div#works_pake_box a#pake").first["href"],
             directors:     specs["監督"].split,
             description:   html.css("p.works_txt").text,
             genres:        specs["ジャンル"].split,
@@ -32,7 +32,7 @@ module OpenDMM
             movie_length:  ChronicDuration.parse(specs["収録時間"]),
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"]),
-            sample_images: html.css("ul#sample_photo li a").map { |a| URI.join(page_uri, a["href"]).to_s },
+            sample_images: html.css("ul#sample_photo li a").map { |a| a["href"] },
             series:        specs["シリーズ"],
             title:         html.css("div.hl_box_btm").text,
           }

@@ -1,5 +1,7 @@
+require "active_support/core_ext/array/access"
 require "active_support/core_ext/module/aliasing"
 require "active_support/core_ext/numeric/time"
+require "active_support/core_ext/string/starts_ends_with"
 
 module OpenDMM
   module Utils
@@ -24,6 +26,42 @@ module OpenDMM
       encoding = Nokogiri::HTML(content).encoding
       $stderr = STDERR
       content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: "")
+    end
+
+    def self.cleanup(details)
+      details = self.squish(details)
+      if details[:page]
+        if details[:cover_image] && !details[:cover_image].start_with?("http")
+          details[:cover_image] = URI.join(details[:page], details[:cover_image]).to_s
+        end
+        if details[:sample_images]
+          details[:sample_images] = details[:sample_images].map do |uri|
+            uri.start_with?("http") ? uri : URI.join(details[:page], uri).to_s
+          end
+        end
+      end
+      details
+    end
+
+    def self.squish(obj)
+      case obj
+      when String
+        obj.squish!
+        obj.gsub!(/^[\s-]*$/, '')
+      when Hash
+        obj = obj.map do |k, v|
+          [k, squish(v)]
+        end.select do |kv|
+          kv.second.present?
+        end.to_h.symbolize_keys
+      when Array
+        obj = obj.map do |v|
+          squish(v)
+        end.select do |v|
+          v.present?
+        end
+      end
+      return obj.present? ? obj : nil
     end
   end
 end
@@ -55,39 +93,5 @@ end
 class NilClass
   def text
     ""
-  end
-end
-
-class Array
-  def squish
-    array = []
-    self.each do |v|
-      v = v.squish_hard if v.instance_of? String
-      array << v if v.present?
-    end
-    return array
-  end
-end
-
-class Hash
-  def squish
-    hash = {}
-    self.each do |k, v|
-      case v
-      when String
-        v = v.squish
-        v = nil if v =~ /^[\s-]*$/
-      when Hash, Array
-        v = v.squish
-      end
-      hash[k] = v if v.present?
-    end
-    hash
-  end
-end
-
-class String
-  def squish_hard
-    self.squish =~ /^[\s-]*$/ ? nil : self.squish
   end
 end

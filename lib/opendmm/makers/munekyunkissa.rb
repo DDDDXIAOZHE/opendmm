@@ -24,13 +24,13 @@ module OpenDMM
           return {
             actresses:     specs["出演者"].text.remove("：").split,
             code:          specs["品番"].text.remove("："),
-            cover_image:   URI.join(page_uri, html.css("div.ttl-pac a.ttl-package").first["href"]).to_s,
+            cover_image:   html.css("div.ttl-pac a.ttl-package").first["href"],
             description:   html.css("div.ttl-comment div.comment").text,
             maker:         "胸キュン喫茶",
             movie_length:  ChronicDuration.parse(specs["収録時間"].text.remove("：")),
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["発売日"].text.remove("：")),
-            sample_images: html.css("div.ttl-sample img").map { |img| URI.join(page_uri, img["src"]).to_s },
+            sample_images: html.css("div.ttl-sample img").map { |img| img["src"] },
             title:         html.css("div.capt01").text,
             # TODO: parse series, label, genres from pics
           }

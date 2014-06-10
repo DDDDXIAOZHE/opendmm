@@ -24,13 +24,13 @@ module OpenDMM
           return {
             actresses:     specs['出演女優'].css('a').map(&:text),
             code:          specs['品番'],
-            cover_image:   URI.join(page_uri, html.css('div.package > a.package-pic').first["href"]).to_s,
+            cover_image:   html.css('div.package > a.package-pic').first["href"],
             description:   html.css('div.title-data > p.comment').text,
             genres:        specs['ジャンル'].css('a').map(&:text),
             movie_length:  ChronicDuration.parse(specs['収録時間']),
             page:          page_uri.to_s,
             release_date:  Date.parse(specs['発売日'].text),
-            sample_images: html.css('div.sample-box > ul.sample-pic > li > a').map { |a| URI.join(page_uri, a["href"]).to_s },
+            sample_images: html.css('div.sample-box > ul.sample-pic > li > a').map { |a| a["href"] },
             series:        specs['シリーズ'].text.remove('：'),
             title:         html.css('div.title-data > h1').text,
           }

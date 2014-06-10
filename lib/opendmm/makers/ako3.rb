@@ -25,12 +25,12 @@ module OpenDMM
               html.css('//*[@id="spec-area"]/div[2]').text,
             ],
             code:          specs["商品番号"],
-            cover_image:   URI.join(page_uri, html.css("div.jacket a").first["href"]).to_s,
+            cover_image:   html.css("div.jacket a").first["href"],
             description:   html.css("div#caption").text,
             maker:         specs["メーカー"],
             page:          page_uri.to_s,
             release_date:  Date.parse(specs["配信日"]),
-            sample_images: html.css("ul.sampleimg li a").map { |a| URI.join(page_uri, a["href"]).to_s },
+            sample_images: html.css("ul.sampleimg li a").map { |a| a["href"] },
             title:         html.css("div.maintitle").text,
           }
         end

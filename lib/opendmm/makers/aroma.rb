@@ -43,14 +43,14 @@ module OpenDMM
         def self.parse_cover_image(html, page_uri)
           href = html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[1]/a").first["href"]
           if href =~ /'(\/images\/.*)'/
-            return URI.join(page_uri, $1).to_s
+            return $1
           end
         end
 
         def self.parse_sample_images(html, page_uri)
           html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[7]/td[2]/table/tr[3]").css("td input").map do |input|
             if input["onclick"] =~ /'(\/images\/.*)'/
-              URI.join(page_uri, $1).to_s
+              $1
             end
           end
         end

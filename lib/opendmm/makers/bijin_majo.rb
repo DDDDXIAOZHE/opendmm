@@ -23,12 +23,12 @@ module OpenDMM
           return {
             actresses:     [ html.css('#detail_main > h2').children.first.text ],
             code:          specs['品番：'].text,
-            cover_image:   URI.join(page_uri, html.css('#detail_main > div.figure > a').first['href']).to_s,
+            cover_image:   html.css('#detail_main > div.figure > a').first['href'],
             description:   html.css('#detail_main > div.detail_item > p').text,
             movie_length:  ChronicDuration.parse(specs['収録時間：'].text),
             page:          page_uri.to_s,
             release_date:  Date.parse(specs['発売日：'].text),
-            sample_images: html.css('#detail_photo > ul > li > a').map { |a| URI.join(page_uri, a['href']).to_s },
+            sample_images: html.css('#detail_photo > ul > li > a').map { |a| a['href'] },
             title:         html.css('#detail_main > h2').text,
           }
         end
