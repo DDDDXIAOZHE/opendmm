@@ -27,9 +27,9 @@ module OpenDMM
             cover_image:   html.css("div.ttl-pac a.ttl-package").first["href"],
             description:   html.css("div.ttl-comment div.comment").text,
             maker:         "胸キュン喫茶",
-            movie_length:  ChronicDuration.parse(specs["収録時間"].text.remove("：")),
+            movie_length:  specs["収録時間"].text.remove("："),
             page:          page_uri.to_s,
-            release_date:  Date.parse(specs["発売日"].text.remove("：")),
+            release_date:  specs["発売日"].text.remove("："),
             sample_images: html.css("div.ttl-sample img").map { |img| img["src"] },
             title:         html.css("div.capt01").text,
             # TODO: parse series, label, genres from pics

@@ -27,7 +27,7 @@ module OpenDMM
             description:   html.css("div.detail_description").first.inner_text,
             directors:     specs["監督"].split,
             maker:         "Apache",
-            movie_length:  ChronicDuration.parse(specs["収録時間"]),
+            movie_length:  specs["収録時間"],
             page:          page_uri.to_s,
             sample_images: html.css("ul.detail-main-thum li a").map { |a| a["href"] },
             title:         html.css("div.detail_title_1").text,

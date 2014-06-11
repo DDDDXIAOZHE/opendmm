@@ -29,7 +29,7 @@ module OpenDMM
             description:   html.css("div#caption").text,
             maker:         specs["メーカー"],
             page:          page_uri.to_s,
-            release_date:  Date.parse(specs["配信日"]),
+            release_date:  specs["配信日"],
             sample_images: html.css("ul.sampleimg li a").map { |a| a["href"] },
             title:         html.css("div.maintitle").text,
           }

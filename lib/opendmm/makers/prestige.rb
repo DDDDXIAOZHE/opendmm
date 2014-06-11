@@ -32,9 +32,9 @@ module OpenDMM
             #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
             label:         specs["レーベル："].text,
             maker:         specs["メーカー名："].text,
-            movie_length:  ChronicDuration.parse(specs["収録時間："].text),
+            movie_length:  specs["収録時間："].text,
             page:          page_uri.to_s,
-            release_date:  Date.parse(specs["発売日："].text),
+            release_date:  specs["発売日："].text,
             sample_images: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
             series:        specs["シリーズ："].text,
             title:         html.css("div.product_title_layout_01").text,

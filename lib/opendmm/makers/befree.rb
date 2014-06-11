@@ -28,9 +28,9 @@ module OpenDMM
             description:   html.css('#content > div.main > section > p.comment').text,
             directors:     specs['監督：'].text.split,
             genres:        specs['ジャンル：'].css('a').map(&:text),
-            movie_length:  ChronicDuration.parse(specs['収録時間']),
+            movie_length:  specs['収録時間'],
             page:          page_uri.to_s,
-            release_date:  Date.parse(specs['発売日：'].text),
+            release_date:  specs['発売日：'].text,
             sample_images: html.css('#content > div.main > section > ul > li > a').map { |a| a['href'] },
             title:         html.xpath('//*[@id="content"]/div[2]/section/h2[1]').text,
           }

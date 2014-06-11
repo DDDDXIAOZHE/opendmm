@@ -1,5 +1,4 @@
 require "active_support/core_ext/string/filters"
-require "chronic_duration"
 require "httparty"
 require "nokogiri"
 require "opendmm/utils"

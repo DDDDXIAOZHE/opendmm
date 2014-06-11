@@ -31,7 +31,7 @@ module OpenDMM
             genres:        specs["ジャンル"].split,
             label:         specs["レーベル"],
             maker:         "Aroma",
-            movie_length:  ChronicDuration.parse(specs["時間"]),
+            movie_length:  specs["時間"],
             page:          page_uri.to_s,
             sample_images: parse_sample_images(html, page_uri),
             title:         html.xpath("/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[1]/td").text,
