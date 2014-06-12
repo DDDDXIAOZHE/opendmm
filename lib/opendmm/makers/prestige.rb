@@ -10,7 +10,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(ABP|ABS|ABY|BRA|CHN|CHS|DOM|EDD|ESK|EZD|HAZ|HON|INU|JOB|LLR|MAS|MBD|MDC|MEK|MMY|NDR|NOF|OSR|PPB|PPT|RAW|SAD|SGA|SPC|SRS|TAP|TDT|TRD|WAT|WPC|XND|YRH|YRZ)-?(\d{3})/i
+          when /(ABP|ABS|ABY|BRA|CHN|CHS|DOM|EDD|ESK|EZD|HAZ|HON|INU|JBS|JOB|LLR|MAS|MBD|MDC|MEK|MMY|NDR|NOF|OSR|PPB|PPT|RAW|SAD|SGA|SPC|SRS|TAP|TDT|TRD|WAT|WPC|XND|YRH|YRZ)-?(\d{3})/i
             get("/item/prestige/#{$1.upcase}-#{$2}")
           end
         end
