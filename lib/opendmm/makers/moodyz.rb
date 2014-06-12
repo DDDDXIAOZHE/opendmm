@@ -24,7 +24,7 @@ module OpenDMM
           specs = Utils.hash_by_split(html.xpath('//*[@id="nabi_information"]/ul/li[1]/dl/dd').map(&:text)).merge(
                   Utils.hash_by_split(html.xpath('//*[@id="nabi_information"]/ul/li').map(&:text)[1..-1]))
           return {
-            actresses:     html.xpath('//*[@id="works"]/dl/dt').text.split,
+            actresses:     html.xpath('//*[@id="works"]/dl/dt').map(&:text),
             code:          specs['品番'],
             cover_image:   html.xpath('//*[@id="works"]/span/a/p/img').first['src'].gsub(/pm.jpg$/, 'pl.jpg'),
             description:   html.xpath('//*[@id="works"]/dl/dd').text,
