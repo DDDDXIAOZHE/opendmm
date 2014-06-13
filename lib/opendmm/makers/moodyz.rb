@@ -11,7 +11,13 @@ module OpenDMM
           case name
           when /(MIAD|MIDE|MIMK|MINT|MIQD|MIXS)-?(\d{3})/i
             get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
-          when /(MIDD|MIGD|MIRD)-?(\d{3})/i
+          when /(MIDD)-?(\d{3})/i
+            if $2.to_i <= 643
+              get("/shop/-/detail/=/cid=#{$1.downcase.remove(/d$/)}#{$2}")
+            else
+              get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
+            end
+          when /(MIGD|MIRD)-?(\d{3})/i
             get("/shop/-/detail/=/cid=#{$1.downcase.remove(/d$/)}#{$2}")
           end
         end
