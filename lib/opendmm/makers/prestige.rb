@@ -5,7 +5,7 @@ module OpenDMM
 
       module Site
         include HTTParty
-        base_uri "www.prestige-av.com"
+        base_uri 'www.prestige-av.com'
         cookies(adc: 1)
 
         def self.item(name)
@@ -20,41 +20,42 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = Utils.hash_from_dl(html.css("div.product_detail_layout_01 dl.spec_layout"))
+          specs = Utils.hash_from_dl(html.css('div.product_detail_layout_01 dl.spec_layout'))
           descriptions = parse_descriptions(html)
           return {
-            actresses:     parse_actresses(specs["出演："]),
-            code:          specs["品番："].text,
-            cover_image:   html.css("div.product_detail_layout_01 p.package_layout a.sample_image").first["href"],
-            description:   [ descriptions["作品情報"].text, descriptions["レビュー"].text ].join,
-            genres:        specs["ジャンル："].css("a").map(&:text),
+            actresses:       parse_actresses(specs['出演：']),
+            code:            specs['品番：'].text,
+            cover_image:     html.css('div.product_detail_layout_01 p.package_layout a.sample_image').first['href'],
+            description:     [ descriptions['作品情報'].text, descriptions['レビュー'].text ].join,
+            genres:          specs['ジャンル：'].css('a').map(&:text),
             # TODO: Parse complete label, for example
-            #       "ABSOLUTELY P…" should be "ABSOLUTELY PERFECT"
-            label:         specs["レーベル："].text,
-            maker:         specs["メーカー名："].text,
-            movie_length:  specs["収録時間："].text,
-            page:          page_uri.to_s,
-            release_date:  specs["発売日："].text,
-            sample_images: descriptions["サンプル画像"].css("a.sample_image").map { |a| a["href"] },
-            series:        specs["シリーズ："].text,
-            title:         html.css("div.product_title_layout_01").text,
+            #       'ABSOLUTELY P…' should be 'ABSOLUTELY PERFECT'
+            label:           specs['レーベル：'].text,
+            maker:           specs['メーカー名：'].text,
+            movie_length:    specs['収録時間：'].text,
+            page:            page_uri.to_s,
+            release_date:    specs['発売日：'].text,
+            sample_images:   descriptions['サンプル画像'].css('a.sample_image').map { |a| a['href'] },
+            series:          specs['シリーズ：'].text,
+            thumbnail_image: html.css('#Wrapper > div.main_layout_01 > div.box_705 > div.section.product_layout_01 > div.product_detail_layout_01 > p > a > img').first['src'],
+            title:           html.css('div.product_title_layout_01').text,
           }
         end
 
         private
 
         def self.parse_descriptions(html)
-          layouts = html.css("div.product_layout_01 div.product_description_layout_01")
-          titles = layouts.css("h2.title").map(&:text)
-          contents = layouts.css(".contents")
+          layouts = html.css('div.product_layout_01 div.product_description_layout_01')
+          titles = layouts.css('h2.title').map(&:text)
+          contents = layouts.css('.contents')
           Hash[titles.zip(contents)]
         end
 
         def self.parse_actresses(node)
           if node.nil?
             nil
-          elsif !node.css("a").empty?
-            node.css("a").map(&:text)
+          elsif !node.css('a').empty?
+            node.css('a').map(&:text)
           else
             [ node.text ]
           end

@@ -20,26 +20,27 @@ module OpenDMM
   	# Known fields:
   	#
   	# {
-  	#   actresses:     Array
-  	#   actress_types: Array
-  	#   brand:         String
-  	#   code:          String
-  	#   cover_image:   String
-  	#   description:   String
-  	#   directors:     Array
-  	#   genres:        Array
-  	#   label:         String
-  	#   maker:         String
-  	#   movie_length:  String
-  	#   page:          String
-  	#   release_date:  String
-  	#   sample_images: Array
-  	#   scenes:        Array
-  	#   series:        String
-    #   subtitle:      String
-    #   theme:         String
-  	#   title:         String
-    #   __extra:       Hash
+  	#   actresses:       Array
+  	#   actress_types:   Array
+  	#   brand:           String
+  	#   code:            String
+  	#   cover_image:     String
+  	#   description:     String
+  	#   directors:       Array
+  	#   genres:          Array
+  	#   label:           String
+  	#   maker:           String
+  	#   movie_length:    String
+  	#   page:            String
+  	#   release_date:    String
+  	#   sample_images:   Array
+  	#   scenes:          Array
+  	#   series:          String
+    #   subtitle:        String
+    #   theme:           String
+    #   thumbnail_image: String
+  	#   title:           String
+    #   __extra:         Hash
   	# }
 
   	def self.search(name)

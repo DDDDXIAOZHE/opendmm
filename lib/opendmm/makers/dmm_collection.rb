@@ -5,7 +5,7 @@ module OpenDMM
 
       module Site
         include HTTParty
-        base_uri "dmm-collection.com"
+        base_uri 'dmm-collection.com'
 
         def self.item(name)
           case name

@@ -5,7 +5,7 @@ module OpenDMM
 
       module Site
         include HTTParty
-        base_uri "anna-and-hanako.jp"
+        base_uri 'anna-and-hanako.jp'
 
         def self.item(name)
           case name
@@ -21,16 +21,17 @@ module OpenDMM
           html = Nokogiri::HTML(Utils.force_utf8(content))
           specs = Utils.hash_by_split(html.xpath('//*[@id="pake-bottom-box_r"]/dl/p').map(&:text))
           return {
-            actresses:     specs["出演者"].split("/"),
-            code:          specs["品番"],
-            cover_image:   html.xpath('//*[@id="pake-bottom-box"]/dl/a').first["href"],
-            description:   html.xpath('//*[@id="txt-bottom-box"]').text,
-            directors:     specs["監督"].split("/"),
-            movie_length:  specs["収録時間"],
-            page:          page_uri.to_s,
-            release_date:  specs["発売日"],
-            sample_images: html.xpath('//*[@id="mein-sanpuru-sam"]/a').map { |a| a["href"] },
-            title:         html.xpath('//*[@id="mein-left-new-release-box"]/div/div/h5').text,
+            actresses:       specs['出演者'].split('/'),
+            code:            specs['品番'],
+            cover_image:     html.xpath('//*[@id="pake-bottom-box"]/dl/a').first['href'],
+            description:     html.xpath('//*[@id="txt-bottom-box"]').text,
+            directors:       specs['監督'].split('/'),
+            movie_length:    specs['収録時間'],
+            page:            page_uri.to_s,
+            release_date:    specs['発売日'],
+            sample_images:   html.xpath('//*[@id="mein-sanpuru-sam"]/a').map { |a| a['href'] },
+            thumbnail_image: html.xpath('//*[@id="pake-bottom-box"]/dl/a/img').first['src'],
+            title:           html.xpath('//*[@id="mein-left-new-release-box"]/div/div/h5').text,
           }
         end
       end

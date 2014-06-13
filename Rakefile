@@ -1,26 +1,26 @@
-require "bundler/gem_tasks"
-require "rake/testtask"
-require "json"
-require "opendmm"
+require 'bundler/gem_tasks'
+require 'rake/testtask'
+require 'json'
+require 'opendmm'
 
 Rake::TestTask.new do |t|
-  t.pattern = "test/**/*_test.rb"
+  t.pattern = 'test/**/*_test.rb'
 end
 
 namespace :fixture do
-  desc "Generate a fixture"
+  desc 'Generate a fixture'
   task :generate, [:id] => :install do |t, args|
-    File.open(File.join(File.dirname(__FILE__) + "/test/fixtures/#{args[:id]}.json"), "w") do |file|
+    File.open(File.join(File.dirname(__FILE__) + "/test/fixtures/#{args[:id]}.json"), 'w') do |file|
       puts "Generating #{args[:id]}.json"
       file.puts JSON.pretty_generate(OpenDMM.search(args[:id]))
     end
   end
 
-  desc "Regenerate all fixtures"
+  desc 'Regenerate all fixtures'
   task :regenerate => :install do
     Dir[File.dirname(__FILE__) + '/test/fixtures/*.json'].each do |path|
-      File.open(path, "w") do |file|
-        id = File.basename(path, ".json")
+      File.open(path, 'w') do |file|
+        id = File.basename(path, '.json')
         puts "Generating #{id}.json"
         file.puts JSON.pretty_generate(OpenDMM.search(id))
       end
@@ -31,7 +31,7 @@ end
 namespace :maker do
   desc "Generate a maker"
   task :generate, [:name] do |t, args|
-    File.open(File.join(File.dirname(__FILE__) + "/lib/opendmm/makers/#{args[:name].underscore}.rb"), "w") do |file|
+    File.open(File.join(File.dirname(__FILE__) + "/lib/opendmm/makers/#{args[:name].underscore}.rb"), 'w') do |file|
       puts "Generating #{args[:name].underscore}.rb"
       file.puts <<-CODE
 module OpenDMM
@@ -41,7 +41,7 @@ module OpenDMM
 
       module Site
         include HTTParty
-        base_uri "example.com"
+        base_uri 'example.com'
 
         def self.item(name)
           case name

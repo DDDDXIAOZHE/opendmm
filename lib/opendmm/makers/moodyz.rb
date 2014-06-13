@@ -5,7 +5,7 @@ module OpenDMM
 
       module Site
         include HTTParty
-        base_uri "moodyz.com"
+        base_uri 'moodyz.com'
 
         def self.item(name)
           case name
@@ -24,19 +24,20 @@ module OpenDMM
           specs = Utils.hash_by_split(html.xpath('//*[@id="nabi_information"]/ul/li[1]/dl/dd').map(&:text)).merge(
                   Utils.hash_by_split(html.xpath('//*[@id="nabi_information"]/ul/li').map(&:text)[1..-1]))
           return {
-            actresses:     html.xpath('//*[@id="works"]/dl/dt').map(&:text),
-            code:          specs['品番'],
-            cover_image:   html.xpath('//*[@id="works"]/span/a/p/img').first['src'].gsub(/pm.jpg$/, 'pl.jpg'),
-            description:   html.xpath('//*[@id="works"]/dl/dd').text,
-            directors:     specs['▪監督'].split,
-            genres:        specs['▪ジャンル'].split('/'),
-            label:         specs['▪レーベル'],
-            movie_length:  specs['収録時間'],
-            page:          page_uri.to_s,
-            release_date:  specs['発売日'],
-            sample_images: html.xpath('//*[@id="sample-pic"]/li/a/img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg$)/, "jp") },
-            series:        specs['▪シリーズ'],
-            title:         html.xpath('//*[@id="main"]/ul[2]/h3/dl/dd/h2').text,
+            actresses:       html.xpath('//*[@id="works"]/dl/dt').map(&:text),
+            code:            specs['品番'],
+            cover_image:     html.xpath('//*[@id="works"]/span/a/p/img').first['src'].gsub(/pm.jpg$/, 'pl.jpg'),
+            description:     html.xpath('//*[@id="works"]/dl/dd').text,
+            directors:       specs['▪監督'].split,
+            genres:          specs['▪ジャンル'].split('/'),
+            label:           specs['▪レーベル'],
+            movie_length:    specs['収録時間'],
+            page:            page_uri.to_s,
+            release_date:    specs['発売日'],
+            sample_images:   html.xpath('//*[@id="sample-pic"]/li/a/img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg$)/, 'jp') },
+            series:          specs['▪シリーズ'],
+            thumbnail_image: html.xpath('//*[@id="works"]/span/a/p/img').first['src'],
+            title:           html.xpath('//*[@id="main"]/ul[2]/h3/dl/dd/h2').text,
           }
         end
       end

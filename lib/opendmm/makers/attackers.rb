@@ -5,7 +5,7 @@ module OpenDMM
 
       module Site
         include HTTParty
-        base_uri "attackers.net"
+        base_uri 'attackers.net'
 
         def self.item(name)
           case name
@@ -19,22 +19,23 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = Utils.hash_by_split(html.css("div#works-content ul li").map(&:text))
+          specs = Utils.hash_by_split(html.css('div#works-content ul li').map(&:text))
           return {
-            actresses:     specs["出演女優"].split,
-            code:          parse_code(specs["品番"]),
-            cover_image:   html.css("div#works_pake_box a#pake").first["href"],
-            directors:     specs["監督"].split,
-            description:   html.css("p.works_txt").text,
-            genres:        specs["ジャンル"].split,
-            label:         specs["レーベル"],
-            maker:         "Attackers",
-            movie_length:  specs["収録時間"],
-            page:          page_uri.to_s,
-            release_date:  specs["発売日"],
-            sample_images: html.css("ul#sample_photo li a").map { |a| a["href"] },
-            series:        specs["シリーズ"],
-            title:         html.css("div.hl_box_btm").text,
+            actresses:       specs['出演女優'].split,
+            code:            parse_code(specs['品番']),
+            cover_image:     html.css('div#works_pake_box a#pake').first['href'],
+            directors:       specs['監督'].split,
+            description:     html.css('p.works_txt').text,
+            genres:          specs['ジャンル'].split,
+            label:           specs['レーベル'],
+            maker:           'Attackers',
+            movie_length:    specs['収録時間'],
+            page:            page_uri.to_s,
+            release_date:    specs['発売日'],
+            sample_images:   html.css('ul#sample_photo li a').map { |a| a['href'] },
+            series:          specs['シリーズ'],
+            thumbnail_image: html.css('#pake > img').first['src'],
+            title:           html.css('div.hl_box_btm').text,
           }
         end
 

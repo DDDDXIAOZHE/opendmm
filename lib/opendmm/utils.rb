@@ -73,6 +73,9 @@ module OpenDMM
             uri.start_with?("http") ? uri : URI.join(details[:page], uri).to_s
           end
         end
+        if details[:thumbnail_image] && !details[:thumbnail_image].start_with?("http")
+          details[:thumbnail_image] = URI.join(details[:page], details[:thumbnail_image]).to_s
+        end
       end
       if details[:release_date].instance_of? String
         details[:release_date] = Date.parse(details[:release_date])
