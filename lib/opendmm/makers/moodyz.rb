@@ -9,26 +9,12 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(MIAD|MIDE|MIMK|MINT|MIQD|MIXS)-?(\d{3})/i
-            get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
-          when /(MIDD)-?(\d{3})/i
-            if $2.to_i <= 643
-              get("/shop/-/detail/=/cid=#{$1.downcase.remove(/d$/)}#{$2}")
-            else
-              get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
-            end
-          when /(MIGD)-?(\d{3})/i
-            if $2.to_i <= 336
-              get("/shop/-/detail/=/cid=#{$1.downcase.remove(/d$/)}#{$2}")
-            else
-              get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
-            end
-          when /(MIRD)-?(\d{3})/i
-            if $2.to_i <= 072
-              get("/shop/-/detail/=/cid=#{$1.downcase.remove(/d$/)}#{$2}")
-            else
-              get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
-            end
+          when /(MIAD|MIDD|MIDE|MIGD|MIMK|MINT|MIQD|MIRD|MIXS)-?(\d{3})/i
+            $alpha = $1.downcase
+            $alpha.remove!(/d$/) if ( ($alpha == 'midd' && $2.to_i <= 643) ||
+                                      ($alpha == 'migd' && $2.to_i <= 336) ||
+                                      ($alpha == 'mird' && $2.to_i <= 72) )
+            get("/shop/-/detail/=/cid=#{$alpha}#{$2}")
           end
         end
       end
