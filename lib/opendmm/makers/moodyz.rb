@@ -24,7 +24,11 @@ module OpenDMM
               get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
             end
           when /(MIRD)-?(\d{3})/i
-            get("/shop/-/detail/=/cid=#{$1.downcase.remove(/d$/)}#{$2}")
+            if $2.to_i <= 072
+              get("/shop/-/detail/=/cid=#{$1.downcase.remove(/d$/)}#{$2}")
+            else
+              get("/shop/-/detail/=/cid=#{$1.downcase}#{$2}")
+            end
           end
         end
       end
