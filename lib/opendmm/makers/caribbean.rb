@@ -23,6 +23,7 @@ module OpenDMM
           return {
             actresses:       specs['出演'].split,
             categories:      specs['カテゴリー'].split,
+            code:            "Carib " + page_uri.to_s.match(/\d{6}-\d{3}/)[0],
             cover_image:     "./images/l_l.jpg",
             description:     html.css('#main-content > div.main-content-movieinfo > div.movie-comment').text,
             movie_length:    specs['再生時間'],
