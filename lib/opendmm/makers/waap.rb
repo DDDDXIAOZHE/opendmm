@@ -27,7 +27,7 @@ module OpenDMM
             code:            specs['品番'],
             cover_image:     html.css('ul#title_img_all li.title_img a').first['href'],
             description:     html.css('div#title_cmt_all').text,
-            directors:       specs['監督'],
+            directors:       specs['監督'].split,
             genres:          specs['ジャンル'].split,
             label:           specs['レーベル'],
             maker:           specs['メーカー'],
