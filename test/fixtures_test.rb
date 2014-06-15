@@ -22,7 +22,7 @@ Dir[File.dirname(__FILE__) + '/fixtures/*.json'].each do |path|
   eval <<-TESTCASE
 
 class FixtureTest
-  def test_#{name.underscore}
+  def test_#{name.parameterize.underscore}
     expected = load_product("#{path}")
     actual = OpenDMM.search("#{name}")
     assert_equal expected, actual, HashDiff.diff(expected, actual)

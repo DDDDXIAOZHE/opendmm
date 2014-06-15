@@ -1,8 +1,9 @@
-require "active_support/core_ext/array/access"
-require "active_support/core_ext/module/aliasing"
-require "active_support/core_ext/numeric/time"
-require "active_support/core_ext/string/starts_ends_with"
-require "chronic_duration"
+require 'active_support/core_ext/array/access'
+require 'active_support/core_ext/array/grouping'
+require 'active_support/core_ext/module/aliasing'
+require 'active_support/core_ext/numeric/time'
+require 'active_support/core_ext/string/starts_ends_with'
+require 'chronic_duration'
 
 class << Date
   def parse_with_chinese_support(str)
@@ -30,7 +31,7 @@ end
 
 class NilClass
   def text
-    ""
+    ''
   end
 end
 
