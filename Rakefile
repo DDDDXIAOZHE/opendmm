@@ -41,7 +41,7 @@ namespace :maker do
       file.puts <<-CODE
 module OpenDMM
   module Maker
-    module #{args[:name].camelize}
+    module #{args[:name].underscore.classify}
       include Maker
 
       module Site
