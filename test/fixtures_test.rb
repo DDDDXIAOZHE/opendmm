@@ -15,6 +15,42 @@ class FixtureTest < Minitest::Test
     product[:__extra].try(:symbolize_keys!)
     product
   end
+
+  def assert_has_basic_keys(product)
+    %i(code title thumbnail_image cover_image).each do |key|
+      assert product[key], "Key #{key} should not be absent"
+    end
+  end
+
+  def assert_is_well_typed(product)
+    {
+      actresses:       Array,
+      actress_types:   Array,
+      boobs:           String,
+      brand:           String,
+      categories:      Array,
+      code:            String,
+      cover_image:     String,
+      description:     String,
+      directors:       Array,
+      genres:          Array,
+      label:           String,
+      maker:           String,
+      movie_length:    Fixnum,
+      page:            String,
+      release_date:    Date,
+      sample_images:   Array,
+      scenes:          Array,
+      series:          String,
+      subtitle:        String,
+      theme:           String,
+      thumbnail_image: String,
+      title:           String,
+      __extra:         Hash,
+    }.each do |key, klass|
+      assert_equal klass, product[key].class, "Value #{key} should be a #{klass}, while #{product[key]} provided" if product[key]
+    end
+  end
 end
 
 Dir[File.dirname(__FILE__) + '/fixtures/*.json'].each do |path|
@@ -25,6 +61,8 @@ class FixtureTest
   def test_#{name.parameterize.underscore}
     expected = load_product("#{path}")
     actual = OpenDMM.search("#{name}")
+    assert_has_basic_keys(actual)
+    assert_is_well_typed(actual)
     assert_equal expected, actual, HashDiff.diff(expected, actual)
   end
 end
