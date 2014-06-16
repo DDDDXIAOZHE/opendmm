@@ -74,3 +74,4 @@ CODE
 end
 
 task :test => :install
+task :default => :test
