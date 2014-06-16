@@ -22,6 +22,7 @@ module OpenDMM
     # {
     #   actresses:       Array
     #   actress_types:   Array
+    #   boobs:           String
     #   brand:           String
     #   categories:      Array
     #   code:            String
