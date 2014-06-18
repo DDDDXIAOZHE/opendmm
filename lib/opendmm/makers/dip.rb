@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(NPS|PTS|ZEX)-?(\d{3})/i
+          when /(NPS|PTS|WA|ZEX)-?(\d{3})/i
             get("/detail.php?hinban=#{$1.upcase}-#{$2}")
           end
         end
