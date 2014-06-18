@@ -22,8 +22,8 @@ class FixtureTest < Minitest::Test
     end
   end
 
-  def assert_is_well_typed(product)
-    {
+  def assert_no_unknown_keys(product)
+    known_keys = {
       actresses:       Array,
       actress_types:   Array,
       boobs:           String,
@@ -47,8 +47,10 @@ class FixtureTest < Minitest::Test
       thumbnail_image: String,
       title:           String,
       __extra:         Hash,
-    }.each do |key, klass|
-      assert_equal klass, product[key].class, "Value #{key} should be a #{klass}, while #{product[key]} provided" if product[key]
+    }
+    product.each do |key, value|
+      assert known_keys[key], "Unknown key: #{key}"
+      assert_equal known_keys[key], value.class, "Value #{key} should be a #{known_keys[key]}, while #{value} provided" if product[key]
     end
   end
 end
@@ -62,7 +64,7 @@ class FixtureTest
     expected = load_product("#{path}")
     actual = OpenDMM.search("#{name}")
     assert_has_basic_keys(actual)
-    assert_is_well_typed(actual)
+    assert_no_unknown_keys(actual)
     assert_equal expected, actual, HashDiff.diff(expected, actual)
   end
 end
