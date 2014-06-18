@@ -39,7 +39,9 @@ module OpenDMM
   module Utils
     def self.hash_from_dl(dl)
       dts = dl.css('dt').map(&:text).map(&:squish)
-      dds = dl.css('dt, dd').to_a.split do |node|
+      dds = dl.children.select do |node|
+        node.name == 'dt' || node.name == 'dd'
+      end.split do |node|
         node.name == 'dt'
       end[1..-1].map do |nodes|
         node_set = Nokogiri::XML::NodeSet.new(dl.document)
