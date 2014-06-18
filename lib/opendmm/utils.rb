@@ -38,8 +38,16 @@ end
 module OpenDMM
   module Utils
     def self.hash_from_dl(dl)
-      dts = dl.css("dt").map(&:text).map(&:squish)
-      dds = dl.css("dd")
+      dts = dl.css('dt').map(&:text).map(&:squish)
+      dds = dl.css('dt, dd').to_a.split do |node|
+        node.name == 'dt'
+      end[1..-1].map do |nodes|
+        node_set = Nokogiri::XML::NodeSet.new(dl.document)
+        nodes.each do |node|
+          node_set << node
+        end
+        node_set
+      end
       Hash[dts.zip(dds)]
     end
 
@@ -53,11 +61,11 @@ module OpenDMM
 
     def self.force_utf8(content)
       # This is to get rid of the annoying error message:
-      #   "encoding error : input conversion failed due to input error"
-      $stderr.reopen("/dev/null", "w")
+      #   'encoding error : input conversion failed due to input error'
+      $stderr.reopen('/dev/null', 'w')
       encoding = Nokogiri::HTML(content).encoding
       $stderr = STDERR
-      content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: "")
+      content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: '')
     end
 
     def self.cleanup(details)
@@ -66,15 +74,15 @@ module OpenDMM
         details[:movie_length] = ChronicDuration.parse(details[:movie_length])
       end
       if details[:page]
-        if details[:cover_image] && !details[:cover_image].start_with?("http")
+        if details[:cover_image] && !details[:cover_image].start_with?('http')
           details[:cover_image] = URI.join(details[:page], details[:cover_image]).to_s
         end
         if details[:sample_images]
           details[:sample_images] = details[:sample_images].map do |uri|
-            uri.start_with?("http") ? uri : URI.join(details[:page], uri).to_s
+            uri.start_with?('http') ? uri : URI.join(details[:page], uri).to_s
           end
         end
-        if details[:thumbnail_image] && !details[:thumbnail_image].start_with?("http")
+        if details[:thumbnail_image] && !details[:thumbnail_image].start_with?('http')
           details[:thumbnail_image] = URI.join(details[:page], details[:thumbnail_image]).to_s
         end
       end
