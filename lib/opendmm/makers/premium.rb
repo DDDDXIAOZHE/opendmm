@@ -23,7 +23,7 @@ module OpenDMM
           return {
             actresses:       html.css('#content > div > div > div.actress-list > dl > dd > a').map(&:text),
             code:            specs['DVD品番'] || specs['Blu-ray品番'],
-            cover_image:     html.css('#pake').first['href'],
+            cover_image:     html.at_css('#pake')['href'],
             description:     html.css('#content > div > div > div.detail_text').text,
             directors:       specs['監督'].split,
             genres:          specs['ジャンル'].split('/'),
@@ -33,7 +33,7 @@ module OpenDMM
             release_date:    specs['発売日'],
             sample_images:   html.css('#sample_photo > li > a').map { |a| a['href'] },
             series:          specs['シリーズ'],
-            thumbnail_image: html.css('#pake > img').first['src'],
+            thumbnail_image: html.at_css('#pake > img')['src'],
             title:           html.css('#content > div > h2').text,
           }
         end

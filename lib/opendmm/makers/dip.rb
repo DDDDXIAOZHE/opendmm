@@ -24,7 +24,7 @@ module OpenDMM
           return {
             actresses:       specs['出演者'].try(:split),
             code:            specs['品番'],
-            cover_image:     html.css('#main > div.detail > a').first['href'],
+            cover_image:     html.at_css('#main > div.detail > a')['href'],
             description:     html.css('#main > div.detail > div.comment').text,
             genres:          specs['ジャンル'].try(:split),
             label:           specs['レーベル'],
@@ -33,7 +33,7 @@ module OpenDMM
             page:            page_uri.to_s,
             release_date:    specs['品番'],
             series:          specs['シリーズ'],
-            thumbnail_image: html.css('#main > div.detail > a > img').first['src'],
+            thumbnail_image: html.at_css('#main > div.detail > a > img')['src'],
             title:           html.css('#main > h1').text,
           }
         end

@@ -24,7 +24,7 @@ module OpenDMM
             actresses:       html.css('#content_main_detail > div > div.works_left > p.detail-actress > a').map(&:text),
             boobs:           specs['おっぱい'].text,
             code:            dvd(specs['品番'].text),
-            cover_image:     html.css('#pake > dt > a').first['href'],
+            cover_image:     html.at_css('#pake > dt > a')['href'],
             description:     html.css('#content_main_detail > div > div.works_left > p.detail_txt').text,
             genres:          specs['ジャンル'].css('a').map(&:text),
             label:           specs['レーベル'].text,
@@ -33,7 +33,7 @@ module OpenDMM
             release_date:    dvd(specs['発売日'].text),
             sample_images:   html.css('#sample-pic > div > a').map { |a| a['href'] },
             series:          specs['シリーズ'].text,
-            thumbnail_image: html.css('#pake > dt > a > img').first['src'],
+            thumbnail_image: html.at_css('#pake > dt > a > img')['src'],
             title:           html.css('#works-name').text,
           }
         end

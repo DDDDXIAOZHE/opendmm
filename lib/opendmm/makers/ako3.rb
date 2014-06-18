@@ -23,13 +23,13 @@ module OpenDMM
           return {
             actresses:       [ html.css('//*[@id="spec-area"]/div[2]').text ],
             code:            specs['商品番号'],
-            cover_image:     html.css('div.jacket a').first['href'],
+            cover_image:     html.at_css('div.jacket a')['href'],
             description:     html.css('div#caption').text,
             maker:           specs['メーカー'],
             page:            page_uri.to_s,
             release_date:    specs['配信日'],
             sample_images:   html.css('ul.sampleimg li a').map { |a| a['href'] },
-            thumbnail_image: html.css('#title-area > div > div.jacket > a > img').first['src'],
+            thumbnail_image: html.at_css('#title-area > div > div.jacket > a > img')['src'],
             title:           html.css('div.maintitle').text,
           }
         end

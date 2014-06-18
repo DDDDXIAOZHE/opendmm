@@ -25,7 +25,7 @@ module OpenDMM
             actresses:       specs['出演者'].split,
             brand:           specs['ブランド'],
             code:            specs['品番'],
-            cover_image:     html.css('ul#title_img_all li.title_img a').first['href'],
+            cover_image:     html.at_css('ul#title_img_all li.title_img a')['href'],
             description:     html.css('div#title_cmt_all').text,
             directors:       specs['監督'].split,
             genres:          specs['ジャンル'].split,
@@ -36,7 +36,7 @@ module OpenDMM
             release_date:    specs['発売日'],
             sample_images:   html.css('ul.samplepicture_list li a').map { |a| a['href'] },
             series:          specs['シリーズ'],
-            thumbnail_image: html.css('#title_img_all > li.title_img > a > img').first['src'],
+            thumbnail_image: html.at_css('#title_img_all > li.title_img > a > img')['src'],
             title:           html.css('ul#pan_list li').last.text,
           }
         end

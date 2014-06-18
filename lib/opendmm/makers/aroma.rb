@@ -36,7 +36,7 @@ module OpenDMM
             movie_length:    specs['時間'],
             page:            page_uri.to_s,
             sample_images:   parse_sample_images(html, page_uri),
-            thumbnail_image: html.xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[1]/a/img').first['src'],
+            thumbnail_image: html.at_xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[1]/a/img')['src'],
             title:           html.xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[1]/td').text,
           }
         end
@@ -44,7 +44,7 @@ module OpenDMM
         private
 
         def self.parse_cover_image(html, page_uri)
-          href = html.xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[1]/a').first['href']
+          href = html.at_xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[1]/a')['href']
           if href =~ /'(\/images\/.*)'/
             return $1
           end

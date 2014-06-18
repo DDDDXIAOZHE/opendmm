@@ -23,7 +23,7 @@ module OpenDMM
           return {
             actresses:       specs['出演女優'].text.split('/'),
             code:            specs['品番'].text,
-            cover_image:     html.css('#img_pm > img').first['src'].gsub(/pm\.jpg$/, 'pl.jpg'),
+            cover_image:     html.at_css('#img_pm > img')['src'].gsub(/pm\.jpg$/, 'pl.jpg'),
             description:     html.css('//*[@id="details_main"]/p[1]').text,
             genres:          specs['ジャンル'].text.split('/'),
             label:           specs['レーベル'].text,
@@ -32,7 +32,7 @@ module OpenDMM
             release_date:    specs['発売日'].text,
             sample_images:   html.css('#sample-pic > li > a > img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg)/, 'jp') },
             series:          specs['シリーズ'].text,
-            thumbnail_image: html.css('#img_pm > img').first['src'],
+            thumbnail_image: html.at_css('#img_pm > img')['src'],
             title:           html.css('#details_main > h2').text,
           }
         end

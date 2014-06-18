@@ -25,7 +25,7 @@ module OpenDMM
           return {
             actresses:       parse_actresses(specs['出演：']),
             code:            specs['品番：'].text,
-            cover_image:     html.css('div.product_detail_layout_01 p.package_layout a.sample_image').first['href'],
+            cover_image:     html.at_css('div.product_detail_layout_01 p.package_layout a.sample_image')['href'],
             description:     [ descriptions['作品情報'].text, descriptions['レビュー'].text ].join,
             genres:          specs['ジャンル：'].css('a').map(&:text),
             # TODO: Parse complete label, for example
@@ -37,7 +37,7 @@ module OpenDMM
             release_date:    specs['発売日：'].text,
             sample_images:   descriptions['サンプル画像'].css('a.sample_image').map { |a| a['href'] },
             series:          specs['シリーズ：'].text,
-            thumbnail_image: html.css('#Wrapper > div.main_layout_01 > div.box_705 > div.section.product_layout_01 > div.product_detail_layout_01 > p > a > img').first['src'],
+            thumbnail_image: html.at_css('#Wrapper > div.main_layout_01 > div.box_705 > div.section.product_layout_01 > div.product_detail_layout_01 > p > a > img')['src'],
             title:           html.css('div.product_title_layout_01').text,
           }
         end

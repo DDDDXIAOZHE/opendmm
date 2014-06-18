@@ -22,7 +22,7 @@ module OpenDMM
           return {
             actresses:       html.xpath('//*[@id="content1"]/section/div[2]/table/tr[7]/td/a').map(&:text),
             code:            html.xpath('//*[@id="content1"]/section/div[2]/table/tr[1]/td').text,
-            cover_image:     html.css('#content1 > section > div.img > img').first['src'],
+            cover_image:     html.at_css('#content1 > section > div.img > img')['src'],
             description:     html.css('#content1 > section > p').text,
             label:           html.xpath('//*[@id="content1"]/section/div[2]/table/tr[4]/td').text,
             movie_length:    html.xpath('//*[@id="content1"]/section/div[2]/table/tr[2]/td').text,
@@ -30,7 +30,7 @@ module OpenDMM
             release_date:    html.xpath('//*[@id="content1"]/section/div[2]/table/tr[3]/td').text,
             series:          html.xpath('//*[@id="content1"]/section/div[2]/table/tr[5]/td').text,
             theme:           html.xpath('//*[@id="content1"]/section/div[2]/table/tr[6]/td').text,
-            thumbnail_image: html.css('#content1 > section > div.img > img').first['src'],
+            thumbnail_image: html.at_css('#content1 > section > div.img > img')['src'],
             title:           html.css('#content1 > section > h2').text,
           }
         end

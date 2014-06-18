@@ -24,7 +24,7 @@ module OpenDMM
           return {
             actresses:       specs['出演女優'].css('a').map(&:text),
             code:            specs['DVD品番'].text,
-            cover_image:     html.css('div#container-detail > div.pkg-data > div.pkg > a > img').first['src'].gsub(/pm.jpg$/, 'pl.jpg'),
+            cover_image:     html.at_css('div#container-detail > div.pkg-data > div.pkg > a > img')['src'].gsub(/pm.jpg$/, 'pl.jpg'),
             description:     html.css('#container-detail > div.pkg-data > div.comment-data').text,
             directors:       specs['監督'].css('a').map(&:text),
             genres:          specs['ジャンル'].css('a').map(&:text),
@@ -33,7 +33,7 @@ module OpenDMM
             release_date:    specs['発売日'].text,
             sample_images:   html.css('#sample-pic > li > a > img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg$)/, "jl") },
             series:          specs['シリーズ'].text.remove('：'),
-            thumbnail_image: html.css('div#container-detail > div.pkg-data > div.pkg > a > img').first['src'],
+            thumbnail_image: html.at_css('div#container-detail > div.pkg-data > div.pkg > a > img')['src'],
             title:           html.xpath('//*[@id="container-detail"]/p[1]').text,
             __extra: {
               transsexual:   specs['ニューハーフ'].css('a').map(&:text),

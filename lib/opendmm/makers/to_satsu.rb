@@ -22,7 +22,7 @@ module OpenDMM
           specs = Utils.hash_from_dl(html.css('#main > div > div.main-detail > div.ttl-data > dl'))
           return {
             code:            specs['品番：'].text,
-            cover_image:     html.css('#main > div > div.main-detail > div.ttl-pac > a').first['href'],
+            cover_image:     html.at_css('#main > div > div.main-detail > div.ttl-pac > a')['href'],
             description:     html.xpath('//*[@id="main"]/div/div[@class="main-detail"]/div[@class="ttl-comment"]/div[not(@class)]').text,
             genres:          specs['ジャンル：'].text,
             movie_length:    specs['収録時間：'].text,
@@ -30,7 +30,7 @@ module OpenDMM
             release_date:    specs['発売日：'].text,
             sample_images:   html.css('#main > div > div.main-detail > div.ttl-sample > img').map { |img| img['src'] },
             series:          specs['シリーズ：'].text,
-            thumbnail_image: html.css('#main > div > div.main-detail > div.ttl-pac > a > img').first['src'],
+            thumbnail_image: html.at_css('#main > div > div.main-detail > div.ttl-pac > a > img')['src'],
             title:           html.css('#main > div > div.capt2').text,
           }
         end

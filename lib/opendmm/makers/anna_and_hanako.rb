@@ -23,14 +23,14 @@ module OpenDMM
           return {
             actresses:       specs['出演者'].split('/'),
             code:            specs['品番'],
-            cover_image:     html.xpath('//*[@id="pake-bottom-box"]/dl/a').first['href'],
+            cover_image:     html.at_xpath('//*[@id="pake-bottom-box"]/dl/a')['href'],
             description:     html.xpath('//*[@id="txt-bottom-box"]').text,
             directors:       specs['監督'].split('/'),
             movie_length:    specs['収録時間'],
             page:            page_uri.to_s,
             release_date:    specs['発売日'],
             sample_images:   html.xpath('//*[@id="mein-sanpuru-sam"]/a').map { |a| a['href'] },
-            thumbnail_image: html.xpath('//*[@id="pake-bottom-box"]/dl/a/img').first['src'],
+            thumbnail_image: html.at_xpath('//*[@id="pake-bottom-box"]/dl/a/img')['src'],
             title:           html.xpath('//*[@id="mein-left-new-release-box"]/div/div/h5').text,
           }
         end

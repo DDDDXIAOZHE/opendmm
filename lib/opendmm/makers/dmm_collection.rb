@@ -23,13 +23,13 @@ module OpenDMM
           return {
             actresses:       html.css('#information > dl.actress > dd > a').map(&:text),
             code:            specs['品番'].text,
-            cover_image:     html.xpath('//*[@id="package"]/h4/a').first['href'],
+            cover_image:     html.at_xpath('//*[@id="package"]/h4/a')['href'],
             description:     html.xpath('//*[@id="comment"]/h5').text,
             movie_length:    specs['収録時間'].text,
             page:            page_uri.to_s,
             release_date:    specs['DVD発売日'].text,
             sample_images:   html.xpath('//*[@id="photo"]/ul/li/a').map { |a| a['href'] },
-            thumbnail_image: html.xpath('//*[@id="package"]/h4/a/img').first['src'],
+            thumbnail_image: html.at_xpath('//*[@id="package"]/h4/a/img')['src'],
             title:           html.xpath('//*[@id="information"]/h3').text,
           }
         end

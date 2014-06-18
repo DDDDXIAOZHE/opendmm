@@ -23,7 +23,7 @@ module OpenDMM
           return {
             actresses:       specs['出演女優'].split('/'),
             code:            specs['品番'],
-            cover_image:     html.xpath('//*[@id="content-box"]/div[3]/div[1]/a').first['href'],
+            cover_image:     html.at_xpath('//*[@id="content-box"]/div[3]/div[1]/a')['href'],
             description:     html.xpath('//*[@id="content-box"]/div[3]/div[2]/p').text,
             directors:       specs['監督'].split,
             genres:          specs['ジャンル'].split('/'),
@@ -32,7 +32,7 @@ module OpenDMM
             page:            page_uri.to_s,
             release_date:    specs['発売日'],
             sample_images:   html.xpath('//*[@id="content-box"]/div[3]/div[7]/ul/li/a').map { |a| a['href'] },
-            thumbnail_image: html.xpath('//*[@id="content-box"]/div[3]/div[1]/a/img').first['src'],
+            thumbnail_image: html.at_xpath('//*[@id="content-box"]/div[3]/div[1]/a/img')['src'],
             series:          specs['シリーズ'],
             subtitle:        html.css('#content-box > p.works-subtl650').text,
             title:           html.xpath('//*[@id="content-box"]/h1').text,

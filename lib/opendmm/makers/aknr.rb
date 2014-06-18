@@ -22,13 +22,13 @@ module OpenDMM
           return {
             actresses:       html.xpath('//*[@id="data"]/div[2]/span').map(&:text),
             code:            html.xpath('//*[@id="info2"][2]/div[2]').text,
-            cover_image:     html.xpath('//*[@id="jktimg_l2"]/a').first['href'],
+            cover_image:     html.at_xpath('//*[@id="jktimg_l2"]/a')['href'],
             directors:       html.xpath('//*[@id="info2"][1]/div[2]').text.split,
             movie_length:    html.xpath('//*[@id="info2"][3]/div[2]').text,
             page:            page_uri.to_s,
             release_date:    html.xpath('//*[@id="data"]/div[2]').text,
             sample_images:   html.xpath('//*[@id="photo"]/p/a').map { |a| a['href'] },
-            thumbnail_image: html.xpath('//*[@id="jktimg_l2"]/a/img').first['src'],
+            thumbnail_image: html.at_xpath('//*[@id="jktimg_l2"]/a/img')['src'],
             title:           html.css('#mainContent2 > h1').text,
           }
         end

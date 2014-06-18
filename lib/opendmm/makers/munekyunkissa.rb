@@ -19,19 +19,19 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = Utils.hash_from_dl(html.css('dl.data-left').first).merge(
-                  Utils.hash_from_dl(html.css('dl.data-right').first))
+          specs = Utils.hash_from_dl(html.at_css('dl.data-left')).merge(
+                  Utils.hash_from_dl(html.at_css('dl.data-right')))
           return {
             actresses:       specs['出演者'].text.remove('：').split,
             code:            specs['品番'].text.remove('：'),
-            cover_image:     html.css('div.ttl-pac a.ttl-package').first['href'],
+            cover_image:     html.at_css('div.ttl-pac a.ttl-package')['href'],
             description:     html.css('div.ttl-comment div.comment').text,
             maker:           '胸キュン喫茶',
             movie_length:    specs['収録時間'].text.remove('：'),
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text.remove('：'),
             sample_images:   html.css('div.ttl-sample img').map { |img| img['src'] },
-            thumbnail_image: html.css('#main > div > div.main-detail > div.ttl-pac > a > img').first['src'],
+            thumbnail_image: html.at_css('#main > div > div.main-detail > div.ttl-pac > a > img')['src'],
             title:           html.css('div.capt01').text,
             # TODO: parse series, label, genres from pics
           }
