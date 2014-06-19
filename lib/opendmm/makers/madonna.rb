@@ -21,7 +21,7 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = Utils.hash_from_dl(html.css('#column_contents > div > div.right_contents > dl'))
           return {
-            actresses:       specs['出演女優'].text.split,
+            actresses:       specs['出演女優'].css('a').map(&:text),
             code:            specs['品番'].text.remove('DVD'),
             cover_image:     html.at_css('#column_contents > div > div.left_contents > div.pack > a')['href'],
             description:     html.css('#column_contents > div > div.left_contents > p').text,
