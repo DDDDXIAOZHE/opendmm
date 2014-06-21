@@ -52,6 +52,8 @@ module OpenDMM
           jav_id = Parser.parse_search_result(search_result)
         end
         Parser.parse_item(Site.item(jav_id)) if jav_id
+      rescue
+        nil
       end
     end
   end
