@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /^AP-?(\d{3})$/
+          when /^AP-?(\d{3})$/i
             get("/list_detail/detail_#{$1}.html")
           end
         end
