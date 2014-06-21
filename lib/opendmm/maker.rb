@@ -1,39 +1,48 @@
-require "active_support/core_ext/string/filters"
-require "chronic_duration"
-require "httparty"
-require "nokogiri"
-require "opendmm/utils"
+require 'active_support/core_ext/string/filters'
+require 'httparty'
+require 'nokogiri'
+require 'opendmm/utils'
 
 module OpenDMM
   module Maker
     @@makers = []
 
-    def self.included(mod)
-      @@makers << mod
+    def self.included(klass)
+      klass.module_eval <<-CODE
+        def self.search(name)
+          item = Site.item(name)
+          item ? Parser.parse(item) : nil
+        end
+      CODE
+      @@makers << klass
     end
 
     # Known fields:
     #
     # {
-    #   actresses:     Hash
-    #   actress_types: Array
-    #   brand:         String
-    #   code:          String
-    #   description:   String
-    #   directors:     Array
-    #   genres:        Array
-    #   images: {
-    #     cover:   String
-    #     samples: Array,
-    #   },
-    #   label:         String
-    #   maker:         String
-    #   movie_length:  String
-    #   page:          String
-    #   release_date:  String
-    #   scenes:        Array
-    #   series:        String
-    #   title:         String
+    #   actresses:       Array
+    #   actress_types:   Array
+    #   boobs:           String
+    #   brand:           String
+    #   categories:      Array
+    #   code:            String
+    #   cover_image:     String
+    #   description:     String
+    #   directors:       Array
+    #   genres:          Array
+    #   label:           String
+    #   maker:           String
+    #   movie_length:    String
+    #   page:            String
+    #   release_date:    String
+    #   sample_images:   Array
+    #   scenes:          Array
+    #   series:          String
+    #   subtitle:        String
+    #   theme:           String
+    #   thumbnail_image: String
+    #   title:           String
+    #   __extra:         Hash
     # }
 
     def self.search(name)

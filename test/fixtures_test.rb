@@ -1,36 +1,74 @@
-require "minitest/autorun"
-require "active_support/core_ext/numeric/time"
-require "opendmm"
+require 'minitest/autorun'
+require 'active_support/core_ext/hash/keys'
+require 'active_support/core_ext/string/inflections'
+require 'active_support/json'
+require 'hashdiff'
+require 'opendmm'
 
 I18n.enforce_available_locales = false
 
 class FixtureTest < Minitest::Test
-  def assert_equal(expected, actual)
-    case expected
-    when Hash
-      assert actual.instance_of?(Hash), "#{expected} expected but non-hash value #{actual} given"
-      expected.each do |k, v|
-        assert_equal v, actual[k]
-      end
-    when Array
-      assert actual.instance_of?(Array), "#{expected} expected but non-array value #{actual} given"
-      assert (expected - actual).empty?, "#{expected} not included in #{actual}"
-    else
-      super(expected, actual, "#{expected} expected while #{actual} given")
+  def load_product(path)
+    json = File.read(path)
+    product = ActiveSupport::JSON.decode(json).symbolize_keys
+    product[:release_date] = Date.parse(product[:release_date]) if product[:release_date]
+    product[:__extra].try(:symbolize_keys!)
+    product
+  end
+
+  def assert_has_basic_keys(product)
+    %i(code title thumbnail_image cover_image).each do |key|
+      assert product[key], "Key #{key} should not be absent"
+    end
+  end
+
+  def assert_no_unknown_keys(product)
+    known_keys = {
+      actresses:       Array,
+      actress_types:   Array,
+      boobs:           String,
+      brand:           String,
+      categories:      Array,
+      code:            String,
+      cover_image:     String,
+      description:     String,
+      directors:       Array,
+      genres:          Array,
+      label:           String,
+      maker:           String,
+      movie_length:    Fixnum,
+      page:            String,
+      release_date:    Date,
+      sample_images:   Array,
+      scenes:          Array,
+      series:          String,
+      subtitle:        String,
+      theme:           String,
+      thumbnail_image: String,
+      title:           String,
+      __extra:         Hash,
+    }
+    product.each do |key, value|
+      klass = known_keys[key]
+      assert klass, "Unknown key: #{key}"
+      assert_equal klass, value.class, "Value #{key} should be a #{known_keys[key]}, while #{value} provided" if value
     end
   end
 end
 
-Dir[File.dirname(__FILE__) + '/fixtures/*.rb'].each do |file|
-  name = File.basename(file, ".rb")
-  require_relative "fixtures/#{name}"
+Dir[File.dirname(__FILE__) + '/fixtures/*.json'].each do |path|
+  name = File.basename(path, '.json')
   eval <<-TESTCASE
 
 class FixtureTest
-  def test_#{name.downcase}
-    Fixture::#{name.upcase}.each do |name, details|
-      assert_equal details, OpenDMM.search(name)
-    end
+  def test_#{name.parameterize.underscore}
+    expected = load_product('#{path}')
+    actual = OpenDMM.search('#{name}')
+    assert_has_basic_keys(actual)
+    assert_no_unknown_keys(actual)
+    assert_equal expected, actual, HashDiff.diff(expected, actual)
+  rescue Errno::ETIMEDOUT => e
+    raise unless ENV['GFW_MODE']
   end
 end
 
