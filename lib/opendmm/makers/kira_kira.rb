@@ -19,21 +19,20 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = Utils.hash_from_dl(html.xpath('//*[@id="details_main"]/dl'))
+          specs = Utils.hash_from_dl(html.xpath('//*[@id="wrap-works"]/section/section[2]/dl'))
           return {
-            actresses:       specs['出演女優'].text.split('/'),
+            actresses:       specs['出演女優'].css('ul > li').map(&:text),
             code:            specs['品番'].text,
-            cover_image:     html.at_css('#img_pm > img')['src'].gsub(/pm\.jpg$/, 'pl.jpg'),
-            description:     html.css('//*[@id="details_main"]/p[1]').text,
-            genres:          specs['ジャンル'].text.split('/'),
+            cover_image:     html.at_css('#slider > ul.slides > li:nth-child(1) > img')['src'],
+            description:     html.xpath('//*[@id="wrap-works"]/section/section[1]/p').text,
+            genres:          specs['ジャンル'].css('ul > li').map(&:text),
             label:           specs['レーベル'].text,
-            movie_length:    specs['収録時間'].text.remove('DVD/'),
+            movie_length:    specs['収録時間'].text,
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text,
-            sample_images:   html.css('#sample-pic > li > a > img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg)/, 'jp') },
-            series:          specs['シリーズ'].text,
-            thumbnail_image: html.at_css('#img_pm > img')['src'],
-            title:           html.css('#details_main > h2').text,
+            sample_images:   html.css('#slider > ul.slides > li > img').map { |img| img['src'] }[1..-1],
+            thumbnail_image: html.at_css('#carousel > ul.slides > li:nth-child(1) > img')['src'],
+            title:           html.css('#wrap-works > section > h1').text,
           }
         end
       end

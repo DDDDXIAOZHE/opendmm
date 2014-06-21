@@ -49,8 +49,9 @@ class FixtureTest < Minitest::Test
       __extra:         Hash,
     }
     product.each do |key, value|
-      assert known_keys[key], "Unknown key: #{key}"
-      assert_equal known_keys[key], value.class, "Value #{key} should be a #{known_keys[key]}, while #{value} provided" if product[key]
+      klass = known_keys[key]
+      assert klass, "Unknown key: #{key}"
+      assert_equal klass, value.class, "Value #{key} should be a #{known_keys[key]}, while #{value} provided" if value
     end
   end
 end
@@ -63,7 +64,6 @@ class FixtureTest
   def test_#{name.parameterize.underscore}
     expected = load_product("#{path}")
     actual = OpenDMM.search("#{name}")
-    return if !actual && ENV['GFW_MODE']
     assert_has_basic_keys(actual)
     assert_no_unknown_keys(actual)
     assert_equal expected, actual, HashDiff.diff(expected, actual)
