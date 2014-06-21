@@ -1,7 +1,7 @@
-require "active_support/core_ext/string/filters"
-require "httparty"
-require "nokogiri"
-require "opendmm/utils"
+require 'active_support/core_ext/string/filters'
+require 'httparty'
+require 'nokogiri'
+require 'opendmm/utils'
 
 module OpenDMM
   module Maker
@@ -11,7 +11,7 @@ module OpenDMM
       klass.module_eval <<-CODE
         def self.search(name)
           item = Site.item(name)
-          item ? Utils.cleanup(Parser.parse(item)) : nil
+          item ? Parser.parse(item) : nil
         end
       CODE
       @@makers << klass

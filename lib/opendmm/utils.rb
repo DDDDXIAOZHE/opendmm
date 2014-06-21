@@ -71,6 +71,7 @@ module OpenDMM
     end
 
     def self.cleanup(details)
+      return nil unless details
       details = self.squish(details)
       if details[:movie_length].instance_of? String
         details[:movie_length] = ChronicDuration.parse(details[:movie_length])

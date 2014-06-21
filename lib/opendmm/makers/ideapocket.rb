@@ -36,14 +36,7 @@ module OpenDMM
             thumbnail_image: html.at_css('#content-box > div.pake > a > img')['src'],
             series:          specs['シリーズ'],
             title:           html.css('div#content-box h2.list-ttl').text,
-          }.reject do |k, v|
-            case v
-            when Array, Hash, String
-              v.empty?
-            when nil
-              true
-            end
-          end
+          }
         end
 
         private
