@@ -1,9 +1,9 @@
-require "minitest/autorun"
-require "active_support/core_ext/hash/keys"
-require "active_support/core_ext/string/inflections"
-require "active_support/json"
-require "hashdiff"
-require "opendmm"
+require 'minitest/autorun'
+require 'active_support/core_ext/hash/keys'
+require 'active_support/core_ext/string/inflections'
+require 'active_support/json'
+require 'hashdiff'
+require 'opendmm'
 
 I18n.enforce_available_locales = false
 
@@ -57,13 +57,13 @@ class FixtureTest < Minitest::Test
 end
 
 Dir[File.dirname(__FILE__) + '/fixtures/*.json'].each do |path|
-  name = File.basename(path, ".json")
+  name = File.basename(path, '.json')
   eval <<-TESTCASE
 
 class FixtureTest
   def test_#{name.parameterize.underscore}
-    expected = load_product("#{path}")
-    actual = OpenDMM.search("#{name}")
+    expected = load_product('#{path}')
+    actual = OpenDMM.search('#{name}')
     assert_has_basic_keys(actual)
     assert_no_unknown_keys(actual)
     assert_equal expected, actual, HashDiff.diff(expected, actual)
