@@ -10,7 +10,7 @@ module OpenDMM
         def self.item(name)
           name =~ /(\w+)-?(\d+)/
           case name
-          when /(AIR|CWM|ECB|WSS)-?(\d{3})/i
+          when /^(AIR|CWM|ECB|WSS)-?(\d{3})$/i
             get("/work/item.php?itemcode=#{$1.upcase}#{$2}")
           end
         end

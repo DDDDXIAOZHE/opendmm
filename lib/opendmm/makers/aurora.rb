@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(APAA|APAK)-?(\d{3})/i
+          when /^(APAA|APAK)-?(\d{3})$/i
             get("/shop/-/product/p/goods_id=#{$1.upcase}-#{$2}")
           end
         end

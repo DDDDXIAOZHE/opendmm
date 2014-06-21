@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(TMAM|TMCY|TMDI|TMEM|TMVI)-?(\d{3})/i
+          when /^(TMAM|TMCY|TMDI|TMEM|TMVI)-?(\d{3})$/i
             get("/items/detail/#{$1.upcase}-#{$2}")
           end
         end

@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(MDYD)-?(\d{3})/i
+          when /^(MDYD)-?(\d{3})$/i
             get("/works/-/detail/=/cid=#{$1.downcase}#{$2}")
           end
         end

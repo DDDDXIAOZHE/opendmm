@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /Carib ?(\d{6})[-_](\d{3})/i
+          when /^Carib ?(\d{6})[-_](\d{3})$/i
             get("/moviepages/#{$1}-#{$2}/index.html")
           end
         end

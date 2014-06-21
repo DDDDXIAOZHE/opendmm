@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(BBI|BEB|BID|BWB)-?(\d{3})/i
+          when /^(BBI|BEB|BID|BWB)-?(\d{3})$/i
             get("/works/#{$1.downcase}/#{$1.downcase}#{$2}.html")
           end
         end

@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(MIAD|MIDD|MIDE|MIGD|MIMK|MINT|MIQD|MIRD|MIXS)-?(\d{3})/i
+          when /^(MIAD|MIDD|MIDE|MIGD|MIMK|MINT|MIQD|MIRD|MIXS)-?(\d{3})$/i
             $alpha = $1.downcase
             $alpha.remove!(/d$/) if ( ($alpha == 'midd' && $2.to_i <= 643) ||
                                       ($alpha == 'migd' && $2.to_i <= 336) ||

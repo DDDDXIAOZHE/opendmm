@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(FSET)-?(\d{3})/i
+          when /^(FSET)-?(\d{3})$/i
             get("/works/#{$1.downcase}-#{$2}/")
           end
         end

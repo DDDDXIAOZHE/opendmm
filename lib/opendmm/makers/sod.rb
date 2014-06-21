@@ -9,7 +9,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(NAGE|SDDE|SDMT|SDMU|SDNM|STAR)-?(\d{3})/i
+          when /^(NAGE|SDDE|SDMT|SDMU|SDNM|STAR)-?(\d{3})$/i
             get("/detail/index/-_-/iid/#{$1.upcase}-#{$2}")
           end
         end
