@@ -67,8 +67,6 @@ class FixtureTest
     assert_has_basic_keys(actual)
     assert_no_unknown_keys(actual)
     assert_equal expected, actual, HashDiff.diff(expected, actual)
-  rescue Errno::ETIMEDOUT => e
-    raise unless ENV['GFW_MODE']
   end
 end
 

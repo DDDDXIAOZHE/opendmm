@@ -1,5 +1,6 @@
 require 'active_support/core_ext/string/filters'
 require 'httparty'
+require 'logger'
 require 'nokogiri'
 require 'opendmm/utils'
 
@@ -51,8 +52,9 @@ module OpenDMM
         return result if result
       end
       nil
-    rescue
-      nil
+    rescue Errno::ETIMEDOUT => e
+      tries++
+      tries <= 5 ? retry : raise
     end
   end
 end
