@@ -51,6 +51,8 @@ module OpenDMM
         return result if result
       end
       nil
+    rescue
+      nil
     end
   end
 end
