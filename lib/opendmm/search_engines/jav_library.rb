@@ -9,7 +9,7 @@ module OpenDMM
         follow_redirects false
 
         def self.search(name)
-          get("/ja/vl_searchbyid.php?keyword=#{name}")
+          get("/ja/vl_searchbyid.php?keyword=#{CGI::escape(name)}")
         end
 
         def self.item(id)
