@@ -12,7 +12,7 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-details = OpenDMM.search(ARGV.first)
+details = OpenDMM.search!(ARGV.first)
 if details
   if options[:json]
     puts JSON.pretty_generate(details)

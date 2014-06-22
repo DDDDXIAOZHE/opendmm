@@ -3,7 +3,7 @@ require 'opendmm/maker'
 require 'opendmm/search_engines/jav_library'
 
 module OpenDMM
-  def self.search(name)
+  def self.search!(name)
     details = Maker.search(name) || SearchEngine::JavLibrary.search(name)
     return nil unless details
     details = details.squish_hard
@@ -25,5 +25,11 @@ module OpenDMM
       details[:release_date] = Date.parse(details[:release_date])
     end
     details
+  end
+
+  def self.search(name)
+    serach! name
+  rescue
+    nil
   end
 end
