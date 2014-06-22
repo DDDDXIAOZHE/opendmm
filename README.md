@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/opendmm/opendmm.svg?branch=develop)](https://travis-ci.org/opendmm/opendmm)
+[![Build Status](https://travis-ci.org/opendmm/opendmm.svg)](https://travis-ci.org/opendmm/opendmm)
 
 # Welcome to OpenDMM
 
