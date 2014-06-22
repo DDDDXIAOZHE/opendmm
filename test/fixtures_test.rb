@@ -17,7 +17,7 @@ class FixtureTest < Minitest::Test
   end
 
   def assert_has_basic_keys(product)
-    %i(code title thumbnail_image cover_image).each do |key|
+    %i(code title thumbnail_image cover_image page).each do |key|
       assert product[key], "Key #{key} should not be absent"
     end
   end
