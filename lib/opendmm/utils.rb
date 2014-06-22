@@ -69,51 +69,33 @@ module OpenDMM
       $stderr = STDERR
       content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: '')
     end
+  end
+end
 
-    def self.cleanup(details)
-      return nil unless details
-      details = self.squish(details)
-      if details[:movie_length].instance_of? String
-        details[:movie_length] = ChronicDuration.parse(details[:movie_length])
-      end
-      if details[:page]
-        if details[:cover_image] && !details[:cover_image].start_with?('http')
-          details[:cover_image] = URI.join(details[:page], details[:cover_image]).to_s
-        end
-        if details[:sample_images]
-          details[:sample_images] = details[:sample_images].map do |uri|
-            uri.start_with?('http') ? uri : URI.join(details[:page], uri).to_s
-          end
-        end
-        if details[:thumbnail_image] && !details[:thumbnail_image].start_with?('http')
-          details[:thumbnail_image] = URI.join(details[:page], details[:thumbnail_image]).to_s
-        end
-      end
-      if details[:release_date].instance_of? String
-        details[:release_date] = Date.parse(details[:release_date])
-      end
-      details
-    end
+class Object
+  def squish_hard
+    presence
+  end
+end
 
-    def self.squish(obj)
-      case obj
-      when String
-        obj.squish!
-        obj.gsub!(/^[\s-]*$/, '')
-      when Hash
-        obj = obj.map do |k, v|
-          [k, squish(v)]
-        end.select do |kv|
-          kv.second.present?
-        end.to_h.symbolize_keys
-      when Array
-        obj = obj.map do |v|
-          squish(v)
-        end.select do |v|
-          v.present?
-        end
-      end
-      return obj.present? ? obj : nil
-    end
+class String
+  def squish_hard
+    squish.gsub(/^[\s-]*$/, '').presence
+  end
+end
+
+class Hash
+  def squish_hard
+    map do |k, v|
+      [k, v.squish_hard]
+    end.select do |k_v|
+      k_v.second.present?
+    end.to_h.presence
+  end
+end
+
+class Array
+  def squish_hard
+    map(&:squish_hard).select(&:present?).presence
   end
 end

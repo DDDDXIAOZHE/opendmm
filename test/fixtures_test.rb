@@ -17,7 +17,7 @@ class FixtureTest < Minitest::Test
   end
 
   def assert_has_basic_keys(product)
-    %i(code title thumbnail_image cover_image).each do |key|
+    %i(code title thumbnail_image cover_image page).each do |key|
       assert product[key], "Key #{key} should not be absent"
     end
   end
@@ -67,8 +67,6 @@ class FixtureTest
     assert_has_basic_keys(actual)
     assert_no_unknown_keys(actual)
     assert_equal expected, actual, HashDiff.diff(expected, actual)
-  rescue Errno::ETIMEDOUT => e
-    raise unless ENV['GFW_MODE']
   end
 end
 

@@ -9,7 +9,7 @@ module OpenDMM
         follow_redirects false
 
         def self.search(name)
-          get("/ja/vl_searchbyid.php?keyword=#{name}")
+          get("/ja/vl_searchbyid.php?keyword=#{CGI::escape(name)}")
         end
 
         def self.item(id)
@@ -52,8 +52,9 @@ module OpenDMM
           jav_id = Parser.parse_search_result(search_result)
         end
         Parser.parse_item(Site.item(jav_id)) if jav_id
-      rescue
-        nil
+      rescue Errno::ETIMEDOUT => e
+        tries++
+        tries <= 5 ? retry : raise
       end
     end
   end

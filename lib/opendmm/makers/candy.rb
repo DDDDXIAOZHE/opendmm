@@ -4,7 +4,6 @@ module OpenDMM
       include Maker
 
       module Site
-        include HTTParty
         base_uri 'candy-av.com'
 
         def self.item(name)
@@ -22,7 +21,7 @@ module OpenDMM
           specs = Utils.hash_from_dl(html.css('#actress > div > dl'))
           return {
             actresses:       specs['出演女優'].css('a').map(&:text),
-            code:            specs['品番'].text,
+            code:            parse_code(specs['品番'].text),
             cover_image:     html.at_xpath('//*[@id="thumbnail"]/a[1]')['href'],
             description:     html.css('#brand > p.p_actress_detail').text,
             genres:          specs['ジャンル'].css('a').map(&:text),
@@ -34,6 +33,13 @@ module OpenDMM
             series:          specs['シリーズ'].text,
             title:           html.css('#brand > div.m_t_4 > h3').text,
           }
+        end
+
+        def self.parse_code(text)
+          return text unless text.include? '⁄'
+          text.lines.map do |line|
+            line.split '⁄'
+          end.squish_hard.to_h['DVD']
         end
       end
     end

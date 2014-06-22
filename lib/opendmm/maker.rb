@@ -1,5 +1,6 @@
 require 'active_support/core_ext/string/filters'
 require 'httparty'
+require 'logger'
 require 'nokogiri'
 require 'opendmm/utils'
 
@@ -9,9 +10,14 @@ module OpenDMM
 
     def self.included(klass)
       klass.module_eval <<-CODE
+        module Site
+          include HTTParty
+          follow_redirects false
+        end
+
         def self.search(name)
           item = Site.item(name)
-          item ? Parser.parse(item) : nil
+          Parser.parse(item) if item && item.code == 200
         end
       CODE
       @@makers << klass
@@ -51,8 +57,9 @@ module OpenDMM
         return result if result
       end
       nil
-    rescue
-      nil
+    rescue Errno::ETIMEDOUT => e
+      tries++
+      tries <= 5 ? retry : raise
     end
   end
 end
