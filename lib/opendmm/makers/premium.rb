@@ -4,7 +4,6 @@ module OpenDMM
       include Maker
 
       module Site
-        include HTTParty
         base_uri 'premium-beauty.com'
 
         def self.item(name)

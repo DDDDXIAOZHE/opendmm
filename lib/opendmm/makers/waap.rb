@@ -4,7 +4,6 @@ module OpenDMM
       include Maker
 
       module Site
-        include HTTParty
         base_uri 'www.waap.co.jp'
 
         def self.item(name)

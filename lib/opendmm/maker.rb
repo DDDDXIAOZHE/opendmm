@@ -10,9 +10,14 @@ module OpenDMM
 
     def self.included(klass)
       klass.module_eval <<-CODE
+        module Site
+          include HTTParty
+          follow_redirects false
+        end
+
         def self.search(name)
           item = Site.item(name)
-          item ? Parser.parse(item) : nil
+          Parser.parse(item) if item && item.code == 200
         end
       CODE
       @@makers << klass

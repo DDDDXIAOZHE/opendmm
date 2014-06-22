@@ -4,7 +4,6 @@ module OpenDMM
       include Maker
 
       module Site
-        include HTTParty
         base_uri 'www.prestige-av.com'
         cookies(adc: 1)
 
