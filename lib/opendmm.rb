@@ -28,7 +28,7 @@ module OpenDMM
   end
 
   def self.search(name)
-    serach! name
+    search! name
   rescue
     nil
   end

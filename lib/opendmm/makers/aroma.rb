@@ -44,7 +44,7 @@ module OpenDMM
 
         def self.parse_cover_image(html, page_uri)
           href = html.at_xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[1]/a')['href']
-          if href =~ /'(\/images\/.*)'/
+          if href =~ /'(\/images\/.*?)'/
             return $1
           end
         end
