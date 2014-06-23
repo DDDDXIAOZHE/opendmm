@@ -17,6 +17,7 @@ module OpenDMM
           def self.get(uri)
             super(uri)
           rescue Errno::ETIMEDOUT => e
+            tries ||= 0
             tries++
             tries <= 5 ? retry : raise
           end
