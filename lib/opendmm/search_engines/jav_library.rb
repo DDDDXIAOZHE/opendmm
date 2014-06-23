@@ -10,16 +10,10 @@ module OpenDMM
 
         def self.search(name)
           get("/ja/vl_searchbyid.php?keyword=#{CGI::escape(name)}")
-        rescue Errno::ETIMEDOUT => e
-          tries++
-          tries <= 5 ? retry : raise
         end
 
         def self.item(id)
           get("/ja/?v=#{id}")
-        rescue Errno::ETIMEDOUT => e
-          tries++
-          tries <= 5 ? retry : raise
         end
 
         def self.get(uri)

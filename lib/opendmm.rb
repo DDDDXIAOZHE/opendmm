@@ -1,10 +1,13 @@
 require 'opendmm/version'
 require 'opendmm/maker'
 require 'opendmm/search_engines/jav_library'
+require 'opendmm/search_engines/dmm'
 
 module OpenDMM
   def self.search!(name)
-    details = Maker.search(name) || SearchEngine::JavLibrary.search(name)
+    details = Maker.search(name) ||
+              SearchEngine::JavLibrary.search(name) ||
+              SearchEngine::Dmm.search(name)
     return nil unless details
     details = details.squish_hard
     if !details[:cover_image].start_with?('http')
