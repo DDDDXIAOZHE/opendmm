@@ -13,6 +13,13 @@ module OpenDMM
         module Site
           include HTTParty
           follow_redirects false
+
+          def self.get(uri)
+            super(uri)
+          rescue Errno::ETIMEDOUT => e
+            tries++
+            tries <= 5 ? retry : raise
+          end
         end
 
         def self.search(name)
@@ -57,9 +64,6 @@ module OpenDMM
         return result if result
       end
       nil
-    rescue Errno::ETIMEDOUT => e
-      tries++
-      tries <= 5 ? retry : raise
     end
   end
 end

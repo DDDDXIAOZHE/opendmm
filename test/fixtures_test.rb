@@ -63,7 +63,7 @@ Dir[File.dirname(__FILE__) + '/fixtures/*.json'].each do |path|
 class FixtureTest
   def test_#{name.parameterize.underscore}
     expected = load_product('#{path}')
-    actual = OpenDMM.search('#{name}')
+    actual = OpenDMM.search!('#{name}')
     assert_has_basic_keys(actual)
     assert_no_unknown_keys(actual)
     assert_equal expected, actual, HashDiff.diff(expected, actual)
