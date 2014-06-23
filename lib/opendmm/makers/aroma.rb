@@ -51,7 +51,7 @@ module OpenDMM
 
         def self.parse_sample_images(html, page_uri)
           html.xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[7]/td[2]/table/tr[3]').css('td input').map do |input|
-            if input['onclick'] =~ /'(\/images\/.*)'/
+            if input['onclick'] =~ /'(\/images\/.*?)'/
               $1
             end
           end
