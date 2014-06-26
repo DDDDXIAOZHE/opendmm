@@ -5,12 +5,12 @@ module OpenDMM
 
       module Site
         base_uri 'www.prestige-av.com'
-        cookies(adc: 1)
+        cookies(age_auth: 1)
 
         def self.item(name)
           case name
           when /^(ABP|ABS|ABY|BRA|CHN|CHS|DOM|EDD|ESK|EZD|HAZ|HON|INU|JBS|JOB|LLR|MAS|MBD|MDC|MEK|MMY|NDR|NOF|OSR|PPB|PPP|PPT|RAW|SAD|SGA|SPC|SRS|TAP|TDT|TRD|WAT|WPC|XND|YRH|YRZ)-?(\d{3})$/i
-            get("/item/prestige/#{$1.upcase}-#{$2}")
+            get("/goods/goods_detail.php?sku=#{$1.upcase}-#{$2}")
           end
         end
       end
