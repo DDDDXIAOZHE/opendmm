@@ -26,6 +26,7 @@ module OpenDMM
             description:     html.css('#contents > p.tx-comment').text,
             directors:       specs['監督'].text.split,
             genres:          specs['ジャンル'].css('a').map(&:text),
+            maker:           'S1',
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text,
             sample_images:   html.xpath('//*[@id="slide-photo"]/div[contains(@class, "slide") and not(contains(@class, "pake"))]/img').map { |img| img['src'] },

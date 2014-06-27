@@ -27,6 +27,7 @@ module OpenDMM
             description:     html.css('#content > div.main > section > p.comment').text,
             directors:       specs['監督：'].text.split,
             genres:          specs['ジャンル：'].css('a').map(&:text),
+            maker:           'BeFree',
             movie_length:    specs['収録時間'],
             page:            page_uri.to_s,
             release_date:    specs['発売日：'].text,

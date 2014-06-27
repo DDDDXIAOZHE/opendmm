@@ -27,6 +27,7 @@ module OpenDMM
             directors:       specs['監督'].split,
             genres:          specs['ジャンル'].split('/'),
             label:           specs['レーベル'],
+            maker:           '美',
             movie_length:    specs['収録時間'],
             page:            page_uri.to_s,
             release_date:    specs['発売日'],

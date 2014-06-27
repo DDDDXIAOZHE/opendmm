@@ -27,6 +27,7 @@ module OpenDMM
             description:     html.css('#details > div > p.story').text,
             directors:       specs['監督'].css('a').map(&:text),
             genres:          specs['ジャンル'].css('a').map(&:text),
+            maker:           'Cross',
             movie_length:    specs['収録時間'].text,
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text,

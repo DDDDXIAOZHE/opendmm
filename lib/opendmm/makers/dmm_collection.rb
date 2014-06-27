@@ -24,6 +24,7 @@ module OpenDMM
             code:            specs['品番'].text,
             cover_image:     html.at_xpath('//*[@id="package"]/h4/a')['href'],
             description:     html.xpath('//*[@id="comment"]/h5').text,
+            maker:           'D★Collection',
             movie_length:    specs['収録時間'].text,
             page:            page_uri.to_s,
             release_date:    specs['DVD発売日'].text,

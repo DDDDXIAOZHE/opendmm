@@ -26,6 +26,7 @@ module OpenDMM
             description:     html.css('#column_contents > div > div.left_contents > p').text,
             directors:       specs['監督'].text.split,
             genres:          specs['ジャンル'].text.split,
+            maker:           'Madonna',
             movie_length:    specs['収録時間'].text.remove('DVD'),
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text.remove('DVD'),

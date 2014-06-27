@@ -21,9 +21,10 @@ module OpenDMM
           html = Nokogiri::HTML(content)
           specs = html.xpath('//*[@class="detail"]/article/p[2]').text.split('|')
           return {
-            code:            "S-Cute " + page_uri.to_s.split('/').last,
+            code:            'S-Cute ' + page_uri.to_s.split('/').last,
             cover_image:     html.at_css('#movie > div > div > div > a > img')['src'],
             description:     html.css('//*[@class="detail"]/article/p[4]').text,
+            maker:           'S-Cute',
             movie_length:    specs[1],
             page:            page_uri.to_s,
             release_date:    specs[0],

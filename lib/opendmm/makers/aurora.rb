@@ -28,7 +28,7 @@ module OpenDMM
             directors:       specs['監督'].css('ul li').map(&:text),
             genres:          specs['ジャンル'].css('ul li').map(&:text),
             label:           specs['レーベル'],
-            maker:           'Apache Project',
+            maker:           'Aurora Project',
             movie_length:    specs['収録時間'].text,
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text,

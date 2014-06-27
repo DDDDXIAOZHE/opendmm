@@ -25,6 +25,7 @@ module OpenDMM
             cover_image:     html.at_xpath('//*[@id="pake-bottom-box"]/dl/a')['href'],
             description:     html.xpath('//*[@id="txt-bottom-box"]').text,
             directors:       specs['監督'].split('/'),
+            maker:           'アンナと花子',
             movie_length:    specs['収録時間'],
             page:            page_uri.to_s,
             release_date:    specs['発売日'],

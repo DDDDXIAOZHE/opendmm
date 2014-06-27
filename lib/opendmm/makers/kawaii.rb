@@ -25,6 +25,7 @@ module OpenDMM
             cover_image:     html.at_css('#content > div.col300 > span.pake > p.textright > a > img')['src'].gsub(/pm.jpg$/, 'pl.jpg'),
             description:     html.css('#content > div.col540 > div > p.text').text,
             genres:          specs['ジャンル'].css('a').map(&:text),
+            maker:           'Kawaii',
             movie_length:    (specs['DVD収録時間'] || specs['Blu-ray収録時間']).text,
             page:            page_uri.to_s,
             release_date:    (specs['DVD発売日'] || specs['Blu-ray発売日']).text,

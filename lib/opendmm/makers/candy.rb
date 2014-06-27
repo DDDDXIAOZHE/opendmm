@@ -25,6 +25,7 @@ module OpenDMM
             cover_image:     html.at_xpath('//*[@id="thumbnail"]/a[1]')['href'],
             description:     html.css('#brand > p.p_actress_detail').text,
             genres:          specs['ジャンル'].css('a').map(&:text),
+            maker:           'Candy',
             movie_length:    specs['収録時間'].text,
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text,

@@ -24,6 +24,7 @@ module OpenDMM
             cover_image:     html.at_css('#main > div > div.main-detail > div.ttl-pac > a')['href'],
             description:     html.xpath('//*[@id="main"]/div/div[@class="main-detail"]/div[@class="ttl-comment"]/div[not(@class)]').text,
             genres:          specs['ジャンル：'].text,
+            maker:           '変態紳士倶楽部',
             movie_length:    specs['収録時間：'].text,
             page:            page_uri.to_s,
             release_date:    specs['発売日：'].text,

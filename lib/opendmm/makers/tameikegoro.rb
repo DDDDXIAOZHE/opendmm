@@ -27,6 +27,7 @@ module OpenDMM
             directors:       specs['監督'].split,
             genres:          specs['ジャンル'].split,
             label:           specs['レーベル'],
+            maker:           '溜池ゴロー',
             page:            page_uri.to_s,
             release_date:    specs['発売日'].remove('DVD/'),
             sample_images:   html.css('#sample-pic > a > img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg)/, 'jp') },

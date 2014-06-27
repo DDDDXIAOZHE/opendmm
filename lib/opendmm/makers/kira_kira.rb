@@ -26,6 +26,7 @@ module OpenDMM
             description:     html.xpath('//*[@id="wrap-works"]/section/section[1]/p').text,
             genres:          specs['ジャンル'].css('ul > li').map(&:text),
             label:           specs['レーベル'].text,
+            maker:           'Kira☆Kira',
             movie_length:    specs['収録時間'].text,
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text,

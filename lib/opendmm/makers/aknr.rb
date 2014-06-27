@@ -23,6 +23,7 @@ module OpenDMM
             code:            html.css('//*[@id="info"]/div[5]/div[2]').text,
             cover_image:     html.at_css('#jktimg_l2 > a')['href'],
             directors:       html.css('//*[@id="info"]/div[4]/div[2]').text.split,
+            maker:           'AKNR',
             movie_length:    html.css('//*[@id="info"]/div[6]/div[2]').text,
             page:            page_uri.to_s,
             release_date:    html.css('//*[@id="info"]/div[2]/div[2]').text,

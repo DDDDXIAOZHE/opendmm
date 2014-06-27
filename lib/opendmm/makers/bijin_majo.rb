@@ -24,6 +24,7 @@ module OpenDMM
             code:            specs['品番：'].text,
             cover_image:     html.at_css('#detail_main > div.figure > a')['href'],
             description:     html.css('#detail_main > div.detail_item > p').text,
+            maker:           '美人魔女',
             movie_length:    specs['収録時間：'].text,
             page:            page_uri.to_s,
             release_date:    specs['発売日：'].text,

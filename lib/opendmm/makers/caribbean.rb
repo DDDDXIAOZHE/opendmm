@@ -18,19 +18,20 @@ module OpenDMM
         def self.parse(content)
           page_uri = content.request.last_uri
           html = Nokogiri::HTML(content)
-          specs = Utils.hash_by_split(html.css('#main-content > div.main-content-movieinfo > div.movie-info > dl').map(&:text))
+          specs = Utils.hash_by_split(html.css('div.main-content-movieinfo > div.movie-info > dl').map(&:text))
           return {
             actresses:       specs['出演'].split,
             categories:      specs['カテゴリー'].split,
-            code:            "Carib " + page_uri.to_s.split('/')[-2],
-            cover_image:     "./images/l_l.jpg",
-            description:     html.css('#main-content > div.main-content-movieinfo > div.movie-comment').text,
+            code:            'Carib ' + page_uri.to_s.split('/')[-2],
+            cover_image:     './images/l_l.jpg',
+            description:     html.css('div.main-content-movieinfo > div.movie-comment').text,
+            maker:           'Caribbean',
             movie_length:    specs['再生時間'],
             page:            page_uri.to_s,
             release_date:    specs['配信日'],
-            sample_images:   html.css('#main-content > div.detail-content.detail-content-gallery-old > table > tr > td > a').map{ |a| a['href'] }.reject{ |uri| uri =~ /\/member\// },
+            sample_images:   html.css('div.detail-content.detail-content-gallery-old > table > tr > td > a').map{ |a| a['href'] }.reject{ |uri| uri =~ /\/member\// },
             thumbnail_image: "./images/l_s.jpg",
-            title:           html.css('#main-content > div.main-content-movieinfo > div.video-detail > span.movie-title > h1').text,
+            title:           html.css('div.main-content-movieinfo > div.video-detail > span.movie-title > h1').text,
           }
         end
       end

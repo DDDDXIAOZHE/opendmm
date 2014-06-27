@@ -27,6 +27,7 @@ module OpenDMM
             description:     html.css('#content_main_detail > div > div.works_left > p.detail_txt').text,
             genres:          specs['ジャンル'].css('a').map(&:text),
             label:           specs['レーベル'].text,
+            maker:           'Oppai',
             movie_length:    dvd(specs['収録時間'].text),
             page:            page_uri.to_s,
             release_date:    dvd(specs['発売日'].text),

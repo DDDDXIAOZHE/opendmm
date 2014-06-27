@@ -24,6 +24,7 @@ module OpenDMM
             cover_image:     html.at_css('#content1 > section > div.img > img')['src'],
             description:     html.css('#content1 > section > p').text,
             label:           html.xpath('//*[@id="content1"]/section/div[2]/table/tr[4]/td').text,
+            maker:           'Baltan',
             movie_length:    html.xpath('//*[@id="content1"]/section/div[2]/table/tr[2]/td').text,
             page:            page_uri.to_s,
             release_date:    html.xpath('//*[@id="content1"]/section/div[2]/table/tr[3]/td').text,

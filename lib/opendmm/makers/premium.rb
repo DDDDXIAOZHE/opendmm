@@ -27,6 +27,7 @@ module OpenDMM
             directors:       specs['監督'].split,
             genres:          specs['ジャンル'].split('/'),
             label:           specs['レーベル'],
+            maker:           'Premium',
             movie_length:    specs['DVD収録時間'] || specs['Blu-ray収録時間'],
             page:            page_uri.to_s,
             release_date:    specs['発売日'],

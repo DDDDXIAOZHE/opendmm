@@ -26,6 +26,7 @@ module OpenDMM
             cover_image:     html.at_css('div.package > a.package-pic')["href"],
             description:     html.css('div.title-data > p.comment').text,
             genres:          specs['ジャンル'].css('a').map(&:text),
+            maker:           'E-Body',
             movie_length:    specs['収録時間'],
             page:            page_uri.to_s,
             release_date:    specs['発売日'].text,
