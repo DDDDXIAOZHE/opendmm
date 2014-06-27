@@ -10,23 +10,13 @@ module OpenDMM
               SearchEngine::Dmm.search(name)
     return nil unless details
     details = details.squish_hard
-    if !details[:cover_image].start_with?('http')
-      details[:cover_image] = URI.join(details[:page], details[:cover_image]).to_s
-    end
-    if !details[:thumbnail_image].start_with?('http')
-      details[:thumbnail_image] = URI.join(details[:page], details[:thumbnail_image]).to_s
-    end
-    if details[:sample_images]
-      details[:sample_images] = details[:sample_images].map do |uri|
-        uri.start_with?('http') ? uri : URI.join(details[:page], uri).to_s
-      end
-    end
-    if details[:movie_length].instance_of? String
-      details[:movie_length] = ChronicDuration.parse(details[:movie_length])
-    end
-    if details[:release_date].instance_of? String
-      details[:release_date] = Date.parse(details[:release_date])
-    end
+    details[:cover_image] = join_if_relative(details[:page], details[:cover_image])
+    details[:thumbnail_image] = join_if_relative(details[:page], details[:thumbnail_image])
+    details[:sample_images] = details[:sample_images].map do |uri|
+      join_if_relative(details[:page], uri)
+    end if details[:sample_images]
+    details[:movie_length] = ChronicDuration.parse(details[:movie_length]) if details[:movie_length]
+    details[:release_date] = Date.parse(details[:release_date]) if details[:release_date]
     details
   end
 
@@ -34,5 +24,11 @@ module OpenDMM
     search! name
   rescue
     nil
+  end
+
+private
+  def self.join_if_relative(page_url, image_url)
+    return nil unless image_url
+    image_url.start_with?('http') ? image_url : URI.join(page_url, image_url).to_s
   end
 end

@@ -50,7 +50,7 @@ module OpenDMM
 
         def self.item(name)
           case name
-          when /(EXAM)-?(\\d{3})/i
+          when /^(EXAM)-?(\\d{3})$/i
             get("/#\{$1.downcase\}#\{$2\}")
           end
         end
