@@ -2,8 +2,10 @@ require 'active_support/core_ext/array/access'
 require 'active_support/core_ext/array/grouping'
 require 'active_support/core_ext/module/aliasing'
 require 'active_support/core_ext/numeric/time'
+require 'active_support/core_ext/string/filters'
 require 'active_support/core_ext/string/starts_ends_with'
 require 'chronic_duration'
+require 'nokogiri'
 
 class << Date
   def parse_with_chinese_support(str)
@@ -61,13 +63,31 @@ module OpenDMM
       end.to_h
     end
 
-    def self.force_utf8(content)
+    def self.html_in_utf8(content)
       # This is to get rid of the annoying error message:
       #   'encoding error : input conversion failed due to input error'
       $stderr.reopen('/dev/null', 'w')
-      encoding = Nokogiri::HTML(content).encoding
+      encoding = Nokogiri.HTML(content).encoding
       $stderr = STDERR
       content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: '')
+      Nokogiri.HTML content
+    end
+
+    def self.finalize_details_hash(details)
+      details = details.squish_hard
+      details[:cover_image] = join_url_if_relative(details[:page], details[:cover_image])
+      details[:thumbnail_image] = join_url_if_relative(details[:page], details[:thumbnail_image])
+      details[:sample_images] = details[:sample_images].map do |uri|
+        join_url_if_relative(details[:page], uri)
+      end if details[:sample_images]
+      details[:movie_length] = ChronicDuration.parse(details[:movie_length]) if details[:movie_length]
+      details[:release_date] = Date.parse(details[:release_date]) if details[:release_date]
+      details.sort.to_h
+    end
+
+    def self.join_url_if_relative(page_url, image_url)
+      return nil unless image_url
+      image_url.start_with?('http') ? image_url : URI.join(page_url, image_url).to_s
     end
   end
 end

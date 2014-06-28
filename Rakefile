@@ -15,7 +15,7 @@ namespace :fixture do
       puts "#{args[:id]} not found"
       next
     end
-    File.open(File.join(File.dirname(__FILE__) + "/test/fixtures/#{args[:id]}.json"), 'w') do |file|
+    File.open(File.join(File.dirname(__FILE__) + "/test/maker_fixtures/#{args[:id]}.json"), 'w') do |file|
       puts "Generating #{args[:id]}.json"
       file.puts JSON.pretty_generate(fixture)
     end
@@ -23,7 +23,7 @@ namespace :fixture do
 
   desc 'Regenerate all fixtures'
   task :regenerate => :install do
-    Dir[File.dirname(__FILE__) + '/test/fixtures/*.json'].each do |path|
+    Dir[File.dirname(__FILE__) + '/test/maker_fixtures/*.json'].each do |path|
       File.open(path, 'w') do |file|
         id = File.basename(path, '.json')
         puts "Generating #{id}.json"
@@ -39,35 +39,43 @@ namespace :maker do
     File.open(File.join(File.dirname(__FILE__) + "/lib/opendmm/makers/#{args[:name].underscore}.rb"), 'w') do |file|
       puts "Generating #{args[:name].underscore}.rb"
       file.puts <<-CODE
-module OpenDMM
-  module Maker
-    module #{args[:name].underscore.classify}
-      include Maker
+base_uri 'example.com'
 
-      module Site
-        include HTTParty
-        base_uri 'example.com'
+register_product(
+  /^(EXAM)-?(\d{3})$/i,
+  '#{$1.downcase}#{$2}',
+)
 
-        def self.item(name)
-          case name
-          when /^(EXAM)-?(\\d{3})$/i
-            get("/#\{$1.downcase\}#\{$2\}")
-          end
-        end
-      end
+private
 
-      module Parser
-        def self.parse(content)
-          page_uri = content.request.last_uri
-          html = Nokogiri::HTML(content)
-          return {
-            page:            page_uri.to_s,
-          }
-        end
-      end
-    end
-  end
+def self.parse_product_html(html)
+  {
+  #   actresses:       Array
+  #   actress_types:   Array
+  #   boobs:           String
+  #   brand:           String
+  #   categories:      Array
+  #   code:            String
+  #   cover_image:     String
+  #   description:     String
+  #   directors:       Array
+  #   genres:          Array
+  #   label:           String
+  #   maker:           String
+  #   movie_length:    String
+  #   page:            String
+  #   release_date:    String
+  #   sample_images:   Array
+  #   scenes:          Array
+  #   series:          String
+  #   subtitle:        String
+  #   theme:           String
+  #   thumbnail_image: String
+  #   title:           String
+  #   __extra:         Hash
+  }
 end
+
 CODE
     end
   end

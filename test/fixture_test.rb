@@ -56,19 +56,23 @@ class FixtureTest < Minitest::Test
   end
 end
 
-Dir[File.dirname(__FILE__) + '/fixtures/*.json'].each do |path|
-  name = File.basename(path, '.json')
-  eval <<-TESTCASE
+{ 'dmm'         => 'OpenDMM::SearchEngine::Dmm',
+  'jav_library' => 'OpenDMM::SearchEngine::JavLibrary',
+  'maker'       => 'OpenDMM::Maker' }.each do |category, klass|
+  Dir[File.dirname(__FILE__) + "/#{category}_fixtures/*.json"].each do |file|
+    name = File.basename(file, '.json')
+    eval <<-TESTCASE
 
-class FixtureTest
-  def test_#{name.parameterize.underscore}
-    expected = load_product('#{path}')
-    actual = OpenDMM.search!('#{name}')
-    assert_has_basic_keys(actual)
-    assert_no_unknown_keys(actual)
-    assert_equal expected, actual, HashDiff.diff(expected, actual)
+  class FixtureTest
+    def test_#{category}_#{name.parameterize.underscore}
+      expected = load_product('#{file}')
+      actual = #{klass}.search('#{name}')
+      assert_has_basic_keys(actual)
+      assert_no_unknown_keys(actual)
+      assert_equal expected, actual, HashDiff.diff(expected, actual)
+    end
   end
-end
 
-TESTCASE
+  TESTCASE
+  end
 end
