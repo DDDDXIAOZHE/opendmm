@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require "json"
-require "optparse"
-require "pp"
-require "opendmm"
+require 'json'
+require 'optparse'
+require 'pp'
+require 'opendmm'
 
 options = { json: false }
 OptionParser.new do |opts|
-  opts.on("-j", "--[no-]json", "JSON mode") do |j|
+  opts.on('-j', '--[no-]json', 'JSON mode') do |j|
     options[:json] = j
   end
 end.parse!
@@ -20,5 +20,5 @@ if details
     pp details
   end
 else
-  puts "Unknown product: " + ARGV.first
+  puts 'Unknown product: ' + ARGV.first
 end
