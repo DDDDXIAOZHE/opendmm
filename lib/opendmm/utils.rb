@@ -64,11 +64,7 @@ module OpenDMM
     end
 
     def self.html_in_utf8(content)
-      # This is to get rid of the annoying error message:
-      #   'encoding error : input conversion failed due to input error'
-      $stderr.reopen('/dev/null', 'w')
       encoding = Nokogiri.HTML(content).encoding
-      $stderr = STDERR
       content = content.encode('UTF-8', encoding, invalid: :replace, undef: :replace, replace: '')
       Nokogiri.HTML content
     end
