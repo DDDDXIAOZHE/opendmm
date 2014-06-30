@@ -58,7 +58,8 @@ end
 
 { 'dmm'         => 'OpenDMM::SearchEngine::Dmm',
   'jav_library' => 'OpenDMM::SearchEngine::JavLibrary',
-  'maker'       => 'OpenDMM::Maker' }.each do |category, klass|
+  'maker'       => 'OpenDMM::Maker',
+  'mgstage'     => 'OpenDMM::SearchEngine::Mgstage' }.each do |category, klass|
   Dir[File.dirname(__FILE__) + "/#{category}_fixtures/*.json"].each do |file|
     name = File.basename(file, '.json')
     eval <<-TESTCASE

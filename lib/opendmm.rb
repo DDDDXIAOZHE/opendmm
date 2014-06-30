@@ -32,7 +32,7 @@ module OpenDMM
   # }
 
   def self.search(name, debug = false)
-    Maker.search(name) || SearchEngine::JavLibrary.search(name) || SearchEngine::Dmm.search(name)
+    Maker.search(name) || SearchEngine::JavLibrary.search(name) || SearchEngine::Dmm.search(name) || SearchEngine::Mgstage.search(name)
   rescue => e
     if debug
       puts e.inspect

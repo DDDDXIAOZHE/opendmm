@@ -8,17 +8,14 @@ Rake::TestTask.new do |t|
 end
 
 namespace :fixture do
-  desc 'Generate a fixture'
-  task :generate, [:id] => :install do |t, args|
-    fixture = OpenDMM.search(args[:id])
-    if fixture.blank?
-      puts "#{args[:id]} not found"
-      next
-    end
-    File.open(File.join(File.dirname(__FILE__) + "/test/maker_fixtures/#{args[:id]}.json"), 'w') do |file|
-      puts "Generating #{args[:id]}.json"
-      file.puts JSON.pretty_generate(fixture)
-    end
+  desc 'Generate a maker fixture'
+  task :maker, [:id] => :install do |t, args|
+    generate(args[:id], 'maker')
+  end
+
+  desc 'Generate a search engine fixture'
+  task :search_engine, [:id, :name] => :install do |t, args|
+    generate(args[:id], args[:name])
   end
 
   desc 'Regenerate all fixtures'
@@ -29,6 +26,20 @@ namespace :fixture do
         puts "Generating #{id}.json"
         file.puts JSON.pretty_generate(OpenDMM.search(id))
       end
+    end
+  end
+
+  private
+
+  def generate(id, category)
+    fixture = OpenDMM.search(id)
+    if fixture.blank?
+      puts "#{id} not found"
+      return
+    end
+    File.open(File.join(File.dirname(__FILE__) + "/test/#{category}_fixtures/#{id}.json"), 'w') do |file|
+      puts "Generating #{id}.json"
+      file.puts JSON.pretty_generate(fixture)
     end
   end
 end
@@ -43,39 +54,38 @@ base_uri 'example.com'
 
 register_product(
   /^(EXAM)-?(\d{3})$/i,
-  '#{$1.downcase}#{$2}',
+  '#\{$1.downcase\}#\{$2\}',
 )
 
 private
 
 def self.parse_product_html(html)
   {
-  #   actresses:       Array
-  #   actress_types:   Array
-  #   boobs:           String
-  #   brand:           String
-  #   categories:      Array
-  #   code:            String
-  #   cover_image:     String
-  #   description:     String
-  #   directors:       Array
-  #   genres:          Array
-  #   label:           String
-  #   maker:           String
-  #   movie_length:    String
-  #   page:            String
-  #   release_date:    String
-  #   sample_images:   Array
-  #   scenes:          Array
-  #   series:          String
-  #   subtitle:        String
-  #   theme:           String
-  #   thumbnail_image: String
-  #   title:           String
-  #   __extra:         Hash
+  # actresses:       Array
+  # actress_types:   Array
+  # boobs:           String
+  # brand:           String
+  # categories:      Array
+  # code:            String
+  # cover_image:     String
+  # description:     String
+  # directors:       Array
+  # genres:          Array
+  # label:           String
+  # maker:           String
+  # movie_length:    String
+  # page:            String
+  # release_date:    String
+  # sample_images:   Array
+  # scenes:          Array
+  # series:          String
+  # subtitle:        String
+  # theme:           String
+  # thumbnail_image: String
+  # title:           String
+  # __extra:         Hash
   }
 end
-
 CODE
     end
   end
