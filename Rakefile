@@ -53,7 +53,7 @@ namespace :maker do
 base_uri 'example.com'
 
 register_product(
-  /^(EXAM)-?(\d{3})$/i,
+  /^(EXAM)-?(\\d{3})$/i,
   '#\{$1.downcase\}#\{$2\}',
 )
 

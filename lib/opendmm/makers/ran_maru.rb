@@ -22,7 +22,6 @@ def self.parse_product_html(html)
   }
 end
 
-      private
 def self.parse_specs(html)
   root = html.css('#works > div > div.works-box > div.left-box > dl > dd > p')
   groups = root.children.to_a.split do |delimeter|
