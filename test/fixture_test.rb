@@ -12,7 +12,6 @@ class FixtureTest < Minitest::Test
     json = File.read(path)
     product = ActiveSupport::JSON.decode(json).symbolize_keys
     product[:release_date] = Date.parse(product[:release_date]) if product[:release_date]
-    product[:__extra].try(:symbolize_keys!)
     product
   end
 
@@ -24,29 +23,30 @@ class FixtureTest < Minitest::Test
 
   def assert_no_unknown_keys(product)
     known_keys = {
-      actresses:       Array,
-      actress_types:   Array,
-      boobs:           String,
-      brand:           String,
-      categories:      Array,
-      code:            String,
-      cover_image:     String,
-      description:     String,
-      directors:       Array,
-      genres:          Array,
-      label:           String,
-      maker:           String,
-      movie_length:    Fixnum,
-      page:            String,
-      release_date:    Date,
-      sample_images:   Array,
-      scenes:          Array,
-      series:          String,
-      subtitle:        String,
-      theme:           String,
-      thumbnail_image: String,
-      title:           String,
-      __extra:         Hash,
+      actresses:        Array,
+      actress_types:    Array,
+      boobs:            String,
+      brand:            String,
+      categories:       Array,
+      code:             String,
+      cover_image:      String,
+      description:      String,
+      directors:        Array,
+      genres:           Array,
+      label:            String,
+      maker:            String,
+      movie_length:     Fixnum,
+      page:             String,
+      release_date:     Date,
+      sample_images:    Array,
+      scatologies:      Array,
+      scenes:           Array,
+      series:           String,
+      subtitle:         String,
+      theme:            String,
+      thumbnail_image:  String,
+      title:            String,
+      transsexualities: Array,
     }
     product.each do |key, value|
       klass = known_keys[key]
