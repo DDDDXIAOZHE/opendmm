@@ -14,7 +14,7 @@ def self.parse_product_html(html)
     cover_image:     html.at_xpath('//*[@id="slide-photo"]/div[@class="slide pake"]/img')['src'],
     description:     html.css('#contents > p.tx-comment').text,
     directors:       specs['監督'].text.split,
-    genres:          specs['ジャンル'].css('a').map(&:text),
+    genres:          (specs['ジャンル'].css('a').map(&:text) if specs['ジャンル']),
     maker:           'S1',
     release_date:    specs['発売日'].text,
     sample_images:   html.xpath('//*[@id="slide-photo"]/div[contains(@class, "slide") and not(contains(@class, "pake"))]/img').map { |img| img['src'] },

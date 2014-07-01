@@ -57,7 +57,7 @@ module OpenDMM
       def product(name)
         url = product_url name
         page = get_with_retry url
-        return nil unless page
+        return nil unless page && page.code == 200
         html = Utils.html_in_utf8 page
         details = parse_product_html html
         details[:code] ||= product_code name
