@@ -22,13 +22,14 @@ module OpenDMM
   #   page:            String
   #   release_date:    String
   #   sample_images:   Array
+  #   scatology:       Array
   #   scenes:          Array
   #   series:          String
   #   subtitle:        String
   #   theme:           String
   #   thumbnail_image: String
   #   title:           String
-  #   __extra:         Hash
+  #   transsexual:     Array
   # }
 
   def self.search(name, debug = false)

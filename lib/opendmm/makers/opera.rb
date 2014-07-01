@@ -20,12 +20,10 @@ def self.parse_product_html(html)
     movie_length:    specs['収録時間'].text,
     release_date:    specs['発売日'].text,
     sample_images:   html.css('#sample-pic > li > a > img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg$)/, "jl") },
+    scatology:       specs['スカトロ'].css('a').map(&:text),
     series:          specs['シリーズ'].text.remove('：'),
     thumbnail_image: html.at_css('div#container-detail > div.pkg-data > div.pkg > a > img')['src'],
     title:           html.xpath('//*[@id="container-detail"]/p[1]').text,
-    __extra: {
-      transsexual:   specs['ニューハーフ'].css('a').map(&:text),
-      scatology:     specs['スカトロ'].css('a').map(&:text),
-    },
+    transsexual:     specs['ニューハーフ'].css('a').map(&:text),
   }
 end

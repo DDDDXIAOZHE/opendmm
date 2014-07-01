@@ -36,6 +36,5 @@ def self.parse_product_html(html)
   # theme:           String
     thumbnail_image: html.at_css('div.content_detail_layout_01 img.enlarge_image')['src'],
     title:           html.css('.title_detail_layout h1').text,
-  # __extra:         Hash
   }
 end

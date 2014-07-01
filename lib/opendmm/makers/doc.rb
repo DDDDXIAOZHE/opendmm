@@ -11,8 +11,6 @@ def self.parse_product_html(html)
   specs = parse_specs(html)
   {
     actresses:       parse_actresses(specs['女優']),
-  # actress_types:   Array
-  # boobs:           String
   # brand:           String
   # categories:      Array
   # code:            String
@@ -32,7 +30,6 @@ def self.parse_product_html(html)
   # theme:           String
     thumbnail_image: html.at_css('#single_box > div.entry-content > img')['src'],
     title:           html.css('#single_box > h1').text,
-  # __extra:         Hash
   }
 end
 

@@ -62,8 +62,6 @@ private
 def self.parse_product_html(html)
   {
   # actresses:       Array
-  # actress_types:   Array
-  # boobs:           String
   # brand:           String
   # categories:      Array
   # code:            String
@@ -83,7 +81,6 @@ def self.parse_product_html(html)
   # theme:           String
   # thumbnail_image: String
   # title:           String
-  # __extra:         Hash
   }
 end
 CODE
