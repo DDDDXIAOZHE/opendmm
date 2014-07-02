@@ -33,7 +33,10 @@ module OpenDMM
   # }
 
   def self.search(name, debug = false)
-    Maker.search(name) || SearchEngine::JavLibrary.search(name) || SearchEngine::Dmm.search(name) || SearchEngine::Mgstage.search(name)
+    [ Maker, SearchEngine::JavLibrary, SearchEngine::Dmm, SearchEngine::Mgstage, SearchEngine::AvEntertainments ].each do |engine|
+      result = engine.search(name)
+      return result if result
+    end
   rescue => e
     if debug
       puts e.inspect

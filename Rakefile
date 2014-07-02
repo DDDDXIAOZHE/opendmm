@@ -37,7 +37,8 @@ namespace :fixture do
       puts "#{id} not found"
       return
     end
-    File.open(File.join(File.dirname(__FILE__) + "/test/#{category}_fixtures/#{id}.json"), 'w') do |file|
+    FileUtils.mkpath File.dirname(__FILE__) + "/test/#{category}_fixtures/"
+    File.open(File.dirname(__FILE__) + "/test/#{category}_fixtures/#{id}.json", 'w') do |file|
       puts "Generating #{id}.json"
       file.puts JSON.pretty_generate(fixture)
     end
@@ -56,6 +57,57 @@ register_product(
   /^(EXAM)-?(\\d{3})$/i,
   '#\{$1.downcase\}#\{$2\}',
 )
+
+private
+
+def self.parse_product_html(html)
+  {
+  # actresses:       Array
+  # brand:           String
+  # categories:      Array
+  # code:            String
+  # cover_image:     String
+  # description:     String
+  # directors:       Array
+  # genres:          Array
+  # label:           String
+  # maker:           String
+  # movie_length:    String
+  # page:            String
+  # release_date:    String
+  # sample_images:   Array
+  # scenes:          Array
+  # series:          String
+  # subtitle:        String
+  # theme:           String
+  # thumbnail_image: String
+  # title:           String
+  }
+end
+CODE
+    end
+  end
+end
+
+namespace :search_engine do
+  desc "Generate a search engine"
+  task :generate, [:name] do |t, args|
+    File.open(File.join(File.dirname(__FILE__) + "/lib/opendmm/search_engines/#{args[:name].underscore}.rb"), 'w') do |file|
+      puts "Generating #{args[:name].underscore}.rb"
+      file.puts <<-CODE
+base_uri 'example.com'
+
+def self.search_url(name)
+  "#{CGI::escape(name)}"
+end
+
+def self.product_url(name)
+  search_page = get_with_retry search_url(name)
+  return nil unless search_page
+  search_html = Utils.html_in_utf8 search_page
+  first_result = search_html.at_css('CHANGEME')
+  first_result['href'] if first_result
+end
 
 private
 
