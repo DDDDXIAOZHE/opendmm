@@ -24,7 +24,7 @@ module OpenDMM
       rescue Errno::ETIMEDOUT => e
         tries ||= 0
         tries++
-        tries <= 5 ? retry : raise
+        tries <= limit ? retry : raise
       end
 
       def register_product(matcher, url_generator, code_generator = '#{$1.upcase}-#{$2}')

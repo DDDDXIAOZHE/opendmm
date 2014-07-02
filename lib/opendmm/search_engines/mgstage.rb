@@ -4,10 +4,17 @@ headers({
   "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36"
 })
 
-register_product(
-  /^(\w+?)-?(\d+)$/i,
-  '/ppv/video/#{$1.upcase}-#{$2}',
-)
+def self.search_url(name)
+  "/ppv/list/search/#{CGI::escape(name)}/1/table/date/all/"
+end
+
+def self.product_url(name)
+  search_page = get_with_retry search_url(name)
+  return nil unless search_page
+  search_html = Utils.html_in_utf8 search_page
+  first_result = search_html.at_css('#Content > ul > li.item_layout_02_price > a')
+  first_result['href'] if first_result
+end
 
 private
 
