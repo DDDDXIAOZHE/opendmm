@@ -32,7 +32,7 @@ end
 def self.product_extra_info(name, url, page, html)
   code = product_code(name)
   extra_info = Hash.new
-  if code =~ /(\d{3}_\w+_\d{2})/i
+  if code =~ /(\d{3})_(\w+)_(\d{2})/i
     extra_info[:cover_image] = "http://static.s-cute.com/images/#{$1}_#{$2}/#{$1}_#{$2}_#{$3}/#{$1}_#{$2}_#{$3}_sample.jpg"
   end
   if code =~ /\d{3}_(\w+)_\d{2}/i || code =~ /(?:ps\d|swm)_\d{2}_(\w+)/i
