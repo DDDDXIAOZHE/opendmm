@@ -65,6 +65,8 @@ Give these a try:
 
 Then try search them on DMM, or use DMM API if you have an app key.
 
+It also provides you more detailed information than DMM if you noticed. For example, did you see the `sample_images` part in the example json above?
+
 # How?
 
 ## How to use?
