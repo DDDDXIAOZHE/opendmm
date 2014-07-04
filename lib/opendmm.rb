@@ -18,9 +18,9 @@ module OpenDMM
   #   genres:           Array
   #   label:            String
   #   maker:            String
-  #   movie_length:     String
+  #   movie_length:     Fixnum
   #   page:             String
-  #   release_date:     String
+  #   release_date:     Date
   #   sample_images:    Array
   #   scatologies:      Array
   #   scenes:           Array
