@@ -46,7 +46,7 @@ A command line tool is also provided:
       "thumbnail_image": "http://www.prestige-av.com/images/corner/goods/prestige/abp/123/pf_p_abp-123.jpg",
       "title": "酒井ももか 満足度満点新人ソープDX＋未公開映像DVD付き"
     }
-
+    
 # Why?
 
 [DMM](www.dmm.co.jp) is the obvious choice when this kind of use cases come to your mind, which do have an [API](https://affiliate.dmm.com/api/reference/r18/all/) available.
@@ -54,6 +54,16 @@ A command line tool is also provided:
 Although it's widely used by many AV sites, it's not that easy to use when it comes to personal usage. Because in order to use it you have to register your site and get approval.
 
 So I build this tool, to provide an easy-to-use alternative. It also provides more accurate result, which you can see from the "How?" section.
+
+## Where it excels?
+
+Give these a try:
+
+    $ opendmm "S-Cute 352_kokona_02"
+    $ opendmm SIRO-1088
+    $ opendmm "Carib 021511-620"
+
+Then try search them on DMM, or use DMM API if you have an app key.
 
 # How?
 
@@ -68,10 +78,11 @@ So I build this tool, to provide an easy-to-use alternative. It also provides mo
     * [JavLibrary](www.javlibrary.com)
     * [DMM](www.dmm.co.jp)
     * [MGStage](www.mgstage.com)
+    * [AvEntertainments](www.aventertainments.com)
 
 # You can help
 
-Feel free to report errors of request support for maker's site. Just [file a Issue](https://github.com/opendmm/opendmm/issues).
+Feel free to report errors or request support for maker's site. Just [file a Issue](https://github.com/opendmm/opendmm/issues).
 
 You can see current developing plan including makers planed to support on [Trello](https://trello.com/b/Q3P91c7N/opendmm).
 
