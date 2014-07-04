@@ -37,6 +37,7 @@ module OpenDMM
       result = engine.search(name)
       return result if result
     end
+    nil
   rescue => e
     if debug
       puts e.inspect
