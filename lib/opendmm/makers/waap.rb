@@ -1,7 +1,7 @@
 base_uri 'www.waap.co.jp'
 
 register_product(
-  /^(AIR|CWM|ECB|WSS)-?(\d{3})$/i,
+  /^(AIR|CEN|CWM|ECB|WDI|WSS)-?(\d{3})$/i,
   '/work/item.php?itemcode=#{$1.upcase}#{$2}',
 )
 
