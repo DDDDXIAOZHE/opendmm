@@ -4,9 +4,7 @@ headers({
 })
 
 def self.search_url(name)
-  if name =~ /^([a-z])+[-_ ]*(\d+)$/i
-    name = "#{$1.upcase}-#{$2}"
-  end
+  name = name.split(/(?<=[a-z])(?=\d)|[-_\s]/).join('-')
   "/search_Products.aspx?keyword=#{CGI::escape(name)}"
 end
 

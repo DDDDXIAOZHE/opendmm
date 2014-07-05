@@ -5,6 +5,7 @@ headers({
 })
 
 def self.search_url(name)
+  name = name.split(/(?<=[a-z])(?=\d)|[-_\s]/).join(' ')
   "/ppv/list/search/#{CGI::escape(name)}/1/table/date/all/"
 end
 

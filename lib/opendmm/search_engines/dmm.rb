@@ -1,7 +1,7 @@
 base_uri 'www.dmm.co.jp'
 
 def self.search_url(name)
-  name = name.split(/[-_\s]/).map do |token|
+  name = name.split(/(?<=[a-z])(?=\d)|[-_\s]/).map do |token|
     token =~ /^\d{1,4}$/ ? sprintf("%05d", token.to_i) : token
   end.join(' ')
   "/search/=/searchstr=#{CGI::escape(name)}"
