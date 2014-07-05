@@ -49,7 +49,7 @@ A command line tool is also provided:
     
 # Why?
 
-[DMM](www.dmm.co.jp) is the obvious choice when this kind of use cases come to your mind, which do have an [API](https://affiliate.dmm.com/api/reference/r18/all/) available.
+[DMM](http://www.dmm.co.jp) is the obvious choice when this kind of use cases come to your mind, which do have an [API](https://affiliate.dmm.com/api/reference/r18/all/) available.
 
 Although it's widely used by many AV sites, it's not that easy to use when it comes to personal usage. Because in order to use it you have to register your site and get approval.
 
@@ -77,10 +77,10 @@ It also provides you more detailed information than DMM if you noticed. For exam
 
 1. It will try fetch information from official maker site first, which should have the most accurate and comprehensive information, for example sample images. Currently only a few makers' sites are supported, but more and more is coming.
 2. As backup, if step 1 fails. It will try several existing search engines. For now we have:
-    * [JavLibrary](www.javlibrary.com)
-    * [DMM](www.dmm.co.jp)
-    * [MGStage](www.mgstage.com)
-    * [AvEntertainments](www.aventertainments.com)
+    * [JavLibrary](http://www.javlibrary.com)
+    * [DMM](http://www.dmm.co.jp)
+    * [MGStage](http://www.mgstage.com)
+    * [AvEntertainments](http://www.aventertainments.com)
 
 # You can help
 
