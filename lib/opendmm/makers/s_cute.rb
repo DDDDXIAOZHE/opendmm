@@ -1,12 +1,12 @@
 base_uri 'www.s-cute.com'
 
 register_product(
-  /^S[-_]?Cute\s*(\d{3})[-_](\w+)[-_](\d{2})$/i,
+  /^(?:S[-_]?Cute)?\s*(\d{3})[-_](\w+)[-_](\d{2})$/i,
   '/contents/#{$1}_#{$2}_#{$3}/',
   'S-Cute #{$1}_#{$2}_#{$3}',
 )
 register_product(
-  /^S[-_]?Cute\s*(ps\d|swm)[-_](\d{2})[-_](\w+)$/i,
+  /^(?:S[-_]?Cute)?\s*(ps\d|swm)[-_](\d{2})[-_](\w+)$/i,
   '/contents/#{$1}_#{$2}_#{$3}/',
   'S-Cute #{$1}_#{$2}_#{$3}',
 )
