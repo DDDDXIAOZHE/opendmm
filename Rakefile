@@ -65,13 +65,11 @@ def self.parse_product_html(html)
   # actresses:       Array
   # brand:           String
   # categories:      Array
-  # code:            String
   # cover_image:     String
   # description:     String
   # directors:       Array
   # genres:          Array
   # label:           String
-  # maker:           String
   # movie_length:    String
   # page:            String
   # release_date:    String
@@ -116,7 +114,6 @@ def self.parse_product_html(html)
   # actresses:       Array
   # brand:           String
   # categories:      Array
-  # code:            String
   # cover_image:     String
   # description:     String
   # directors:       Array
@@ -124,7 +121,6 @@ def self.parse_product_html(html)
   # label:           String
   # maker:           String
   # movie_length:    String
-  # page:            String
   # release_date:    String
   # sample_images:   Array
   # scenes:          Array
