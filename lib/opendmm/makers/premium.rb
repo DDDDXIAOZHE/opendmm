@@ -10,10 +10,10 @@ private
 def self.parse_product_html(html)
   specs = Utils.hash_by_split(html.xpath('//*[@id="sub-navi"]/div[1]/div[1]/table/tr').map(&:text))
   {
-    actresses:       html.css('#content > div > div > div.actress-list > dl > dd > a').map(&:text),
+    actresses:       html.css('#content > div > div > div.actress-list > dl > dd').text.split('/'),
     cover_image:     html.at_css('#pake')['href'],
     description:     html.css('#content > div > div > div.detail_text').text,
-    directors:       specs['監督'].split,
+    directors:       specs['監督'].split('/'),
     genres:          specs['ジャンル'].split('/'),
     label:           specs['レーベル'],
     maker:           'Premium',
