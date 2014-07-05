@@ -21,7 +21,7 @@ module OpenDMM
       def get_with_retry(url, limit = 5)
         return nil unless url
         get url
-      rescue Errno::ETIMEDOUT => e
+      rescue Errno::ETIMEDOUT, Errno::ECONNREFUSED => e
         tries ||= 0
         tries++
         tries <= limit ? retry : raise
