@@ -81,7 +81,7 @@ module OpenDMM
         join_url_if_relative(details[:page], uri)
       end if details[:sample_images]
       details[:movie_length] = ChronicDuration.parse(details[:movie_length]) if details[:movie_length]
-      details[:release_date] = Date.parse(details[:release_date]) if details[:release_date]
+      details[:release_date] = Date.parse(details[:release_date]) if details[:release_date].instance_of? String
       details.sort.to_h
     end
 

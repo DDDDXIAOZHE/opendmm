@@ -4,6 +4,9 @@ headers({
 })
 
 def self.search_url(name)
+  if name =~ /^([a-z])+[-_ ]*(\d+)$/i
+    name = "#{$1.upcase}-#{$2}"
+  end
   "/search_Products.aspx?keyword=#{CGI::escape(name)}"
 end
 
@@ -26,14 +29,14 @@ def self.parse_product_html(html)
     categories:      html.xpath('//*[@id="TabbedPanels1"]/div/div[2]/div[2]//ol').map(&:text),
     code:            specs['商品番号'],
     cover_image:     html.at_css('#titlebox > div.list-cover > img')['src'].gsub('jacket_images', 'bigcover'),
-    description:     html.css('#titlebox > div.border > p').map(&:text),
+    description:     html.css('#titlebox > div.border > p').text,
   # directors:       Array
   # genres:          Array
   # label:           String
     maker:           specs['スタジオ'],
     movie_length:    specs['収録時間'],
   # page:            String
-    release_date:    specs['発売日'],
+    release_date:    Date.strptime(specs['発売日'], '%m/%d/%Y'),
   # sample_images:   Array
   # scenes:          Array
     series:          specs['シリーズ'],
