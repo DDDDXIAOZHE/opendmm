@@ -11,7 +11,7 @@ def self.parse_product_html(html)
   specs = Utils.hash_from_dl(html.css('#right-navi > dl')).merge(
           Utils.hash_by_split(html.xpath('//*[@id="right-navi"]/div[1]/p[2]').map(&:text)))
   {
-    actresses:       html.css('#content > div.main > section > p.actress > a').map(&:text),
+    actresses:       html.css('#content > div.main > section > p.actress').text.split(/：|\s/)[1..-1],
     cover_image:     html.at_css('#content > div.main > section > div.package > img')['src'],
     description:     html.css('#content > div.main > section > p.comment').text,
     directors:       specs['監督：'].text.split,
