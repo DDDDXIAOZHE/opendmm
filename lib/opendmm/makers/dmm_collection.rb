@@ -10,7 +10,7 @@ private
 def self.parse_product_html(html)
   specs = Utils.hash_from_dl(html.xpath('//*[@id="information"]/dl[2]'))
   {
-    actresses:       html.css('#information > dl.actress > dd > a').map(&:text),
+    actresses:       html.css('#information > dl.actress > dd').text.split,
     cover_image:     html.at_xpath('//*[@id="package"]/h4/a')['href'],
     description:     html.xpath('//*[@id="comment"]/h5').text,
     maker:           'D★Collection',
