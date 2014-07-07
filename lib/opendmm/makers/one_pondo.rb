@@ -3,7 +3,7 @@ base_uri 'www.1pondo.tv'
 register_product(
   /^1pondo ?(\d{6})[-_](\d{3})$/i,
   '/moviepages/#{$1}_#{$2}/index.html',
-  '1pondo #{$1}-#{$2}',
+  '1pondo #{$1}_#{$2}',
 )
 
 private
