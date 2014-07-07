@@ -28,7 +28,7 @@ private
 def self.parse_product_html(html)
   specs = Utils.hash_by_split(html.css('//*[@id="mu"]/div/table/tr/td[1]/table/tr').map(&:text))
   {
-    actresses:       specs['出演者'].split('/'),
+    actresses:       specs['出演者'].split(/[\s\/]/),
     cover_image:     html.at_css('#sample-video > a')['href'],
     directors:       specs['監督'].split,
     genres:          specs['ジャンル'].split,
