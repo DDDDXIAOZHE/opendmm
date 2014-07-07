@@ -55,6 +55,7 @@ module OpenDMM
       end
 
       def product(name)
+        return nil unless name =~ /^[[:ascii:]]+$/
         url = product_url name
         page = get_with_retry url
         return nil unless page && page.code == 200
