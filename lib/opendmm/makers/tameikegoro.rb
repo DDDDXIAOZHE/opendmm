@@ -10,7 +10,7 @@ private
 def self.parse_product_html(html)
   specs = Utils.hash_by_split(html.css('#work-detail > h4, p').map(&:text))
   {
-    actresses:       specs['出演女優'].split,
+    actresses:       specs['出演女優'].split('/'),
     cover_image:     html.at_css('#work-pake')['src'].gsub(/pm.jpg$/, 'pl.jpg'),
     description:     html.css('#work-detail > h5').text,
     directors:       specs['監督'].split,
