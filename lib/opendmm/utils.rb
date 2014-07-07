@@ -77,7 +77,7 @@ module OpenDMM
       details = details.squish_hard
       details[:actresses] = details[:actresses].map do |actress|
         actress.remove(/[\s\.]/)
-      end if details[:actresses]
+      end.sort if details[:actresses]
       details[:cover_image] = join_url_if_relative(details[:page], details[:cover_image])
       details[:thumbnail_image] = join_url_if_relative(details[:page], details[:thumbnail_image])
       details[:sample_images] = details[:sample_images].map do |uri|
