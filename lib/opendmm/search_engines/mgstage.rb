@@ -27,7 +27,7 @@ def self.parse_product_html(html)
   # boobs:           String
   # brand:           String
   # categories:      Array
-    code:            specs['品番：'].text,
+    code:            parse_code(specs['品番：'].text),
     cover_image:     html.at_css('#EnlargeImage')['href'],
     description:     html.css('#introduction_text > p.introduction').text,
   # directors:       Array
@@ -45,4 +45,8 @@ def self.parse_product_html(html)
     thumbnail_image: html.at_css('div.content_detail_layout_01 img.enlarge_image')['src'],
     title:           html.css('.title_detail_layout h1').text,
   }
+end
+
+def self.parse_code(str)
+  str =~ /^\d+(\w+-\d+)$/ ? $1 : str
 end
