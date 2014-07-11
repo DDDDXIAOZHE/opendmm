@@ -8,19 +8,17 @@ register_product(
 private
 
 def self.parse_product_html(html)
-  specs = Utils.hash_by_split(html.css('#work-detail > h4, p').map(&:text))
+  specs = Utils.hash_from_dl(html.css('div.wrap-maincontents > section.wrap-information > div.wrap-detail > div.wrap-detail-text > dl.wrap-detail-item'))
   {
-    actresses:       specs['出演女優'].split('/'),
-    cover_image:     html.at_css('#work-pake')['src'].gsub(/pm.jpg$/, 'pl.jpg'),
-    description:     html.css('#work-detail > h5').text,
-    directors:       specs['監督'].split,
-    genres:          specs['ジャンル'].split,
-    label:           specs['レーベル'],
+    actresses:       specs['出演女優'].text.try(:split, '/'),
+    cover_image:     html.css('#wrap-detail-slider > ul.bx-detail-slider > li > img').first['src'],
+    description:     html.css('div.wrap-maincontents > section.wrap-information > div.wrap-detail > div.wrap-detail-text > div.wrap-detail-description').text,
+    genres:          specs['ジャンル'].text.try(:split),
     maker:           '溜池ゴロー',
-    release_date:    specs['発売日'].remove('DVD/'),
-    sample_images:   html.css('#sample-pic > a > img').map { |img| img['src'].gsub(/js(?=-\d+\.jpg)/, 'jp') },
-    series:          specs['シリーズ'],
-    thumbnail_image: html.at_css('#work-pake')['src'],
-    title:           html.css('#work-detail > h3').text,
+    release_date:    specs['発売日'].text,
+    series:          specs['シリーズ'].text,
+    sample_images:   html.css('#wrap-detail-slider > ul.bx-detail-slider > li > img')[1..-1].map { |img| img['src'] },
+    thumbnail_image: html.css('#wrap-detail-slider > ul.bx-detail-slider > li > img').first['src'],
+    title:           html.css('div.wrap-maincontents > section.wrap-information > div.bx-index > h2').text,
   }
 end
