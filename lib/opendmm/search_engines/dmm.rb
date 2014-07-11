@@ -23,7 +23,10 @@ def self.product_extra_info(name, url, page, html)
   if dmm_id =~ /\d*([a-z]+)0*(\d+)/i
     dmm_id = "#{$1.upcase}-#{$2.rjust(3, '0')}"
   end
-  { code: dmm_id }
+  {
+    code: dmm_id,
+    maker: 'DMM',
+  }
 end
 
 private
