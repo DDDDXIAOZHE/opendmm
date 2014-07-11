@@ -60,6 +60,7 @@ module OpenDMM
         page = get_with_retry url
         return nil unless page && page.code == 200
         html = Utils.html_in_utf8 page
+        html.css('script').remove
         details = parse_product_html html
         details[:code] ||= product_code name
         details[:page] ||= page.request.last_uri.to_s
