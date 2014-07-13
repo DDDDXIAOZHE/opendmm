@@ -70,8 +70,8 @@ def self.parse_product_html(html)
   # directors:       Array
   # genres:          Array
   # label:           String
+  # maker:           String
   # movie_length:    String
-  # page:            String
   # release_date:    String
   # sample_images:   Array
   # scenes:          Array
