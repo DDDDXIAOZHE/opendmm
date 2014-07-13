@@ -11,9 +11,13 @@ def self.product_url(name)
     url = search_page.headers['location']
   else
     search_html = Utils.html_in_utf8 search_page
-    first_result = search_html.at_css('#rightcolumn > div.videothumblist > div.videos > div.video > a')
-    return nil unless first_result
-    url = first_result['href']
+    links = search_html.css('#rightcolumn > div.videothumblist > div.videos > div.video > a')
+    result = links.detect do |link|
+      link.css('div.id').text == name
+    end
+    result ||= links.first
+    return nil unless result
+    url = result['href']
   end
   URI.join(search_page.request.last_uri, url).to_s
 end
