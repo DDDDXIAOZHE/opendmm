@@ -53,7 +53,7 @@ def self.product_extra_info(name, url, page, html)
   code = product_code(name)
   code = code[/(?<=Perfect-G ).*/]
   extra_info = Hash.new
-  extra_info[:thumbnail_image] = "/img/main/#{code}_320_180.jpg"
+  extra_info[:thumbnail_image] = "http://www.g-area.com/img/main/#{code}_320_180.jpg"
   extra_info[:cover_image] = extra_info[:thumbnail_image]
   extra_info
 end
