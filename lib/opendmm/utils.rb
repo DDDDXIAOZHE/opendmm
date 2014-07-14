@@ -26,6 +26,8 @@ end
 class << ChronicDuration
   def parse_with_chinese_support(str)
     case str
+    when /(\d+)\s*分\s*(\d+)\s*秒/
+      return $1.to_i.minutes + $2.to_i.seconds
     when /(\d+)(\s*)分/
       return $1.to_i.minutes
     else
