@@ -18,7 +18,7 @@ def self.parse_product_html(html)
   # directors:       Array
   # genres:          Array
   # label:           String
-    maker:           'Tokuyo 247',
+    maker:           'Tokyo 247',
   # movie_length:    String
   # release_date:    String
     sample_images:   html.xpath('/html/body/div[3]/div[1]/div[1]/div[6]').css('div.pict_area > ol > li > a > img').map { |img| img['src'].remove(/s(?=\.jpg$)/) },
