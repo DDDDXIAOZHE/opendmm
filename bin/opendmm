@@ -5,14 +5,17 @@ require 'optparse'
 require 'pp'
 require 'opendmm'
 
-options = { json: false }
+options = { json: false, debug: true }
 OptionParser.new do |opts|
-  opts.on('-j', '--[no-]json', 'JSON mode') do |j|
-    options[:json] = j
+  opts.on('-j', '--[no-]json', 'JSON mode') do |value|
+    options[:json] = value
+  end
+  opts.on('-d', '--[no-]debug', 'Debug mode') do |value|
+    options[:debug] = value
   end
 end.parse!
 
-details = OpenDMM.search(ARGV.first, true)
+details = OpenDMM.search(ARGV.first, options[:debug])
 if details
   if options[:json]
     puts JSON.pretty_generate(details)
