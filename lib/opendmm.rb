@@ -36,7 +36,7 @@ module OpenDMM
     [ Maker,
       SearchEngine::JavLibrary,
       SearchEngine::Dmm,
-      SearchEngine::Mgstage,
+      # SearchEngine::Mgstage,
       SearchEngine::AvEntertainments ].each do |engine|
       begin
         result = engine.search(name)
