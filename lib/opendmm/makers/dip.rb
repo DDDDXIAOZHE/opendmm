@@ -11,10 +11,10 @@ def self.parse_product_html(html)
   specs = Utils.hash_by_split(html.css('#main > div.detail > div.actor').map(&:text)).merge(
           Utils.hash_by_split(html.xpath('//*[@id="main"]/div[@class="detail"]/div[not(@class)]').text.lines))
   {
-    actresses:       specs['出演者'].try(:split),
+    actresses:       specs['出演者'].split,
     cover_image:     html.at_css('#main > div.detail > a')['href'],
     description:     html.css('#main > div.detail > div.comment').text,
-    genres:          specs['ジャンル'].try(:split),
+    genres:          specs['ジャンル'].split,
     label:           specs['レーベル'],
     maker:           specs['メーカー'],
     movie_length:    specs['収録時間'],

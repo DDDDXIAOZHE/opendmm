@@ -33,6 +33,7 @@ class FixtureTest < Minitest::Test
       description:      String,
       directors:        Array,
       genres:           Array,
+      keywords:         Array,
       label:            String,
       maker:            String,
       movie_length:     Fixnum,

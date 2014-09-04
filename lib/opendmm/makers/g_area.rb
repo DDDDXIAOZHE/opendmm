@@ -31,7 +31,7 @@ def self.parse_product_html(html)
     actresses:       [ html.css('div.co_ww > div.prof_dat > div.p_name').text[/(?<=-).*(?=-)/] ],
   # brand:           String
   # categories:      Array
-    cover_image:     html.at_css('div.co_ww > div.prof_img > div.pro_imb > div.prof_big > div > img').try(:[], 'src'),
+    cover_image:     html.at_css('div.co_ww > div.prof_img > div.pro_imb > div.prof_big > div > img')['src'],
     description:     html.css('div.co_ww > div.prof_img > div.prof_cap').text,
   # directors:       Array
   # genres:          Array
@@ -44,7 +44,7 @@ def self.parse_product_html(html)
   # series:          String
   # subtitle:        String
   # theme:           String
-    thumbnail_image: html.at_css('div.co_ww > div.prof_img > div.pro_imb > div.prof_big > div > img').try(:[], 'src'),
+    thumbnail_image: html.at_css('div.co_ww > div.prof_img > div.pro_imb > div.prof_big > div > img')['src'],
     title:           html.css('div.co_ww > div.prof_dat > div.p_name').text[/(?<=-).*(?=-)/],
   }
 end

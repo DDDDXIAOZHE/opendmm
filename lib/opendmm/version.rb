@@ -1,3 +1,3 @@
 module OpenDMM
-  VERSION = '0.3.22'
+  VERSION = '0.3.23'
 end

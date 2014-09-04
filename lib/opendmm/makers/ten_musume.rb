@@ -13,7 +13,7 @@ def self.parse_product_html(html)
   {
     actresses:       specs['名前'].split,
   # brand:           String
-    categories:      specs['カテゴリー'].try(:split),
+    categories:      specs['カテゴリー'].split,
     cover_image:     './images/str.jpg',
   # description:     String
   # directors:       Array

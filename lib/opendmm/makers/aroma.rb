@@ -18,9 +18,9 @@ private
 def self.parse_product_html(html)
   specs = Utils.hash_by_split(html.xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[2]/td[2]/table/tr/td[3]/table/tr[3]').text.split)
   {
-    actresses:       specs['出演者'].try(:split, '・'),
+    actresses:       specs['出演者'].split('・'),
     cover_image:     parse_cover_image(html),
-    directors:       specs['監督'].try(:split, '・'),
+    directors:       specs['監督'].split('・'),
     description:     html.xpath('/html/body/table/tr/td/table/tr[4]/td[2]/table/tr/td[2]/table/tr[3]/td/table/tr[9]/td[2]').text,
     genres:          specs['ジャンル'].split,
     label:           specs['レーベル'],

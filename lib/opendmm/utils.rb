@@ -38,8 +38,8 @@ class << ChronicDuration
 end
 
 class NilClass
-  def text
-    ''
+  def method_missing(meth, *args, &block)
+    nil
   end
 end
 

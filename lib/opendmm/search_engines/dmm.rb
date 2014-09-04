@@ -34,17 +34,17 @@ private
 def self.parse_product_html(html)
   specs = Utils.hash_by_split(html.css('//div[@class="page-detail"]/table/tr/td[1]/table/tr').map(&:text))
   {
-    actresses:       (specs['出演者'] || specs['名前']).try(:split, /[\s\/]/),
-    cover_image:     (html.at_css('#sample-video > a').try(:[], 'href') ||
-                      html.at_css('#sample-video > img').try(:[], 'src')),
-    directors:       specs['監督'].try(:split),
-    genres:          specs['ジャンル'].try(:split),
+    actresses:       ( specs['出演者'] || specs['名前'] ).split(/[\s\/]/),
+    cover_image:     ( html.at_css('#sample-video > a')['href'] ||
+                       html.at_css('#sample-video > img')['src'] ),
+    directors:       specs['監督'].split,
+    genres:          specs['ジャンル'].split,
     label:           specs['レーベル'],
     maker:           specs['メーカー'],
     movie_length:    specs['収録時間'],
     release_date:    (specs['商品発売日'] || specs['配信開始日']),
     series:          specs['シリーズ'],
-    thumbnail_image: html.at_css('#sample-video img').try(:[], 'src'),
+    thumbnail_image: html.at_css('#sample-video img')['src'],
     title:           html.css('#title').text,
   }
 end
