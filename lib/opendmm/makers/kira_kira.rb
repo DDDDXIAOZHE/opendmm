@@ -1,4 +1,4 @@
-base_uri 'kirakira-av.com'
+base_uri 'www.kirakira-av.com'
 
 register_product(
   /^(BLK|KIRD|KISD|SET)-?(\d{3})$/i,
