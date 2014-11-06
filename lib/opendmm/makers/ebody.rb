@@ -1,4 +1,4 @@
-base_uri 'av-e-body.com'
+base_uri 'www.av-e-body.com'
 
 register_product(
   /^(EBOD)-?(\d{3})$/i,
