@@ -1,4 +1,4 @@
-base_uri 'bi-av.com'
+base_uri 'www.bi-av.com'
 
 register_product(
   /^(BBI|BEB|BID|BWB)-?(\d{3})$/i,
