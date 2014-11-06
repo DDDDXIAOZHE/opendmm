@@ -1,4 +1,4 @@
-base_uri 'moodyz.com'
+base_uri 'www.moodyz.com'
 
 def self.product_url(name)
   case name
