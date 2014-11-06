@@ -1,4 +1,4 @@
-base_uri 'tameikegoro.jp'
+base_uri 'www.tameikegoro.jp'
 
 register_product(
   /^(MDYD)-?(\d{3})$/i,
