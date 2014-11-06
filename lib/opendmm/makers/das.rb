@@ -1,4 +1,4 @@
-base_uri 'dasdas.jp'
+base_uri 'www.dasdas.jp'
 
 register_product(
   /^(AVOP|DASD|DAZD|PLA)-?(\d{3})$/i,
