@@ -1,4 +1,4 @@
-base_uri 'av-opera.jp'
+base_uri 'www.av-opera.jp'
 
 register_product(
   /^(OPUD)-?(\d{3})$/i,
