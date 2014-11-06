@@ -1,4 +1,4 @@
-base_uri 's1s1s1.com'
+base_uri 'www.s1s1s1.com'
 
 register_product(
   /^(ONSD|SNIS|SOE|SPS)-?(\d{3})$/i,
