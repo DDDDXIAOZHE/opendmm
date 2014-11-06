@@ -1,4 +1,4 @@
-base_uri 'candy-av.com'
+base_uri 'www.candy-av.com'
 
 register_product(
   /^(CND)-?(\d{3})$/i,
