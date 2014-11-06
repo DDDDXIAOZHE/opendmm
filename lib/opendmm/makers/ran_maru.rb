@@ -1,4 +1,4 @@
-base_uri 'ran-maru.com'
+base_uri 'www.ran-maru.com'
 
 register_product(
   /^(TYOD)-?(\d{3})$/i,
