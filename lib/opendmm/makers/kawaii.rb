@@ -1,4 +1,4 @@
-base_uri 'kawaiikawaii.jp'
+base_uri 'www.kawaiikawaii.jp'
 
 register_product(
   /^(KAWD)-?(\d{3})$/i,
