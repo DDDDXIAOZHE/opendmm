@@ -1,4 +1,4 @@
-base_uri 'attackers.net'
+base_uri 'www.attackers.net'
 
 register_product(
   /^(ADN|ATID|JBD|RBD|SHKD|SSPD)-?(\d{3})$/i,
