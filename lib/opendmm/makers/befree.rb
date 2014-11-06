@@ -1,4 +1,4 @@
-base_uri 'befreebe.com'
+base_uri 'www.befreebe.com'
 
 register_product(
   /^(BF)-?(\d{3})$/i,
