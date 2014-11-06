@@ -26,7 +26,7 @@ def self.parse_product_html(html)
   {
     actresses:       html.css('#video_cast .text span.cast span.star').map(&:text),
     code:            html.css('#video_id .text').text,
-    cover_image:     html.at_css('#video_jacket > a')['href'],
+    cover_image:     html.at_css('#video_jacket > img')['src'],
     directors:       html.css('#video_director .text span.director').map(&:text),
     genres:          html.css('#video_genres .text span.genre').map(&:text),
     label:           html.css('#video_label .text').text,
