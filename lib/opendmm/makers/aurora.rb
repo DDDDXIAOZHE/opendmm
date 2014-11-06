@@ -1,4 +1,5 @@
 base_uri 'www.aurora-pro.com'
+cookies(apse: 1)
 
 register_product(
   /^(APAA|APAK)-?(\d{3})$/i,
