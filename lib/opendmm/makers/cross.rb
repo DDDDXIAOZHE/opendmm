@@ -1,4 +1,4 @@
-base_uri 'crosscross.jp'
+base_uri 'www.crosscross.jp'
 
 register_product(
   /(CRAD|CRPD|CRSS)-?(\d{3})/i,

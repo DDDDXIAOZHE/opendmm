@@ -1,4 +1,4 @@
-base_uri 'oppai-av.com'
+base_uri 'www.oppai-av.com'
 
 register_product(
   /^(PPPD|PPSD)-?(\d{3})$/i,
