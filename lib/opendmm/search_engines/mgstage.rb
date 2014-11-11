@@ -1,20 +1,13 @@
+require 'pp'
+
 base_uri 'www.mgstage.com'
 cookies(adc: 1, coc: 1)
 headers({
   "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36"
 })
 
-def self.search_url(name)
-  name = name.split(/(?<=[a-z])(?=\d)|[-_\s]/).join(' ')
-  "/ppv/list/search/#{CGI::escape(name)}/1/table/date/all/"
-end
-
 def self.product_url(name)
-  search_page = get_with_retry search_url(name)
-  return nil unless search_page
-  search_html = Utils.html_in_utf8 search_page
-  first_result = search_html.at_css('#Content > ul > li.item_layout_02_price > a')
-  first_result['href'] if first_result
+  return "/ppv/video/#{name}/"
 end
 
 private
@@ -27,8 +20,8 @@ def self.parse_product_html(html)
   # boobs:           String
   # brand:           String
   # categories:      Array
-    code:            parse_code(specs['品番：'].text),
-    cover_image:     html.at_css('#EnlargeImage')['href'],
+    code:            specs['品番：'].text,
+    cover_image:     html.at_css('a.enlarge_image')['href'],
     description:     html.css('#introduction_text > p.introduction').text,
   # directors:       Array
     genres:          specs['ジャンル：'].css('a').map(&:text),
@@ -37,16 +30,12 @@ def self.parse_product_html(html)
     movie_length:    specs['収録時間：'].text,
   # page:            String
     release_date:    specs['配信開始日：'].text,
-    sample_images:   html.css('div.content_sample_layout_01 > a.sample_image').map { |a| a['href'] },
+    sample_images:   html.css('a.sample_imageN').map { |a| a['href'] },
   # scenes:          Array
     series:          specs['シリーズ名：'].text,
   # subtitle:        String
   # theme:           String
-    thumbnail_image: html.at_css('div.content_detail_layout_01 img.enlarge_image')['src'],
+    thumbnail_image: html.at_css('a.enlarge_image > img')['src'],
     title:           html.css('.title_detail_layout h1').text,
   }
-end
-
-def self.parse_code(str)
-  str =~ /^\d+(\w+-\d+)$/ ? $1 : str
 end
