@@ -12,6 +12,18 @@
   "movie_length": 7200,
   "page": "http://www.dasdas.jp/works/-/detail/=/cid=pla001/",
   "release_date": "2010-04-25",
+  "sample_images": [
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-01.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-02.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-03.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-04.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-05.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-06.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-07.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-08.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-09.jpg",
+    "http://www.dasdas.jp/images/works/pla001/pla001jp-10.jpg"
+  ],
   "thumbnail_image": "http://www.dasdas.jp/images/works/pla001/pla001pl.jpg",
   "title": "復活 夕樹舞子"
 }

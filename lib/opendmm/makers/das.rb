@@ -1,7 +1,11 @@
 base_uri 'www.dasdas.jp'
 
 register_product(
-  /^(AVOP|DASD|DAZD|PLA)-?(\d{3})$/i,
+  /^(DASD|DAZD|PLA)-?(\d{3})$/i,
+  '/works/-/detail/=/cid=#{$1.downcase}#{$2}/',
+)
+register_product(
+  /^(AVOP)-?(061)$/i,
   '/works/-/detail/=/cid=#{$1.downcase}#{$2}/',
 )
 
@@ -21,7 +25,7 @@ def self.parse_product_html(html)
     maker:           'ダスッ！',
     movie_length:    specs['収録時間：'].text,
     release_date:    specs['発売日：'].text,
-  # sample_images:   Array
+    sample_images:   html.css('.digestImage > li > a').map { |a| a['href'] },
   # scenes:          Array
     series:          specs['シリーズ：'].text,
   # subtitle:        String
