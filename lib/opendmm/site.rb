@@ -68,7 +68,11 @@ module OpenDMM
         extra_info.each do |k, v|
           details[k] ||= v
         end
-        Utils.finalize_details_hash details
+        details = Utils.finalize_details_hash details
+        %i(code cover_image maker page thumbnail_image title).each do |key|
+          return unless details[key]
+        end
+        details
       end
     end
   end
