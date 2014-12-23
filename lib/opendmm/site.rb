@@ -13,6 +13,7 @@ module OpenDMM
 
       klass.include HTTParty
       klass.follow_redirects false
+      klass.default_timeout 10
 
       klass.extend ClassMethods
     end
