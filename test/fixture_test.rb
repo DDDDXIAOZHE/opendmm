@@ -57,11 +57,13 @@ class FixtureTest < Minitest::Test
   end
 end
 
-{ 'maker'             => 'OpenDMM::Maker',
+{
+  'av_entertainments' => 'OpenDMM::SearchEngine::AvEntertainments',
   'dmm'               => 'OpenDMM::SearchEngine::Dmm',
   'jav_library'       => 'OpenDMM::SearchEngine::JavLibrary',
+  'maker'             => 'OpenDMM::Maker',
   'mgstage'           => 'OpenDMM::SearchEngine::Mgstage',
-  'av_entertainments' => 'OpenDMM::SearchEngine::AvEntertainments' }.each do |category, klass|
+}.each do |category, klass|
   Dir[File.dirname(__FILE__) + "/#{category}_fixtures/*.json"].each do |file|
     name = File.basename(file, '.json')
     eval <<-TESTCASE
