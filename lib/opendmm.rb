@@ -45,7 +45,6 @@ module OpenDMM
         if debug
           puts e.inspect
           puts e.backtrace.join("\n")
-          return nil
         end
       end
     end

@@ -18,7 +18,7 @@ def self.parse_product_html(html)
     label:           specs['レーベル'],
     maker:           specs['メーカー'],
     movie_length:    specs['収録時間'],
-    release_date:    specs['品番'],
+    release_date:    specs['発売日'],
     series:          specs['シリーズ'],
     thumbnail_image: html.at_css('#main > div.detail > a > img')['src'],
     title:           html.css('#main > h1').text,
