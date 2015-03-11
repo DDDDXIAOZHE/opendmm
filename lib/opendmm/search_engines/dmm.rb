@@ -19,7 +19,7 @@ def self.product_url(name)
 end
 
 def self.product_extra_info(name, url, page, html)
-  dmm_id = page.request.last_uri.to_s.split('/').last.split('=').last
+  dmm_id = page.request.last_uri.to_s.split('/')[-2].split('=').last
   if dmm_id =~ /\d*([a-z]+)0*(\d+)/i
     dmm_id = "#{$1.upcase}-#{$2.rjust(3, '0')}"
   end
