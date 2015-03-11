@@ -1,7 +1,7 @@
 base_uri 'www.tameikegoro.jp'
 
 register_product(
-  /^(MDYD)-?(\d{3})$/i,
+  /^(MDYD|MEYD)-?(\d{3})$/i,
   '/works/-/detail/=/cid=#{$1.downcase}#{$2}',
 )
 
