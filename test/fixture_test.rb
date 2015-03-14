@@ -1,13 +1,11 @@
-require 'minitest/autorun'
-require 'active_support/core_ext/hash/keys'
-require 'active_support/core_ext/string/inflections'
 require 'active_support/json'
 require 'hashdiff'
+require 'highline/import'
 require 'opendmm'
 
 I18n.enforce_available_locales = false
 
-class FixtureTest < Minitest::Test
+class FixtureTest
   def load_product(path)
     json = File.read(path)
     product = ActiveSupport::JSON.decode(json).symbolize_keys
@@ -15,69 +13,44 @@ class FixtureTest < Minitest::Test
     product
   end
 
-  def assert_has_basic_keys(product)
-    %i(code cover_image maker page thumbnail_image title).each do |key|
-      assert product[key], "Key #{key} should not be absent"
-    end
+  def set_to_fix(path)
   end
 
-  def assert_no_unknown_keys(product)
-    known_keys = {
-      actresses:        Array,
-      actress_types:    Array,
-      boobs:            String,
-      brand:            String,
-      categories:       Array,
-      code:             String,
-      cover_image:      String,
-      description:      String,
-      directors:        Array,
-      genres:           Array,
-      keywords:         Array,
-      label:            String,
-      maker:            String,
-      movie_length:     Fixnum,
-      page:             String,
-      release_date:     Date,
-      sample_images:    Array,
-      scatologies:      Array,
-      scenes:           Array,
-      series:           String,
-      subtitle:         String,
-      theme:            String,
-      thumbnail_image:  String,
-      title:            String,
-      transsexualities: Array,
-    }
-    product.each do |key, value|
-      klass = known_keys[key]
-      assert klass, "Unknown key: #{key}"
-      assert_equal klass, value.class, "Value #{key} should be a #{known_keys[key]}, while #{value} provided" if value
+  def run
+    match_count = 0
+    fixed_count = 0
+    to_fix_count = 0
+    to_fix_list = []
+
+    Dir[File.dirname(__FILE__) + "/fixtures/*.json"].each do |path|
+      expected = load_product path
+      actual = OpenDMM.search(File.basename(path, '.json'))
+
+      if actual == expected
+        match_count += 1
+        print '.'
+        next
+      end
+
+      puts "\n\n=== #{path} ==="
+      pp HashDiff.diff(expected, actual)
+      serious = HighLine.agree("Is it serious? (y/n)", true)
+
+      if serious
+        to_fix_count += 1
+        to_fix_list << path
+      else
+        File.open(path, 'w') do |file|
+          file.puts JSON.pretty_generate(actual)
+        end
+        fixed_count += 1
+      end
     end
+
+    puts "\n\n"
+    puts "#{match_count} matches; #{fixed_count} fixed; #{to_fix_count} to fix:"
+    pp to_fix_list
   end
 end
 
-{
-  'av_entertainments' => 'OpenDMM::SearchEngine::AvEntertainments',
-  'dmm'               => 'OpenDMM::SearchEngine::Dmm',
-  'jav_library'       => 'OpenDMM::SearchEngine::JavLibrary',
-  'maker'             => 'OpenDMM::Maker',
-  'mgstage'           => 'OpenDMM::SearchEngine::Mgstage',
-}.each do |category, klass|
-  Dir[File.dirname(__FILE__) + "/#{category}_fixtures/*.json"].each do |file|
-    name = File.basename(file, '.json')
-    eval <<-TESTCASE
-
-  class FixtureTest
-    def test_#{category}_#{name.parameterize.underscore}
-      expected = load_product('#{file}')
-      actual = #{klass}.search('#{name}')
-      assert_has_basic_keys(actual)
-      assert_no_unknown_keys(actual)
-      assert_equal expected, actual, HashDiff.diff(expected, actual)
-    end
-  end
-
-  TESTCASE
-  end
-end
+FixtureTest.new.run
