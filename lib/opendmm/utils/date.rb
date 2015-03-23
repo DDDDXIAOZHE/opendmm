@@ -11,6 +11,8 @@ module OpenDMM
       else
         ::Date.parse(str)
       end
+    rescue ArgumentError => e
+      ::Date.strptime(str, '%m-%d-%Y')
     end
   end
 end

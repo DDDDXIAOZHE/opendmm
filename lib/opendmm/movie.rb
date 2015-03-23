@@ -7,11 +7,13 @@ require 'uri'
 
 module OpenDMM
   class Movie
-    def initialize(page)
-      @page = page
-      @html = Nokogiri.HTML @page
+    def initialize(query, response)
+      @query = query
+      @response = response
+      @html = Nokogiri.HTML @response
       @details = Details.new
-      @details.page = @page.request.last_uri.to_s
+      @details.base_uri = @response.request.last_uri.to_s
+      @details.page = @details.base_uri
     end
 
     def details
@@ -30,12 +32,12 @@ module OpenDMM
       label:        { required: false, type: :String   },
       maker:        { required: true,  type: :String   },
       movie_length: { required: false, type: :Duration },
-      page:         { required: true,  type: :String   },
+      page:         { required: true,  type: :URI      },
       release_date: { required: false, type: :Date     },
       title:        { required: true,  type: :String   },
     }
 
-    Details = Struct.new(*FIELDS.keys) do
+    Details = Struct.new(*FIELDS.keys, :base_uri) do
       def to_h
         Hash.new.tap do |hash|
           FIELDS.each do |key, options|
@@ -58,13 +60,13 @@ module OpenDMM
           raise "Field #{key} not an array: #{value}" unless value.instance_of? Array
           value.map(&:squish).select(&:present?).sort
         when :Date
-          Date.parse(value).to_s
+          Date.parse(value.squish).to_s
         when :Duration
-          ChronicDuration.parse(value).to_i
+          ChronicDuration.parse(value.squish).to_i
         when :String
           value.to_s.squish
         when :URI
-          URI.join(self.page, value).to_s
+          URI.join(self.base_uri, value).to_s
         else
           raise ArgumentError.new("Unknown value type: #{type}")
         end

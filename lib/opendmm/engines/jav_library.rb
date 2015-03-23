@@ -7,8 +7,8 @@ module OpenDMM
   module Engine
     module JavLibrary
       def self.search(query)
-        search = Search.new(Site.search(query), query)
-        movie = Movie.new(Site.get(search.result))
+        search = Search.new(query, Site.search(query))
+        movie = Movie.new(query, Site.get(search.result))
         movie.details
       end
 
@@ -24,10 +24,10 @@ module OpenDMM
       end
 
       class Search < OpenDMM::Search
-        def initialize(page, query)
+        def initialize(query, response)
           super
-          @result = (@page.code == 302) ? @page.headers['location']
-                                        : best_candidate
+          @result = (@response.code == 302) ? @response.headers['location']
+                                            : best_candidate
         end
 
         def best_candidate
@@ -40,7 +40,7 @@ module OpenDMM
       end
 
       class Movie < OpenDMM::Movie
-        def initialize(page)
+        def initialize(query, response)
           super
           @details.code         = @html.css('#video_id .text').text
           @details.title        = @html.css('#video_title > h3').text.remove(@details.code)

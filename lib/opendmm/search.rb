@@ -1,13 +1,13 @@
 module OpenDMM
   class Search
-    def initialize(page, query)
-      @page = page
+    def initialize(query, response)
       @query = query
-      @html = Nokogiri.HTML @page
+      @response = response
+      @html = Nokogiri.HTML @response
     end
 
     def result
-      URI.join(@page.request.last_uri.to_s, @result).to_s
+      URI.join(@response.request.last_uri.to_s, @result).to_s
     end
   end
 end
