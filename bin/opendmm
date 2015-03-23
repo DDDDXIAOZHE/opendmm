@@ -1,27 +1,30 @@
 #!/usr/bin/env ruby
 
 require 'json'
-require 'optparse'
 require 'pp'
 require 'opendmm'
+require 'optparse'
 
-options = { json: false, debug: true }
-OptionParser.new do |opts|
-  opts.on('-j', '--[no-]json', 'JSON mode') do |value|
-    options[:json] = value
-  end
-  opts.on('-d', '--[no-]debug', 'Debug mode') do |value|
-    options[:debug] = value
-  end
-end.parse!
+module OpenDMM
+  class CLI
+    def initialize(argv)
+      parse_options(argv)
+      details = OpenDMM.search(@query)
+      puts details ? JSON.pretty_generate(details)
+                   : "No match for: #{@query}"
+    end
 
-details = OpenDMM.search(ARGV.first, options[:debug])
-if details
-  if options[:json]
-    puts JSON.pretty_generate(details)
-  else
-    pp details
+    private
+
+    def parse_options(argv)
+      OptionParser.new do |opts|
+        opts.on('-d', '--[no-]debug', 'Debug mode') do |debug|
+          LOGGER.level = Logger::DEBUG if debug
+        end
+      end.parse! argv
+      @query = argv.first
+    end
   end
-else
-  puts 'Unknown product: ' + ARGV.first
 end
+
+OpenDMM::CLI.new(ARGV)
