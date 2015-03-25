@@ -1,15 +1,16 @@
 require 'opendmm/engines/caribbean.rb'
+require 'opendmm/engines/caribbean_pr.rb'
 require 'opendmm/engines/jav_library.rb'
 require 'opendmm/engines/tokyo_hot.rb'
 require 'opendmm/version.rb'
 
 module OpenDMM
   def self.search(query)
-    Engine::Caribbean.search(query) ||
-    Engine::TokyoHot.search(query) ||
-    Engine::JavLibrary.search(query)
-  rescue StandardError => e
-    LOGGER.error e
-    nil
+    [ Engine::Caribbean,
+      Engine::CaribbeanPr,
+      Engine::TokyoHot,
+      Engine::JavLibrary ].lazy.map do |engine|
+      engine.search(query)
+    end.find(&:present?)
   end
 end

@@ -1,18 +1,32 @@
 require 'cgi'
 require 'opendmm/movie'
-require 'opendmm/search'
 require 'opendmm/utils/httparty'
 
 module OpenDMM
   module Engine
     module JavLibrary
       def self.search(query)
-        search = Search.new(query, Site.search(query))
-        movie = Movie.new(query, Site.get(search.result))
-        movie.details
+        queries = normalize(query)
+        LOGGER.debug queries
+        queries.lazy.map do |query|
+          begin
+            search = Search.new(query, Site.search(query))
+            movie = Movie.new(query, Site.get(search.result))
+            movie.details
+          rescue StandardError => e
+            LOGGER.info e
+            nil
+          end
+        end.find(&:present?)
       end
 
       private
+
+      def self.normalize(query)
+        query.scan(/([a-z]{2,5})-?(\d{2,5})/i).map do |pair|
+          "#{pair[0]}-#{pair[1]}"
+        end
+      end
 
       module Site
         include HTTParty
@@ -23,19 +37,27 @@ module OpenDMM
         end
       end
 
-      class Search < OpenDMM::Search
+      class Search
         def initialize(query, response)
-          super
-          @result = (@response.code == 302) ? @response.headers['location']
-                                            : best_candidate
+          @query = query
+          @response = response
+          @html = Nokogiri.HTML @response
         end
+
+        def result
+          candidate = (@response.code == 302) ? @response.headers['location']
+                                              : best_candidate
+          URI.join(@response.request.last_uri.to_s, candidate).to_s
+        end
+
+        private
 
         def best_candidate
           candidates = @html.css('#rightcolumn > div.videothumblist > div.videos > div.video > a')
           best = candidates.detect do |candidate|
             candidate.css('div.id').text == @query
           end || candidates.first
-          best['href']
+          best['href'] if best
         end
       end
 

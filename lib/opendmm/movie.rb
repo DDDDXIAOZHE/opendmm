@@ -19,6 +19,9 @@ module OpenDMM
     def details
       LOGGER.debug @details
       @details.to_h
+    rescue StandardError => e
+      LOGGER.error e
+      nil
     end
 
     private

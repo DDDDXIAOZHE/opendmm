@@ -1,25 +1,24 @@
 require 'cgi'
 require 'opendmm/movie'
-require 'opendmm/search'
 require 'opendmm/utils/httparty'
 
 module OpenDMM
   module Engine
     module TokyoHot
       def self.search(query)
-        case query
-        when /Tokyo Hot n(\d{3,4})/i
-          query = "n#{$1.rjust(4, '0')}"
-          MovieN.new(query).details
-        when /Tokyo Hot k(\d{3,4})/i
-          query = "k#{$1.rjust(4, '0')}"
-          MovieK.new(query).details
-        else
-          nil
-        end
+        query = normalize(query)
+        return unless query
+        return MovieN.new(query).details if query.start_with? 'n'
+        return MovieK.new(query).details if query.start_with? 'k'
       end
 
       private
+
+      def self.normalize(query)
+        return unless query =~ /Tokyo[-_\s]*Hot/
+        return unless query =~ /(k|n)(\d{3,4})/
+        "#{$1}#{$2.rjust(4, '0')}"
+      end
 
       module Site
         include HTTParty
