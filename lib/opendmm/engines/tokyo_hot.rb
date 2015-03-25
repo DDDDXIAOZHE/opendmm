@@ -26,17 +26,18 @@ module OpenDMM
         base_uri 'www.tokyo-hot.com'
 
         def self.list_n
-          get "/j/new_video0000_j.html"
+          get '/j/new_video0000_j.html'
         end
 
         def self.list_k
-          get "/j/k_video0000_j.html"
+          get '/j/k_video0000_j.html'
         end
       end
 
       class MovieN < OpenDMM::Movie
         def initialize(query)
           super(query, Site.list_n)
+
           @details.code         = "Tokyo Hot #{query}"
           @details.maker        = 'Tokyo Hot'
 
@@ -57,6 +58,7 @@ module OpenDMM
       class MovieK < OpenDMM::Movie
         def initialize(query)
           super(query, Site.list_k)
+
           @details.code         = "Tokyo Hot #{query}"
           @details.maker        = 'Tokyo Hot'
 

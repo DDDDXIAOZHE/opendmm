@@ -42,6 +42,7 @@ module OpenDMM
       class Movie < OpenDMM::Movie
         def initialize(query, response)
           super
+
           @details.code         = @html.css('#video_id .text').text
           @details.title        = @html.css('#video_title > h3').text.remove(@details.code)
           @details.cover_image  = @html.at_css('#video_jacket > img')['src']

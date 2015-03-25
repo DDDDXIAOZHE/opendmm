@@ -24,17 +24,22 @@ module OpenDMM
     private
 
     FIELDS = {
-      actresses:    { required: false, type: :Array    },
-      code:         { required: true,  type: :String   },
-      cover_image:  { required: true,  type: :URI      },
-      directors:    { required: false, type: :Array    },
-      genres:       { required: false, type: :Array    },
-      label:        { required: false, type: :String   },
-      maker:        { required: true,  type: :String   },
-      movie_length: { required: false, type: :Duration },
-      page:         { required: true,  type: :URI      },
-      release_date: { required: false, type: :Date     },
-      title:        { required: true,  type: :String   },
+      actresses:       { required: false, type: :Array    },
+      categories:      { required: false, type: :Array    },
+      code:            { required: true,  type: :String   },
+      cover_image:     { required: true,  type: :URI      },
+      description:     { required: false, type: :String   },
+      directors:       { required: false, type: :Array    },
+      genres:          { required: false, type: :Array    },
+      label:           { required: false, type: :String   },
+      maker:           { required: true,  type: :String   },
+      movie_length:    { required: false, type: :Duration },
+      page:            { required: true,  type: :URI      },
+      release_date:    { required: false, type: :Date     },
+      sample_images:   { required: false, type: :URIArray },
+      series:          { required: false, type: :String   },
+      thumbnail_image: { required: false, type: :URI      },
+      title:           { required: true,  type: :String   },
     }
 
     Details = Struct.new(*FIELDS.keys, :base_uri) do
@@ -67,6 +72,11 @@ module OpenDMM
           value.to_s.squish
         when :URI
           URI.join(self.base_uri, value).to_s
+        when :URIArray
+          raise "Field #{key} not an array: #{value}" unless value.instance_of? Array
+          value.map do |uri|
+            URI.join(self.base_uri, uri.squish).to_s
+          end.sort
         else
           raise ArgumentError.new("Unknown value type: #{type}")
         end
