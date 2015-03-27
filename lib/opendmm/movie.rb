@@ -1,5 +1,6 @@
 require 'active_support/core_ext/string/starts_ends_with'
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/object/inclusion'
 require 'opendmm/utils/chronic_duration'
 require 'opendmm/utils/date'
 require 'opendmm/utils/nokogiri'
@@ -47,6 +48,7 @@ module OpenDMM
 
     Details = Struct.new(*FIELDS.keys, :base_uri) do
       def to_h
+        normalize_title
         Hash.new.tap do |hash|
           FIELDS.each do |key, options|
             value = process_field(self[key], options[:type])
@@ -82,6 +84,16 @@ module OpenDMM
           end.sort
         else
           raise ArgumentError.new("Unknown value type: #{type}")
+        end
+      end
+
+      def normalize_title
+        if actresses = self[:actresses]
+          pieces = self[:title].squish.split
+          while !pieces.empty? && pieces.last.in?(actresses)
+            pieces.pop
+          end
+          self.title = pieces.join(' ').squish
         end
       end
     end
