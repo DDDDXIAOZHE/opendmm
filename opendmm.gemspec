@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'hashdiff'
   spec.add_development_dependency 'highline'
   spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'thor'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'chronic_duration'
   spec.add_dependency 'httparty'

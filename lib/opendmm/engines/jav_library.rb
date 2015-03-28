@@ -10,9 +10,7 @@ module OpenDMM
         LOGGER.debug queries
         queries.lazy.map do |query|
           begin
-            search = Search.new(query, Site.search(query))
-            movie = Movie.new(query, Site.get(search.result))
-            movie.details
+            Movie.new(query).details
           rescue StandardError => e
             LOGGER.info e
             nil
@@ -62,8 +60,9 @@ module OpenDMM
       end
 
       class Movie < OpenDMM::Movie
-        def initialize(query, response)
-          super
+        def initialize(query)
+          search = Search.new(query, Site.search(query))
+          super(query, Site.get(search.result))
 
           @details.code         = @html.css('#video_id .text').text
           @details.title        = @html.css('#video_title > h3').text.remove(@details.code)
