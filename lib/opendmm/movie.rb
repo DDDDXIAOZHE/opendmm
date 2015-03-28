@@ -29,6 +29,7 @@ module OpenDMM
 
     FIELDS = {
       actresses:       { required: false, type: :Array    },
+      actress_types:   { required: false, type: :Array    },
       categories:      { required: false, type: :Array    },
       code:            { required: true,  type: :String   },
       cover_image:     { required: true,  type: :URI      },
@@ -42,20 +43,24 @@ module OpenDMM
       release_date:    { required: false, type: :Date     },
       sample_images:   { required: false, type: :URIArray },
       series:          { required: false, type: :String   },
+      tags:            { required: false, type: :Array    },
       thumbnail_image: { required: false, type: :URI      },
       title:           { required: true,  type: :String   },
     }
 
     Details = Struct.new(*FIELDS.keys, :base_uri) do
       def to_h
+        FIELDS.each do |key, options|
+          self[key] = process_field(self[key], options[:type])
+        end
         normalize_title
         Hash.new.tap do |hash|
-          FIELDS.each do |key, options|
-            value = process_field(self[key], options[:type])
+          FIELDS.map do |key, options|
+            value = self[key]
             if value.present?
               hash[key] = value
-            else
-              raise "Required field #{key} missing" if options[:required]
+            elsif options[:required]
+              raise "Required field #{key} missing"
             end
           end
         end
@@ -90,7 +95,7 @@ module OpenDMM
       def normalize_title
         if actresses = self[:actresses]
           pieces = self[:title].squish.split
-          while !pieces.empty? && pieces.last.in?(actresses)
+          while pieces.last.in?(actresses) || pieces.last =~ /-+/
             pieces.pop
           end
           self.title = pieces.join(' ').squish
