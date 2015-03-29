@@ -12,7 +12,8 @@ module OpenDMM
         ::Date.parse(str)
       end
     rescue ArgumentError => e
-      ::Date.strptime(str, '%m-%d-%Y')
+      ::Date._strptime(str, '%m-%d-%Y') ||
+      ::Date._strptime(str, '%m/%d/%Y')
     end
   end
 end

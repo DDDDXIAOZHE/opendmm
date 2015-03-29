@@ -2,6 +2,10 @@ require 'minitest/autorun'
 require 'opendmm'
 
 class FlowTest < MiniTest::Unit::TestCase
+  def test_av_entertainments
+    assert OpenDMM.search 'MKBD-S40'
+  end
+
   def test_carib
     assert OpenDMM.search 'Carib 021511-620'
   end

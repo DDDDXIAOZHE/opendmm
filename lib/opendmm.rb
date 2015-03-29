@@ -1,3 +1,4 @@
+require 'opendmm/engines/av_entertainments.rb'
 require 'opendmm/engines/caribbean.rb'
 require 'opendmm/engines/caribbean_pr.rb'
 require 'opendmm/engines/heyzo.rb'
@@ -13,7 +14,9 @@ module OpenDMM
       Engine::Heyzo,
       Engine::OnePondo,
       Engine::TokyoHot,
-      Engine::JavLibrary ].lazy.map do |engine|
+      Engine::JavLibrary,
+      Engine::AvEntertainments,
+    ].lazy.map do |engine|
       engine.search(query)
     end.find(&:present?)
   end

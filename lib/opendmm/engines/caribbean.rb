@@ -1,4 +1,3 @@
-require 'cgi'
 require 'opendmm/movie'
 require 'opendmm/utils/httparty'
 
