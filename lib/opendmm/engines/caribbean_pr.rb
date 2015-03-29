@@ -13,7 +13,7 @@ module OpenDMM
       private
 
       def self.normalize(query)
-        return unless query =~ /(caribpr|カリビアンコム\s*プレミアム)/i
+        return unless query =~ /(caribpr|caribbeancompr|カリビアンコム\s*プレミアム)/i
         return unless query =~ /(\d{6})[-_](\d{3})/i
         "#{$1}_#{$2}"
       end

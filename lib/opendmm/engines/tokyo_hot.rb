@@ -14,7 +14,7 @@ module OpenDMM
       private
 
       def self.normalize(query)
-        return unless query =~ /Tokyo[-_\s]*Hot/
+        # return unless query =~ /Tokyo[-_\s]*Hot/
         return unless query =~ /(k|n)(\d{3,4})/
         "#{$1}#{$2.rjust(4, '0')}"
       end
