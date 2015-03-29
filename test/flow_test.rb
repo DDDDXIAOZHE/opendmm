@@ -17,4 +17,13 @@ class FlowTest < MiniTest::Unit::TestCase
   def test_jav_library
     assert OpenDMM.search 'ABP-036'
   end
+
+  def test_one_pondo
+    assert OpenDMM.search '1pondo 011111_006'
+  end
+
+  def test_tokyo_hot
+    assert OpenDMM.search 'Tokyo Hot k0188'
+    assert OpenDMM.search 'Tokyo Hot n0900'
+  end
 end

@@ -33,9 +33,10 @@ module OpenDMM
           super(query, Site.movie(query))
 
           @details.code            = "Carib #{query}"
-          @details.maker           = 'Caribbean'
           @details.cover_image     = './images/l_l.jpg'
+          @details.maker           = 'Caribbean'
           @details.thumbnail_image = './images/l_s.jpg'
+
           @details.title           = @html.css('#main-content > div.main-content-movieinfo > div.video-detail > span.movie-title').text
           @details.description     = @html.css('#main-content > div.main-content-movieinfo > div.movie-comment').text
           @details.sample_images   = @html.css('#main-content > div.detail-content.detail-content-gallery-old > table > tr > td > a').map do |a|
