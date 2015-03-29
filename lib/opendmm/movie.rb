@@ -95,7 +95,7 @@ module OpenDMM
       def normalize_title
         if actresses = self[:actresses]
           pieces = self[:title].squish.split
-          while pieces.last.in?(actresses) || pieces.last =~ /-+/
+          while pieces.last.in?(actresses) || pieces.last =~ /^-+$/
             pieces.pop
           end
           self.title = pieces.join(' ').squish
