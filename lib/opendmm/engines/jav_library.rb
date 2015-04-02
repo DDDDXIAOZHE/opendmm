@@ -12,6 +12,7 @@ module OpenDMM
           begin
             Movie.new(query).details
           rescue StandardError => e
+            LOGGER.info query
             LOGGER.info e
             nil
           end

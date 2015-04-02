@@ -24,11 +24,11 @@ module OpenDMM
         base_uri 'www.tokyo-hot.com'
 
         def self.list_n
-          get '/j/new_video0000_j.html'
+          @@list_n ||= get '/j/new_video0000_j.html'
         end
 
         def self.list_k
-          get '/j/k_video0000_j.html'
+          @@list_k ||= get '/j/k_video0000_j.html'
         end
       end
 
