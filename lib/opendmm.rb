@@ -17,7 +17,12 @@ module OpenDMM
       Engine::JavLibrary,
       Engine::AvEntertainments,
     ].lazy.map do |engine|
-      engine.search(query)
+      begin
+        engine.search(query)
+      rescue StandardError => e
+        LOGGER.info e
+        nil
+      end
     end.find(&:present?)
   end
 end
