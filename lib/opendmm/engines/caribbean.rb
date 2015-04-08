@@ -36,7 +36,7 @@ module OpenDMM
           @details.maker           = 'Caribbean'
           @details.thumbnail_image = './images/l_s.jpg'
 
-          @details.title           = @html.css('#main-content > div.main-content-movieinfo > div.video-detail > span.movie-title').text
+          @details.title           = @html.css('#main-content > div.main-content-movieinfo > div.video-detail > h1').text
           @details.description     = @html.css('#main-content > div.main-content-movieinfo > div.movie-comment').text
           @details.sample_images   = @html.css('#main-content > div.detail-content.detail-content-gallery-old > table > tr > td > a').map do |a|
             a['href']
