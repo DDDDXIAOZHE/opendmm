@@ -12,8 +12,8 @@ module OpenDMM
           begin
             Movie.new(query).details
           rescue StandardError => e
-            LOGGER.info query
-            LOGGER.info e
+            LOGGER.debug query
+            LOGGER.debug e
             nil
           end
         end.find(&:present?)
