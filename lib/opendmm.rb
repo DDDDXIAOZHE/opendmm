@@ -1,6 +1,7 @@
 require 'opendmm/engines/av_entertainments.rb'
 require 'opendmm/engines/caribbean.rb'
 require 'opendmm/engines/caribbean_pr.rb'
+require 'opendmm/engines/dmm.rb'
 require 'opendmm/engines/heyzo.rb'
 require 'opendmm/engines/jav_library.rb'
 require 'opendmm/engines/one_pondo.rb'
@@ -15,6 +16,7 @@ module OpenDMM
       Engine::OnePondo,
       Engine::TokyoHot,
       Engine::JavLibrary,
+      Engine::DMM,
       Engine::AvEntertainments,
     ].lazy.map do |engine|
       begin

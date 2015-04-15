@@ -56,7 +56,7 @@ module OpenDMM
           search = Search.new(query, Site.search(query))
           super(query, Site.get(search.result))
 
-          @details.title       = @html.css('#mini-tabet > h2').inner_text
+          @details.title       = @html.css('#mini-tabet > h2').text
           @details.cover_image = @html.at_css('#titlebox > div.list-cover > img')['src'].gsub('jacket_images', 'bigcover')
           @details.code        = @html.css('#mini-tabet > div').text.remove('商品番号:')
           @details.categories  = @html.xpath('//*[@id="TabbedPanels1"]/div/div[2]/div[2]//ol').map(&:text)
@@ -70,9 +70,9 @@ module OpenDMM
             when /シリーズ/
               @details.series = li.css('a').text
             when /発売日/
-              @details.release_date = li.inner_text
+              @details.release_date = li.text
             when /収録時間/
-              @details.movie_length = li.inner_text
+              @details.movie_length = li.text
             end
           end
         end

@@ -42,7 +42,7 @@ module OpenDMM
 
           @details.title         = @html.css('head > title').text.remove(/^.*「/, /」.*$/)
           @details.actresses     = @html.css('#profile-area > div > ul.bgoose > li > a > h2').map(&:text)
-          @details.description   = @html.css('#profile-area > div.rr2').inner_text
+          @details.description   = @html.css('#profile-area > div.rr2').text
           @details.sample_images = @html.css('#movie-main > div.pics > table > tr > td > img').map do |img|
             img['src']
           end
