@@ -22,7 +22,7 @@ module OpenDMM
       private
 
       def self.normalize(query)
-        query.scan(/((?:S2)?[a-z]{2,5})[-_\s]?(S?\d{2,5})/i).map do |pair|
+        query.scan(/((?:S2)?[a-z]{2,6})[-_\s]?(S?\d{2,5})/i).map do |pair|
           "#{pair[0].upcase}-#{pair[1]}"
         end
       end
