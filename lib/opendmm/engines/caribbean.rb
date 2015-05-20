@@ -85,17 +85,17 @@ module OpenDMM
 
           @html.css('#main-content > div.main-content-movieinfo > div.movie-info > dl').map do |dl|
             case dl.at_css('dt').text
-            when '出演:'
+            when /出演/
               @details.actresses = dl.css('dd').map(&:text)
-            when 'カテゴリー:'
+            when /カテゴリー/
               @details.categories = dl.css('dd').map(&:text)
-            when '販売日:'
+            when /販売日/
               @details.release_date = dl.css('dd').text
-            when '再生時間:'
+            when /再生時間/
               @details.movie_length = dl.css('dd').text
-            when 'スタジオ:'
+            when /スタジオ/
               @details.maker = dl.css('dd').text
-            when 'シリーズ:'
+            when /シリーズ/
               @details.series = dl.css('dd').text
             end
           end
