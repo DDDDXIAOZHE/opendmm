@@ -4,6 +4,7 @@ require 'opendmm/engines/caribbean_pr.rb'
 require 'opendmm/engines/dmm.rb'
 require 'opendmm/engines/heyzo.rb'
 require 'opendmm/engines/jav_library.rb'
+require 'opendmm/engines/mgstage.rb'
 require 'opendmm/engines/one_pondo.rb'
 require 'opendmm/engines/tokyo_hot.rb'
 require 'opendmm/version.rb'
@@ -16,8 +17,9 @@ module OpenDMM
       Engine::OnePondo,
       Engine::TokyoHot,
       Engine::JavLibrary,
-      Engine::DMM,
       Engine::AvEntertainments,
+      Engine::DMM,
+      Engine::MGStage,
     ].lazy.map do |engine|
       begin
         engine.search(query)
