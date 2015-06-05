@@ -13,7 +13,6 @@ module OpenDMM
           rescue StandardError => e
             LOGGER.debug query
             LOGGER.debug e
-            LOGGER.debug e.backtrace
             nil
           end
         end.find(&:present?)

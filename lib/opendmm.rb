@@ -15,11 +15,11 @@ module OpenDMM
       Engine::CaribbeanPr,
       Engine::Heyzo,
       Engine::OnePondo,
-      Engine::TokyoHot,
       Engine::JavLibrary,
       Engine::AvEntertainments,
       Engine::DMM,
       Engine::MGStage,
+      Engine::TokyoHot,
     ].lazy.map do |engine|
       begin
         engine.search(query)
