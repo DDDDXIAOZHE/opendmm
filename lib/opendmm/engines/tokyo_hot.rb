@@ -7,14 +7,12 @@ module OpenDMM
       def self.search(query)
         query = normalize(query)
         return unless query
-        return MovieN.new(query).details if query.start_with? 'n'
-        return MovieK.new(query).details if query.start_with? 'k'
+        Movie.new(query).details
       end
 
       private
 
       def self.normalize(query)
-        # return unless query =~ /Tokyo[-_\s]*Hot/
         return unless query =~ /(k|n)(\d{3,4})/
         "#{$1}#{$2.rjust(4, '0')}"
       end
@@ -23,54 +21,55 @@ module OpenDMM
         include HTTParty
         base_uri 'www.tokyo-hot.com'
 
-        def self.list_n
-          @@list_n ||= get '/j/new_video0000_j.html'
-        end
-
-        def self.list_k
-          @@list_k ||= get '/j/k_video0000_j.html'
+        def self.search(query)
+          get "http://www.tokyo-hot.com/product/?q=#{CGI::escape(query)}"
         end
       end
 
-      class MovieN < OpenDMM::Movie
-        def initialize(query)
-          super(query, Site.list_n)
+      class Search
+        def initialize(query, response)
+          @query = query
+          @response = response
+          @html = Nokogiri.HTML @response
+        end
 
-          @details.code         = "Tokyo Hot #{query}"
-          @details.maker        = 'Tokyo Hot'
-
-          link = @html.at_xpath("//a[contains(@href, '#{@query}')]")
-          @details.page         = link['href']
-          @details.cover_image  = link.at_css('img')['src']
-
-          table = link.ancestors('table').first
-          table.css('br').each do |br|
-            br.replace "\n"
-          end
-          @details.title        = table.at_xpath('tr[1]').text
-          @details.actresses    = table.at_xpath('tr[2]').text.squish.remove('--').split(/[\s、,]/)
-          @details.release_date = table.at_xpath('tr[3]').text.remove('更新日')
+        def result
+          candidate = @html.at_css('#main > ul > li > a')['href']
+          URI.join(@response.request.last_uri.to_s, candidate).to_s
         end
       end
 
-      class MovieK < OpenDMM::Movie
+      class Movie < OpenDMM::Movie
         def initialize(query)
-          super(query, Site.list_k)
+          search = Search.new(query, Site.search(query))
+          super(query, Site.get(search.result))
 
-          @details.code         = "Tokyo Hot #{query}"
-          @details.maker        = 'Tokyo Hot'
+          @details.maker = 'Tokyo Hot'
 
-          link = @html.at_xpath("//a[contains(@href, '#{@query}')]")
-          @details.page         = link['href']
-          @details.cover_image  = link.at_css('img')['src']
+          @details.title = @html.at_css('#container > div.pagetitle > h2').text
+          @details.cover_image = @html.at_css('#container > div.movie.cf > div.in > div.flowplayer > video')['poster']
+          @details.description = @html.at_css('#main > div.contents > div.sentence').text
 
-          table = link.ancestors('table').first
-          @details.title        = table.at_xpath('tr[1]').text.remove('-').squish
-          if @details.title =~ /餌食牝\s(.*)/
-            @details.actresses = $1.squish.split
-            @details.title = '餌食牝'
+          @html.css('#main > div.contents > div.infowrapper > dl > dt').each do |dt|
+            dd = dt.next_element
+            case dt.text
+            when /出演者/
+              @details.actresses = dd.css('a').map(&:text)
+            when /シリーズ/
+              @details.series = dd.text
+            when /カテゴリ/
+              @details.categories = dd.css('a').map(&:text)
+            when /配信開始日/
+              @details.release_date = dd.text
+            when /収録時間/
+              @details.movie_length = dd.text
+            when /作品番号/
+              @details.code = 'Tokyo Hot ' + dd.text
+            end
           end
-          @details.release_date = table.at_xpath('tr[2]').text.remove('更新日')
+
+          @details.sample_images = @html.css('#main > div.contents > div.scap > a,
+                                              #main > div.contents > div.vcap > a').map { |a| a['href'] }
         end
       end
     end

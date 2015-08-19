@@ -81,11 +81,11 @@ module OpenDMM
         when :String
           value.to_s.squish
         when :URI
-          URI.join(self.base_uri, value).to_s
+          URI.join(self.base_uri, URI.escape(value)).to_s
         when :URIArray
           raise "Field #{key} not an array: #{value}" unless value.instance_of? Array
           value.map do |uri|
-            URI.join(self.base_uri, uri.squish).to_s
+            URI.join(self.base_uri, URI.escape(uri)).to_s
           end.sort
         else
           raise ArgumentError.new("Unknown value type: #{type}")
