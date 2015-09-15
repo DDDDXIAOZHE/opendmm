@@ -13,7 +13,7 @@ It's a ruby gem so you can use it anywhere in you code:
 
 A command line tool is also provided:
 
-    $ opendmm --json 'ABP-123'
+    $ opendmm 'ABP-123'
     {
       "actresses": [
         "酒井 ももか"
@@ -46,7 +46,7 @@ A command line tool is also provided:
       "thumbnail_image": "http://www.prestige-av.com/images/corner/goods/prestige/abp/123/pf_p_abp-123.jpg",
       "title": "酒井ももか 満足度満点新人ソープDX＋未公開映像DVD付き"
     }
-    
+
 # Why?
 
 [DMM](http://www.dmm.co.jp) is the obvious choice when this kind of use cases come to your mind, which do have an [API](https://affiliate.dmm.com/api/reference/r18/all/) available.
