@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/opendmm/opendmm.svg)](https://travis-ci.org/opendmm/opendmm)
-
 # What?
 
 In short, given an AV's ID, OpenDMM fetch the detailed information for you.
