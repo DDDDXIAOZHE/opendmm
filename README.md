@@ -1,3 +1,9 @@
+# Deprecated
+
+A new library is rewritten in Go: https://github.com/junzh0u/opendmm
+
+There's also a binary available in: https://github.com/junzh0u/godmm
+
 # What?
 
 In short, given an AV's ID, OpenDMM fetch the detailed information for you.
