@@ -1,8 +1,8 @@
 # Deprecated
 
-A new library is rewritten in Go: https://github.com/junzh0u/opendmm
+A new library is rewritten in Go with far superior performance: https://github.com/junzh0u/opendmm
 
-There's also a binary available in: https://github.com/junzh0u/godmm
+This repo is not maintained anymore.
 
 # What?
 
