@@ -1,4 +1,8 @@
 {
     "go.testTimeout": "180s",
-    "go.testFlags": ["-v", "-race"]
+    "go.testFlags": [
+        "-v",
+        "-race"
+    ],
+    "go.formatTool": "goimports"
 }
