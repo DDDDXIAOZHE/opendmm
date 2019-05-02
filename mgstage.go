@@ -15,7 +15,7 @@ import (
 	"github.com/junzh0u/httpx"
 )
 
-var mgsCookie = http.Cookie{
+var mgsCookies = []*http.Cookie{&http.Cookie{
 	Name:     "adc",
 	Value:    "1",
 	Domain:   ".mgstage.com",
@@ -23,7 +23,7 @@ var mgsCookie = http.Cookie{
 	HttpOnly: false,
 	Secure:   false,
 	Expires:  time.Now().Add(1000 * time.Hour),
-}
+}}
 
 func mgsSearch(query string, wg *sync.WaitGroup, metach chan MovieMeta) {
 	keywords := mgsGuess(query)
@@ -49,19 +49,22 @@ func mgsGuess(query string) mapset.Set {
 	return keywords
 }
 
-func mgsSearchKeyword(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
+func mgsSearchKeyword(
+	keyword string,
+	wg *sync.WaitGroup,
+	metach chan MovieMeta) {
 	glog.Info("Keyword: ", keyword)
 	urlstrs := []string{
 		fmt.Sprintf(
-			"http://www.mgstage.com/search/search.php?search_word=%s&search_shop_id=shiroutotv",
+			"https://www.mgstage.com/search/search.php?search_word=%s&search_shop_id=shiroutotv",
 			url.QueryEscape(keyword),
 		),
 		fmt.Sprintf(
-			"http://www.mgstage.com/search/search.php?search_word=%s&search_shop_id=nanpatv",
+			"https://www.mgstage.com/search/search.php?search_word=%s&search_shop_id=nanpatv",
 			url.QueryEscape(keyword),
 		),
 		fmt.Sprintf(
-			"http://www.mgstage.com/search/search.php?search_word=%s",
+			"https://www.mgstage.com/search/search.php?search_word=%s",
 			url.QueryEscape(keyword),
 		),
 	}
@@ -74,9 +77,16 @@ func mgsSearchKeyword(keyword string, wg *sync.WaitGroup, metach chan MovieMeta)
 	}
 }
 
-func mgsParseSearchPage(keyword string, urlstr string, wg *sync.WaitGroup, metach chan MovieMeta) {
+func mgsParseSearchPage(
+	keyword string,
+	urlstr string,
+	wg *sync.WaitGroup,
+	metach chan MovieMeta) {
 	glog.V(2).Info("Search page: ", urlstr)
-	doc, err := newDocument(urlstr, httpx.GetContentViaPhantomJS([]*http.Cookie{&mgsCookie}, 0, "center_column", ""))
+	doc, err := newDocument(
+		urlstr,
+		httpx.ReadBodyInUTF8(httpx.GetWithCookies(mgsCookies)),
+	)
 	if err != nil {
 		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
@@ -108,7 +118,9 @@ func mgsParseSearchPage(keyword string, urlstr string, wg *sync.WaitGroup, metac
 
 func mgsParseProductPage(urlstr string, keyword string, metach chan MovieMeta) {
 	glog.V(2).Info("Product page: ", urlstr)
-	doc, err := newDocument(urlstr, httpx.GetContentViaPhantomJS([]*http.Cookie{&mgsCookie}, 0, "center_column", ""))
+	doc, err := newDocument(
+		urlstr,
+		httpx.ReadBodyInUTF8(httpx.GetWithCookies(mgsCookies)))
 	if err != nil {
 		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
@@ -184,7 +196,11 @@ func mgsParseProductPage(urlstr string, keyword string, metach chan MovieMeta) {
 		})
 
 	if !dmmIsCodeEqual(keyword, meta.Code) {
-		glog.V(2).Infof("Code mismatch: Expected %s, got %s", keyword, meta.Code)
+		glog.V(2).Infof(
+			"Code mismatch: Expected %s, got %s",
+			keyword,
+			meta.Code,
+		)
 	} else {
 		metach <- meta
 	}

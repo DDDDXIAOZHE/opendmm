@@ -9,8 +9,8 @@ import (
 	"github.com/junzh0u/httpx"
 )
 
-func newDocument(url string, getcontent httpx.GetContentFunc) (*goquery.Document, error) {
-	content, err := getcontent(url)
+func newDocument(url string, readbody httpx.ReadBodyFunc) (*goquery.Document, error) {
+	content, err := readbody(url)
 	if err != nil {
 		return nil, err
 	}

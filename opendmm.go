@@ -38,7 +38,6 @@ func Search(query string) chan MovieMeta {
 		batches := [][]searchFunc{[]searchFunc{
 			aveSearch,
 			dmmSearch,
-		}, []searchFunc{
 			mgsSearch,
 		}}
 		for _, engines := range batches {
