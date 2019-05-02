@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/golang/glog"
 	"github.com/junzh0u/httpx"
 )
 
@@ -14,7 +13,6 @@ func newDocument(url string, readbody httpx.ReadBodyFunc) (*goquery.Document, er
 	if err != nil {
 		return nil, err
 	}
-	glog.V(3).Infof("=======\nPage:%s\nContent:%s\n=======\n", url, content)
 	return goquery.NewDocumentFromReader(strings.NewReader(content))
 }
 
@@ -35,11 +33,4 @@ func normalizeURLs(in []string) []string {
 		out = append(out, normalizeURL(s))
 	}
 	return out
-}
-
-func unblockingSend(meta MovieMeta, metach chan MovieMeta) {
-	select {
-	case metach <- meta:
-	default:
-	}
 }

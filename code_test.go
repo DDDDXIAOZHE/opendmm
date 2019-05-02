@@ -3,7 +3,6 @@ package opendmm
 import (
 	"testing"
 
-	mapset "github.com/deckarep/golang-set"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -20,158 +19,159 @@ func TestCodeToString(t *testing.T) {
 func TestCodeVariations(t *testing.T) {
 	assert := assert.New(t)
 	assert.Equal(
+		map[string]bool{
+			"MIDE-29":    true,
+			"MIDE-029":   true,
+			"MIDE-0029":  true,
+			"MIDE-00029": true,
+		},
 		code{series: "MIDE", number: 29}.variations(),
-		mapset.NewSet(
-			"MIDE-029",
-			"MIDE-0029",
-			"MIDE-00029",
-		),
 	)
 	assert.Equal(
+		map[string]bool{
+			"3DSVR-106":   true,
+			"3DSVR-0106":  true,
+			"3DSVR-00106": true,
+		},
 		code{series: "3DSVR", number: 106}.variations(),
-		mapset.NewSet(
-			"3DSVR-106",
-			"3DSVR-0106",
-			"3DSVR-00106",
-		),
 	)
 	assert.Equal(
+		map[string]bool{
+			"XV-1001":  true,
+			"XV-01001": true,
+		},
 		code{series: "XV", number: 1001}.variations(),
-		mapset.NewSet(
-			"XV-1001",
-			"XV-01001",
-		),
 	)
 	assert.Equal(
+		map[string]bool{
+			"MKBD-S96": true,
+		},
 		code{series: "MKBD", prefix: "S", number: 96}.variations(),
-		mapset.NewSet(
-			"MKBD-S96",
-		),
 	)
 	assert.Equal(
+		map[string]bool{
+			"MKBD-S100": true,
+		},
 		code{series: "MKBD", prefix: "S", number: 100}.variations(),
-		mapset.NewSet(
-			"MKBD-S100",
-		),
 	)
 }
 
 func TestGuessCodes(t *testing.T) {
 	assert := assert.New(t)
 	assert.Equal(
-		guessCodes("MIDE-029"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "MIDE",
 				number: 29,
-			},
-		),
+			}: true,
+		},
+		guessCodes("MIDE-029"),
 	)
 	assert.Equal(
-		guessCodes("XV-1001"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "XV",
 				number: 1001,
-			},
-		),
+			}: true,
+		},
+		guessCodes("XV-1001"),
 	)
 	assert.Equal(
-		guessCodes("IPZ687"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "IPZ",
 				number: 687,
-			},
-		),
+			}: true,
+		},
+		guessCodes("IPZ687"),
 	)
 	assert.Equal(
-		guessCodes("MMGH00010"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "MMGH",
 				number: 10,
-			},
-		),
+			}: true,
+		},
+		guessCodes("MMGH00010"),
 	)
 	assert.Equal(
-		guessCodes("140c02202"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "C",
 				number: 2202,
-			},
+			}: true,
 			code{
 				series: "140C",
 				number: 2202,
-			},
-		),
+			}: true,
+		},
+		guessCodes("140c02202"),
 	)
 	assert.Equal(
-		guessCodes("3DSVR-100"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "3DSVR",
 				number: 100,
-			},
-		),
+			}: true,
+		},
+		guessCodes("3DSVR-100"),
 	)
 	assert.Equal(
-		guessCodes("200GANA-894"),
-		mapset.NewSet(
-			code{
-				series: "200GANA",
-				number: 894,
-			},
+		map[code]bool{
 			code{
 				series: "GANA",
 				number: 894,
-			},
-		),
+			}: true,
+			code{
+				series: "200GANA",
+				number: 894,
+			}: true,
+		},
+		guessCodes("200GANA-894"),
 	)
 	assert.Equal(
-		guessCodes("CW3D2DBD-30"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "CW3D2DBD",
 				number: 30,
-			},
-		),
+			}: true,
+		},
+		guessCodes("CW3D2DBD-30"),
 	)
 	assert.Equal(
-		guessCodes("MKBD-S97"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "MKBD",
 				prefix: "S",
 				number: 97,
-			},
-		),
+			}: true,
+		},
+		guessCodes("MKBD-S97"),
 	)
 	assert.Equal(
-		guessCodes("CWPBD_77"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "CWPBD",
 				number: 77,
-			},
-		),
+			}: true,
+		},
+		guessCodes("CWPBD_77"),
 	)
 	assert.Equal(
-		guessCodes("140c02202 3DSVR-100"),
-		mapset.NewSet(
+		map[code]bool{
 			code{
 				series: "C",
 				number: 2202,
-			},
+			}: true,
 			code{
 				series: "140C",
 				number: 2202,
-			},
+			}: true,
 			code{
 				series: "3DSVR",
 				number: 100,
-			},
-		),
+			}: true,
+		},
+		guessCodes("140c02202 3DSVR-100"),
 	)
 }

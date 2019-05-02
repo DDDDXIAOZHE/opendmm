@@ -6,7 +6,6 @@ module github.com/libredmm/opendmm
 require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/deckarep/golang-set v1.7.1
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/golang/snappy v0.0.1 // indirect

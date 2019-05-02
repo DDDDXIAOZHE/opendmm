@@ -5,11 +5,14 @@ import (
 )
 
 func TestMgstage(t *testing.T) {
-	queries := []string{
-		"SIRO-1715",
-		"200GANA-894",
-		"259LUXU-011",
-		"3DSVR-200",
-	}
-	assertSearchable(t, queries, mgsSearch)
+	assertSearchable(
+		t,
+		[]string{
+			"SIRO-1715",
+			"200GANA-894",
+			"259LUXU-011",
+			"3DSVR-200",
+		},
+		mgsEngine,
+	)
 }

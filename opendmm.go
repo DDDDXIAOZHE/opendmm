@@ -2,8 +2,6 @@ package opendmm
 
 import (
 	"sync"
-
-	mapset "github.com/deckarep/golang-set"
 )
 
 // MovieMeta contains meta data of movie
@@ -28,48 +26,49 @@ type MovieMeta struct {
 	Title          string
 }
 
-type searchFunc func(string, *sync.WaitGroup, chan MovieMeta)
+// Guess possible movie codes from query string
+func Guess(query string) []string {
+	variationMap := make(map[string]bool)
+	codes := guessCodes(query)
+	for code := range codes {
+		for variation := range code.variations() {
+			variationMap[variation] = true
+		}
+	}
+	variations := make([]string, 0, len(variationMap))
+	for variation := range variationMap {
+		variations = append(variations, variation)
+	}
+	return variations
+}
 
-// Search for movies based on query and return a channel of MovieMeta
-func Search(query string) chan MovieMeta {
-	out := make(chan MovieMeta)
-	go func(out chan MovieMeta) {
-		defer close(out)
-		batches := [][]searchFunc{[]searchFunc{
-			aveSearch,
-			dmmSearch,
-			mgsSearch,
-		}}
-		for _, engines := range batches {
-			batchOut := searchWithEngines(query, engines)
-			meta, ok := <-batchOut
-			if ok {
-				out <- meta
-				break
+type searchEngine func(string, *sync.WaitGroup, chan MovieMeta)
+
+func searchWithEngines(engines []searchEngine) func(string) chan MovieMeta {
+	return func(query string) chan MovieMeta {
+		variations := Guess(query)
+		out := make(chan MovieMeta, 100)
+		wg := new(sync.WaitGroup)
+		for _, engine := range engines {
+			for _, variation := range variations {
+				wg.Add(1)
+				go func(engine searchEngine, variation string, wg *sync.WaitGroup, out chan MovieMeta) {
+					defer wg.Done()
+					engine(variation, wg, out)
+				}(engine, variation, wg, out)
 			}
 		}
-	}(out)
-	return out
-}
-
-func searchWithEngines(query string, engines []searchFunc) chan MovieMeta {
-	wg := new(sync.WaitGroup)
-	out := make(chan MovieMeta, 100)
-	for _, engine := range engines {
-		engine(query, wg, out)
+		go func(wg *sync.WaitGroup, out chan MovieMeta) {
+			wg.Wait()
+			close(out)
+		}(wg, out)
+		return postProcess(out)
 	}
-	go func(wg *sync.WaitGroup, out chan MovieMeta) {
-		wg.Wait()
-		close(out)
-	}(wg, out)
-	return postprocess(out)
 }
 
-// Guess possible movie codes from query string
-func Guess(query string) mapset.Set {
-	keywords := mapset.NewSet()
-	keywords = keywords.Union(aveGuess(query))
-	keywords = keywords.Union(dmmGuess(query))
-	keywords = keywords.Union(mgsGuess(query))
-	return keywords
-}
+// Search is the default search func with all engines
+var Search = searchWithEngines([]searchEngine{
+	aveEngine,
+	dmmEngine,
+	mgsEngine,
+})

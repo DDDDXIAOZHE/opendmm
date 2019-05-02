@@ -5,78 +5,22 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
-	"strconv"
 	"strings"
 	"sync"
 
 	"github.com/PuerkitoBio/goquery"
-	mapset "github.com/deckarep/golang-set"
-	"github.com/golang/glog"
 	"github.com/junzh0u/httpx"
 )
 
-func dmmSearch(query string, wg *sync.WaitGroup, metach chan MovieMeta) {
-	keywords := dmmGuess(query)
-	for keyword := range keywords.Iter() {
-		wg.Add(1)
-		go func(keyword string) {
-			defer wg.Done()
-			dmmSearchKeyword(keyword, wg, metach)
-		}(keyword.(string))
-	}
-}
-
-func dmmRe() *regexp.Regexp {
-	return regexp.MustCompile("(?i)((?:t28|(?:3d|2d|s2|[a-z]){1,7}?))[-_]?(0*(\\d{2,5}))")
-}
-
-func dmmGuess(query string) mapset.Set {
-	matches := dmmRe().FindAllStringSubmatch(query, -1)
-	keywords := mapset.NewSet()
-	for _, match := range matches {
-		series := strings.ToUpper(match[1])
-		num := match[2]
-		keywords.Add(fmt.Sprintf("%s-%03s", series, num))
-		keywords.Add(fmt.Sprintf("%s-%04s", series, num))
-		keywords.Add(fmt.Sprintf("%s-%05s", series, num))
-	}
-	return keywords
-}
-
-func dmmIsCodeEqual(lcode, rcode string) bool {
-	lmeta := dmmRe().FindStringSubmatch(lcode)
-	rmeta := dmmRe().FindStringSubmatch(rcode)
-	if lmeta == nil || rmeta == nil {
-		return false
-	}
-	if lmeta[1] != rmeta[1] {
-		return false
-	}
-	lnum, err := strconv.Atoi(lmeta[2])
-	if err != nil {
-		glog.Error(err)
-		return false
-	}
-	rnum, err := strconv.Atoi(rmeta[2])
-	if err != nil {
-		glog.Error(err)
-		return false
-	}
-	return lnum == rnum
-}
-
-func dmmSearchKeyword(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
-	glog.Info("Keyword: ", keyword)
+func dmmEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
 	urlstr := fmt.Sprintf(
 		"http://www.dmm.co.jp/search/=/searchstr=%s",
 		url.QueryEscape(
 			regexp.MustCompile("(?i)[a-z].*").FindString(keyword),
 		),
 	)
-	glog.V(2).Info("Search page: ", urlstr)
 	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
 	if err != nil {
-		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
 	}
 
@@ -94,10 +38,8 @@ func dmmSearchKeyword(keyword string, wg *sync.WaitGroup, metach chan MovieMeta)
 }
 
 func dmmParse(urlstr string, keyword string, metach chan MovieMeta) {
-	glog.V(2).Info("Product page: ", urlstr)
 	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
 	if err != nil {
-		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
 	}
 
@@ -145,22 +87,11 @@ func dmmParse(urlstr string, keyword string, metach chan MovieMeta) {
 						return a.Text()
 					})
 			} else if strings.Contains(k, "品番") {
-				meta.Code = dmmParseCode(v.Text())
+				meta.Code = normalizeCode(v.Text())
 			}
 		})
 
-	if !dmmIsCodeEqual(keyword, meta.Code) {
-		glog.V(2).Infof("Code mismatch: Expected %s, got %s", keyword, meta.Code)
-	} else {
+	if codeEquals(keyword, meta.Code) {
 		metach <- meta
 	}
-}
-
-func dmmParseCode(code string) string {
-	re := regexp.MustCompile("(?i)((?:3d|2d|[a-z])+)(\\d+)")
-	m := re.FindStringSubmatch(code)
-	if m != nil {
-		return fmt.Sprintf("%s-%s", strings.ToUpper(m[1]), m[2])
-	}
-	return code
 }

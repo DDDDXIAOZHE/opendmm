@@ -4,12 +4,7 @@ import (
 	"reflect"
 	"regexp"
 	"strings"
-
-	"github.com/golang/glog"
 )
-
-// ProcessStage is a pipe of MovieMeta
-type ProcessStage func(chan MovieMeta) chan MovieMeta
 
 func deduplicate(in chan MovieMeta) chan MovieMeta {
 	out := make(chan MovieMeta)
@@ -75,7 +70,6 @@ func validateFields(in chan MovieMeta) chan MovieMeta {
 				meta.Title == "" ||
 				meta.CoverImage == "" ||
 				strings.HasPrefix(meta.CoverImage, "javascript") {
-				glog.V(2).Infof("Validate failed: %+v", meta)
 			} else {
 				out <- meta
 			}
@@ -84,15 +78,13 @@ func validateFields(in chan MovieMeta) chan MovieMeta {
 	return out
 }
 
-func normalizeCode(in chan MovieMeta) chan MovieMeta {
+func normalizeCodeField(in chan MovieMeta) chan MovieMeta {
 	out := make(chan MovieMeta)
 	re := regexp.MustCompile("^(\\w+-)0+(\\d{3,})$")
 	go func(out chan MovieMeta) {
 		defer close(out)
 		for meta := range in {
-			glog.V(2).Infof("Code before normalization: %+v", meta.Code)
 			meta.Code = re.ReplaceAllString(meta.Code, "$1$2")
-			glog.V(2).Infof("Code after normalization: %+v", meta.Code)
 			out <- meta
 		}
 	}(out)
@@ -114,6 +106,6 @@ func normalizeURLFields(in chan MovieMeta) chan MovieMeta {
 	return out
 }
 
-func postprocess(in chan MovieMeta) chan MovieMeta {
-	return normalizeURLFields(normalizeCode(validateFields(trimSpaces(deduplicate(in)))))
+func postProcess(in chan MovieMeta) chan MovieMeta {
+	return normalizeURLFields(normalizeCodeField(validateFields(trimSpaces(deduplicate(in)))))
 }

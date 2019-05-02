@@ -5,19 +5,15 @@ import (
 	"testing"
 )
 
-func assertSearchable(t *testing.T, queries []string, search searchFunc) {
+func assertSearchable(t *testing.T, queries []string, engine searchEngine) {
 	twg := new(sync.WaitGroup)
 	for _, query := range queries {
 		twg.Add(1)
 		go func(query string) {
 			defer twg.Done()
 			for attempt, maxAttempt := 1, 5; ; attempt++ {
-				out := make(chan MovieMeta, 100)
-				wg := new(sync.WaitGroup)
-				search(query, wg, out)
-				wg.Wait()
-				close(out)
-				meta, ok := <-postprocess(out)
+				out := searchWithEngines([]searchEngine{engine})(query)
+				meta, ok := <-(out)
 				if ok {
 					t.Logf("%s -> %s %s", query, meta.Code, meta.Title)
 					break
@@ -33,18 +29,14 @@ func assertSearchable(t *testing.T, queries []string, search searchFunc) {
 	twg.Wait()
 }
 
-func assertUnsearchable(t *testing.T, queries []string, search searchFunc) {
+func assertUnsearchable(t *testing.T, queries []string, engine searchEngine) {
 	twg := new(sync.WaitGroup)
 	for _, query := range queries {
 		twg.Add(1)
 		go func(query string) {
 			defer twg.Done()
-			out := make(chan MovieMeta, 100)
-			wg := new(sync.WaitGroup)
-			search(query, wg, out)
-			wg.Wait()
-			close(out)
-			meta, ok := <-postprocess(out)
+			out := searchWithEngines([]searchEngine{engine})(query)
+			meta, ok := <-(out)
 			if ok {
 				t.Fatalf("Unexpected: %s -> %+v", query, meta)
 			}

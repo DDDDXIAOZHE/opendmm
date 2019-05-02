@@ -10,8 +10,6 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	mapset "github.com/deckarep/golang-set"
-	"github.com/golang/glog"
 	"github.com/junzh0u/httpx"
 )
 
@@ -25,35 +23,10 @@ var mgsCookies = []*http.Cookie{&http.Cookie{
 	Expires:  time.Now().Add(1000 * time.Hour),
 }}
 
-func mgsSearch(query string, wg *sync.WaitGroup, metach chan MovieMeta) {
-	keywords := mgsGuess(query)
-	for keyword := range keywords.Iter() {
-		wg.Add(1)
-		go func(keyword string) {
-			defer wg.Done()
-			mgsSearchKeyword(keyword, wg, metach)
-		}(keyword.(string))
-	}
-}
-
-func mgsGuess(query string) mapset.Set {
-	re := regexp.MustCompile("(?i)([a-z0-9]{2,7}?)-?(\\d{2,5})")
-	matches := re.FindAllStringSubmatch(query, -1)
-	keywords := mapset.NewSet()
-	for _, match := range matches {
-		series := strings.ToUpper(match[1])
-		num := match[2]
-		keywords.Add(fmt.Sprintf("%s-%s", series, num))
-		keywords.Add(fmt.Sprintf("%s-%04s", series, num))
-	}
-	return keywords
-}
-
-func mgsSearchKeyword(
+func mgsEngine(
 	keyword string,
 	wg *sync.WaitGroup,
 	metach chan MovieMeta) {
-	glog.Info("Keyword: ", keyword)
 	urlstrs := []string{
 		fmt.Sprintf(
 			"https://www.mgstage.com/search/search.php?search_word=%s&search_shop_id=shiroutotv",
@@ -82,13 +55,11 @@ func mgsParseSearchPage(
 	urlstr string,
 	wg *sync.WaitGroup,
 	metach chan MovieMeta) {
-	glog.V(2).Info("Search page: ", urlstr)
 	doc, err := newDocument(
 		urlstr,
 		httpx.ReadBodyInUTF8(httpx.GetWithCookies(mgsCookies)),
 	)
 	if err != nil {
-		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
 	}
 
@@ -104,7 +75,6 @@ func mgsParseSearchPage(
 				}
 				urlhref, err := urlbase.Parse(href)
 				if err != nil {
-					glog.V(2).Info(err)
 					return
 				}
 				wg.Add(1)
@@ -117,12 +87,10 @@ func mgsParseSearchPage(
 }
 
 func mgsParseProductPage(urlstr string, keyword string, metach chan MovieMeta) {
-	glog.V(2).Info("Product page: ", urlstr)
 	doc, err := newDocument(
 		urlstr,
 		httpx.ReadBodyInUTF8(httpx.GetWithCookies(mgsCookies)))
 	if err != nil {
-		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
 	}
 
@@ -195,13 +163,7 @@ func mgsParseProductPage(urlstr string, keyword string, metach chan MovieMeta) {
 			}
 		})
 
-	if !dmmIsCodeEqual(keyword, meta.Code) {
-		glog.V(2).Infof(
-			"Code mismatch: Expected %s, got %s",
-			keyword,
-			meta.Code,
-		)
-	} else {
+	if codeEquals(keyword, meta.Code) {
 		metach <- meta
 	}
 }

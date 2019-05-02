@@ -43,7 +43,7 @@ func searchHandler(timeout time.Duration, db *leveldb.DB) http.HandlerFunc {
 func guessHandler(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("q")
 	keywords := opendmm.Guess(q)
-	if keywords.Cardinality() == 0 {
+	if len(keywords) == 0 {
 		w.WriteHeader(http.StatusNotFound)
 	} else {
 		json, _ := json.MarshalIndent(keywords, "", "  ")

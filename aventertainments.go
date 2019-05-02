@@ -4,53 +4,21 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"regexp"
-	"strconv"
 	"strings"
 	"sync"
 
 	"github.com/junzh0u/httpx"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/deckarep/golang-set"
-	"github.com/golang/glog"
 )
 
-func aveSearch(query string, wg *sync.WaitGroup, metach chan MovieMeta) {
-	keywords := aveGuess(query)
-	for keyword := range keywords.Iter() {
-		wg.Add(1)
-		go func(keyword string) {
-			defer wg.Done()
-			aveSearchKeyword(keyword, wg, metach)
-		}(keyword.(string))
-	}
-}
-
-func aveGuess(query string) mapset.Set {
-	re := regexp.MustCompile("(?i)([a-z2-3]{2,8})[-_]?([sm]?)(\\d{2,5})")
-	matches := re.FindAllStringSubmatch(query, -1)
-	keywords := mapset.NewSet()
-	for _, match := range matches {
-		series := strings.ToUpper(match[1])
-		prefix := strings.ToUpper(match[2])
-		keywords.Add(fmt.Sprintf("%s-%s%s", series, prefix, match[3]))
-		number, _ := strconv.Atoi(match[3])
-		keywords.Add(fmt.Sprintf("%s-%s%d", series, prefix, number))
-	}
-	return keywords
-}
-
-func aveSearchKeyword(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
-	glog.Info("Keyword: ", keyword)
+func aveEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
 	urlstr := fmt.Sprintf(
 		"http://www.aventertainments.com/search_Products.aspx?keyword=%s",
 		url.QueryEscape(keyword),
 	)
-	glog.V(2).Info("Search page: ", urlstr)
 	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
 	if err != nil {
-		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
 	}
 
@@ -68,10 +36,8 @@ func aveSearchKeyword(keyword string, wg *sync.WaitGroup, metach chan MovieMeta)
 }
 
 func aveParse(urlstr string, keyword string, metach chan MovieMeta) {
-	glog.V(2).Info("Product page: ", urlstr)
 	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
 	if err != nil {
-		glog.V(2).Infof("Error parsing %s: %v", urlstr, err)
 		return
 	}
 
@@ -83,7 +49,7 @@ func aveParse(urlstr string, keyword string, metach chan MovieMeta) {
 	if ok {
 		meta.CoverImage = strings.Replace(meta.CoverImage, "jacket_images", "bigcover", -1)
 	}
-	meta.Code = strings.Replace(doc.Find("#mini-tabet > div").Text(), "商品番号:", "", -1)
+	meta.Code = strings.TrimSpace(strings.Replace(doc.Find("#mini-tabet > div").Text(), "商品番号:", "", -1))
 	doc.Find("#titlebox > ul > li").Each(
 		func(i int, li *goquery.Selection) {
 			k := li.Find("span").Text()
@@ -103,9 +69,7 @@ func aveParse(urlstr string, keyword string, metach chan MovieMeta) {
 			}
 		})
 
-	if strings.TrimSpace(meta.Code) != keyword {
-		glog.V(2).Infof("Code mismatch: Expected %s, got %s", keyword, meta.Code)
-	} else {
+	if codeEquals(keyword, meta.Code) {
 		metach <- meta
 	}
 }
