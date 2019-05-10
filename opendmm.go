@@ -26,27 +26,33 @@ type MovieMeta struct {
 	Title          string
 }
 
-// Guess possible movie codes from query string
-func Guess(query string) []string {
-	variationMap := make(map[string]bool)
+// Guess possible movie codes from query string, can choose to include
+// variations or not.
+func Guess(query string, includeVariations bool) []string {
 	codes := guessCodes(query)
+	res := []string{}
+	dedupeMap := make(map[string]bool)
 	for code := range codes {
-		for variation := range code.variations() {
-			variationMap[variation] = true
+		if includeVariations {
+			for variation := range code.variations() {
+				if dedupeMap[variation] {
+					continue
+				}
+				dedupeMap[variation] = true
+				res = append(res, variation)
+			}
+		} else {
+			res = append(res, code.toString())
 		}
 	}
-	variations := make([]string, 0, len(variationMap))
-	for variation := range variationMap {
-		variations = append(variations, variation)
-	}
-	return variations
+	return res
 }
 
 type searchEngine func(string, *sync.WaitGroup, chan MovieMeta)
 
 func searchWithEngines(engines []searchEngine) func(string) chan MovieMeta {
 	return func(query string) chan MovieMeta {
-		variations := Guess(query)
+		variations := Guess(query, true)
 		out := make(chan MovieMeta, 100)
 		wg := new(sync.WaitGroup)
 		for _, engine := range engines {

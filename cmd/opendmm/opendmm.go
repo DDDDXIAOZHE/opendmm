@@ -35,7 +35,7 @@ func main() {
 		search(flag.Arg(1), *timeout)
 
 	case "guess":
-		for _, keyword := range opendmm.Guess(flag.Arg(1)) {
+		for _, keyword := range opendmm.Guess(flag.Arg(1), false) {
 			fmt.Println(keyword)
 		}
 

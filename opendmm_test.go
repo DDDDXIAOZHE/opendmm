@@ -41,10 +41,10 @@ func TestOpendmmGuess(t *testing.T) {
 		"SDDE-201",
 	}
 	for _, query := range queries {
-		if !inSlice(query, Guess(query+"_suffix")) {
+		if !inSlice(query, Guess(query+"_suffix", true)) {
 			t.Fatalf("Guessed wrong code for %s with suffix", query)
 		}
-		if !inSlice(query, Guess("prefix_"+query)) {
+		if !inSlice(query, Guess("prefix_"+query, true)) {
 			t.Fatalf("Guessed wrong code for %s with prefix", query)
 		}
 	}

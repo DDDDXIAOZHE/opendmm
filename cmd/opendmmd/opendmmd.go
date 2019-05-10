@@ -41,7 +41,7 @@ func searchHandler(timeout time.Duration, db *leveldb.DB) http.HandlerFunc {
 
 func guessHandler(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("q")
-	keywords := opendmm.Guess(q)
+	keywords := opendmm.Guess(q, false)
 	if len(keywords) == 0 {
 		w.WriteHeader(http.StatusNotFound)
 	} else {
