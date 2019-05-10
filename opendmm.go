@@ -70,5 +70,6 @@ func searchWithEngines(engines []searchEngine) func(string) chan MovieMeta {
 var Search = searchWithEngines([]searchEngine{
 	aveEngine,
 	dmmEngine,
+	kvEngine,
 	mgsEngine,
 })

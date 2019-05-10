@@ -11,6 +11,7 @@ func TestOpendmmSearch(t *testing.T) {
 		"200GANA-894",
 		"3DSVR-106",
 		"DVDMS-393",
+		"KV-123",
 	}
 	wg := new(sync.WaitGroup)
 	for _, query := range queries {
