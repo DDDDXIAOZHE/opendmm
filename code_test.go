@@ -183,4 +183,17 @@ func TestGuessCodes(t *testing.T) {
 		},
 		guessCodes("DVDMS00393"),
 	)
+	assert.Equal(
+		map[code]bool{
+			code{
+				series: "T",
+				number: 28,
+			}: true,
+			code{
+				series: "T28",
+				number: 558,
+			}: true,
+		},
+		guessCodes("T28-558"),
+	)
 }

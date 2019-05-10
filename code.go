@@ -35,10 +35,18 @@ func (c code) variations() map[string]bool {
 }
 
 func guessCodes(query string) map[code]bool {
-	re := regexp.MustCompile(
-		"(?i)(\\d{3})?((?:3d|2d|s2|[a-z]){1,7})[-_]?([sm]?)(0*(\\d{2,5}))",
-	)
-	matches := re.FindAllStringSubmatch(query, -1)
+	res := []*regexp.Regexp{
+		regexp.MustCompile(
+			"(?i)(\\d{3})?((?:3d|2d|s2|[a-z]){1,7})[-_]?([sm]?)(0*(\\d{2,5}))",
+		),
+		regexp.MustCompile(
+			"(?i)\\b(\\d{3})?(\\w{2,5})-()(0*(\\d{2,5}))\\b",
+		),
+	}
+	matches := [][]string{}
+	for _, re := range res {
+		matches = append(matches, re.FindAllStringSubmatch(query, -1)...)
+	}
 	codes := make(map[code]bool)
 	for _, match := range matches {
 		n, err := strconv.Atoi(match[4])
