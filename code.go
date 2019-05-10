@@ -36,7 +36,7 @@ func (c code) variations() map[string]bool {
 
 func guessCodes(query string) map[code]bool {
 	re := regexp.MustCompile(
-		"(?i)(\\d{3})?((?:3d|2d|s2|[a-z]){1,7}?)[-_]?([sm]?)(0*(\\d{2,5}))",
+		"(?i)(\\d{3})?((?:3d|2d|s2|[a-z]){1,7})[-_]?([sm]?)(0*(\\d{2,5}))",
 	)
 	matches := re.FindAllStringSubmatch(query, -1)
 	codes := make(map[code]bool)

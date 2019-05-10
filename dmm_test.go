@@ -21,6 +21,7 @@ func TestDmm(t *testing.T) {
 			"parathd-2000",
 			"140c02202",
 			"khy159",
+			"DVDMS00392",
 		},
 		dmmEngine,
 	)
