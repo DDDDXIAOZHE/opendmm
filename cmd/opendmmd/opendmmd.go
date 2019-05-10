@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/golang/glog"
-	_ "github.com/heroku/x/hmetrics/onload"
 	"github.com/libredmm/opendmm"
 	"github.com/syndtr/goleveldb/leveldb"
 )

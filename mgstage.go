@@ -3,6 +3,7 @@ package opendmm
 import (
 	"fmt"
 	"net/http"
+	"net/http/cookiejar"
 	"net/url"
 	"regexp"
 	"strings"
@@ -10,18 +11,23 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/junzh0u/httpx"
 )
 
-var mgsCookies = []*http.Cookie{&http.Cookie{
-	Name:     "adc",
-	Value:    "1",
-	Domain:   ".mgstage.com",
-	Path:     "/",
-	HttpOnly: false,
-	Secure:   false,
-	Expires:  time.Now().Add(1000 * time.Hour),
-}}
+func mgsClient() *http.Client {
+	client := http.Client{}
+	client.Jar, _ = cookiejar.New(nil)
+	url, _ := url.Parse("https://www.mgstage.com/")
+	client.Jar.SetCookies(url, []*http.Cookie{&http.Cookie{
+		Name:     "adc",
+		Value:    "1",
+		Domain:   ".mgstage.com",
+		Path:     "/",
+		HttpOnly: false,
+		Secure:   false,
+		Expires:  time.Now().Add(1000 * time.Hour),
+	}})
+	return &client
+}
 
 func mgsEngine(
 	keyword string,
@@ -57,7 +63,7 @@ func mgsParseSearchPage(
 	metach chan MovieMeta) {
 	doc, err := newDocument(
 		urlstr,
-		httpx.ReadBodyInUTF8(httpx.GetWithCookies(mgsCookies)),
+		mgsClient().Get,
 	)
 	if err != nil {
 		return
@@ -87,9 +93,7 @@ func mgsParseSearchPage(
 }
 
 func mgsParseProductPage(urlstr string, keyword string, metach chan MovieMeta) {
-	doc, err := newDocument(
-		urlstr,
-		httpx.ReadBodyInUTF8(httpx.GetWithCookies(mgsCookies)))
+	doc, err := newDocument(urlstr, mgsClient().Get)
 	if err != nil {
 		return
 	}

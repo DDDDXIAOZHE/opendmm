@@ -1,6 +1,7 @@
 package opendmm
 
 import (
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -8,8 +9,10 @@ import (
 	"github.com/junzh0u/httpx"
 )
 
-func newDocument(url string, readbody httpx.ReadBodyFunc) (*goquery.Document, error) {
-	content, err := readbody(url)
+type getfunc func(string) (*http.Response, error)
+
+func newDocument(url string, get getfunc) (*goquery.Document, error) {
+	content, err := httpx.ReadBodyX(get(url))
 	if err != nil {
 		return nil, err
 	}

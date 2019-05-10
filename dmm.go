@@ -9,7 +9,6 @@ import (
 	"sync"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/junzh0u/httpx"
 )
 
 func dmmEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
@@ -19,7 +18,7 @@ func dmmEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
 			regexp.MustCompile("(?i)[a-z].*").FindString(keyword),
 		),
 	)
-	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
+	doc, err := newDocument(urlstr, http.Get)
 	if err != nil {
 		return
 	}
@@ -38,7 +37,7 @@ func dmmEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
 }
 
 func dmmParse(urlstr string, keyword string, metach chan MovieMeta) {
-	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
+	doc, err := newDocument(urlstr, http.Get)
 	if err != nil {
 		return
 	}

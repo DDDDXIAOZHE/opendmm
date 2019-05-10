@@ -7,8 +7,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/junzh0u/httpx"
-
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -17,7 +15,7 @@ func aveEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
 		"http://www.aventertainments.com/search_Products.aspx?keyword=%s",
 		url.QueryEscape(keyword),
 	)
-	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
+	doc, err := newDocument(urlstr, http.Get)
 	if err != nil {
 		return
 	}
@@ -36,7 +34,7 @@ func aveEngine(keyword string, wg *sync.WaitGroup, metach chan MovieMeta) {
 }
 
 func aveParse(urlstr string, keyword string, metach chan MovieMeta) {
-	doc, err := newDocument(urlstr, httpx.ReadBodyInUTF8(http.Get))
+	doc, err := newDocument(urlstr, http.Get)
 	if err != nil {
 		return
 	}
