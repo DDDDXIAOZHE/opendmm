@@ -69,6 +69,7 @@ func searchWithEngines(engines []searchEngine) func(string) chan MovieMeta {
 // Search is the default search func with all engines
 var Search = searchWithEngines([]searchEngine{
 	aveEngine,
+	deepsEngine,
 	dmmEngine,
 	mgsEngine,
 })

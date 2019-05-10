@@ -3,6 +3,7 @@ package opendmm
 import (
 	"net/http"
 	"net/url"
+	"path"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -17,6 +18,15 @@ func newDocument(url string, get getfunc) (*goquery.Document, error) {
 		return nil, err
 	}
 	return goquery.NewDocumentFromReader(strings.NewReader(content))
+}
+
+func joinURLs(base string, relative string) (string, error) {
+	baseURL, err := url.Parse(base)
+	if err != nil {
+		return "", err
+	}
+	baseURL.Path = path.Join(baseURL.Path, relative)
+	return baseURL.String(), nil
 }
 
 func normalizeURL(in string) string {
