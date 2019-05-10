@@ -56,11 +56,11 @@ func kvParseProductPage(
 			data := tr.Find("td.data").First()
 			if strings.Contains(label, "商品番号") {
 				meta.Code = normalizeCode(data.Text())
-			} else if strings.Contains(label, "シリーズ") {
-				meta.Series = data.Text()
+			} else if strings.Contains(label, "レーベル") {
+				meta.Label = data.Text()
 			} else if strings.Contains(label, "出演者") {
 				meta.Actresses = strings.Split(data.Text(), " ")
-			} else if strings.Contains(label, "作者	") {
+			} else if strings.Contains(label, "作者") {
 				meta.Directors = strings.Split(data.Text(), " ")
 			} else if strings.Contains(label, "収録時間") {
 				meta.MovieLength = data.Text()
