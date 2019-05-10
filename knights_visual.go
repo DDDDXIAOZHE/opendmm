@@ -45,8 +45,10 @@ func kvParseProductPage(
 	meta.Title = doc.Find("h1.entry-title").Text()
 	meta.CoverImage, _ = doc.Find(
 		"div.entry-content > p:nth-child(1) > a").Attr("href")
-	meta.ThumbnailImage, _ = doc.Find(
-		"div.entry-content > p:nth-child(1) > a > img").Attr("src")
+	meta.CoverImage, _ = joinURLs(
+		"https://www.knights-visual.com/",
+		meta.CoverImage,
+	)
 	dateRe := regexp.MustCompile("\\d+/\\d+/\\d+")
 	meta.ReleaseDate = dateRe.FindString(doc.Find("div.info").Text())
 
