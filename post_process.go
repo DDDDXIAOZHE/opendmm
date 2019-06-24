@@ -80,7 +80,7 @@ func validateFields(in chan MovieMeta) chan MovieMeta {
 
 func normalizeCodeField(in chan MovieMeta) chan MovieMeta {
 	out := make(chan MovieMeta)
-	re := regexp.MustCompile("^(\\w+-)0+(\\d{3,})$")
+	re := regexp.MustCompile("^\\d{3}?(\\w+-)0*(\\d{3,})$")
 	go func(out chan MovieMeta) {
 		defer close(out)
 		for meta := range in {
