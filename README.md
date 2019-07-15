@@ -10,34 +10,38 @@ This Go Librady/CLI fetches AV metadata given a code (番号).
 ## Installation & Usage
 
     $ go install github.com/libredmm/opendmm/cmd/opendmm
-    $ opendmm ABP-123
+    $ opendmm "SDDE-222"
     {
       "Actresses": [
-        "酒井ももか"
+        "橘美穂",
+        "広瀬奏",
+        "なのかひより",
+        "直嶋あい",
+        "羽月希"
       ],
       "ActressTypes": null,
       "Categories": null,
-      "Code": "ABP-123",
-      "CoverImage": "http://pics.dmm.co.jp/mono/movie/adult/118abp123/118abp123pl.jpg",
+      "Code": "SDDE-222",
+      "CoverImage": "https://pics.dmm.co.jp/digital/video/1sdde00222/1sdde00222pl.jpg",
       "Description": "",
       "Directors": [
-        "Porn Stars"
+        "雄次郎"
       ],
       "Genres": [
-        "単体作品",
-        "巨乳",
-        "風俗嬢"
+        "企画",
+        "看護婦・ナース",
+        "手コキ"
       ],
-      "Label": "ABSOLUTELY PERFECT",
-      "Maker": "プレステージ",
-      "MovieLength": "140",
-      "Page": "http://www.javlibrary.com/ja/?v=javlijqo4e",
-      "ReleaseDate": "2014-04-01",
+      "Label": "SODクリエイト",
+      "Maker": "SODクリエイト",
+      "MovieLength": "117分",
+      "Page": "http://www.dmm.co.jp/digital/videoa/-/detail/=/cid=1sdde00222/?i3_ref=search\u0026i3_ord=5",
+      "ReleaseDate": "2010/07/08",
       "SampleImages": null,
-      "Series": "",
+      "Series": "（裏）手コキクリニック",
       "Tags": null,
-      "ThumbnailImage": "",
-      "Title": "酒井ももか、満足度満点新人ソープ DX"
+      "ThumbnailImage": "https://pics.dmm.co.jp/digital/video/1sdde00222/1sdde00222ps.jpg",
+      "Title": "（裏）手コキクリニック ～完全版～ 性交クリニック6"
     }
 
 It's also available as a library. See [the CLI code](https://github.com/libredmm/opendmm/blob/master/cmd/opendmm/opendmm.go) for example usage.
